@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kako da gledaš | BalkanFlix IPTV</title>
+
+  <!-- GLOBAL STYLE (ujednačeno sa ostalim stranicama) -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #001f3f;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: rgba(0, 64, 128, 0.9);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      backdrop-filter: blur(8px);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #ffcc00;
+    }
+
+    /* Overlay meni */
+    .overlay {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      background: rgba(0, 64, 128, 0.98);
+      backdrop-filter: blur(8px);
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+    }
+    .overlay a {
+      display: block;
+      text-decoration: none;
+      font-size: 1.5em;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .overlay a:hover {
+      background: rgba(255, 204, 0, 0.2);
+      color: #ffcc00;
+    }
+    .overlay .closebtn {
+      position: absolute;
+      top: 15px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Sadržaj */
+    .content {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .content p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    .device {
+      background: rgba(0, 50, 100, 0.65);
+      margin-bottom: 20px;
+      padding: 25px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+    .device:hover {
+      transform: translateY(-5px);
+      background: rgba(0, 70, 150, 0.8);
+    }
+    .device h2 {
+      margin: 0 0 10px;
+      color: #ffcc00;
+      font-size: 22px;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 64, 128, 0.9);
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      font-size: 14px;
+      backdrop-filter: blur(8px);
+    }
+    footer a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+
+    /* Canvas pozadina */
+    #tech-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas background -->
+  <canvas id="tech-bg"></canvas>
+
+  <header>
+    <h1>Kako da gledaš BalkanFlix IPTV</h1>
+    <button class="menu-toggle" onclick="openNav()">☰</button>
+  </header>
+
+  <!-- Navigacija -->
+  <div id="myNav" class="overlay">
+    <span class="closebtn" onclick="closeNav()">×</span>
+    <a href="index.html">🏠 Početna</a>
+    <a href="cjenovnik.html">💰 Cijene i akcije</a>
+    <a href="top15.html">🎬 Top 15</a>
+    <a href="komentari.html">💬 Komentari</a>
+    <a href="tim.html">👥 Postani dio tima</a>
+    <a href="onama.html">ℹ️ O nama</a>
+    <a href="kontakt.html">📞 Kontakt</a>
+    <a href="placanje.html">💳 Plaćanje</a>
+    <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
+    <a href="aplikacije.html">📱 Aplikacije</a>
+  </div>
+
+  <main class="content">
+    <p>BalkanFlix IPTV možeš gledati na različitim uređajima — izaberi način koji ti najviše odgovara.</p>
+
+    <div class="device">
+      <h2>📺 Smart TV</h2>
+      <p>Instaliraj IPTV aplikaciju, unesi podatke i gledaj odmah — bez dodatne opreme.</p>
+    </div>
+
+    <div class="device">
+      <h2>💻 Kompjuter ili Laptop</h2>
+      <p>Gledaj direktno kroz browser ili putem IPTV playera za PC.</p>
+    </div>
+
+    <div class="device">
+      <h2>📱 Telefon ili Tablet</h2>
+      <p>Preuzmi aplikaciju sa Google Play ili App Store i gledaj bilo gdje.</p>
+    </div>
+
+    <div class="device">
+      <h2>▶️ Streaming uređaji</h2>
+      <p>Kompatibilno sa Fire Stick, Chromecast, Nvidia Shield i Android TV Box uređajima.</p>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 BalkanFlix IPTV | Kontakt:
+    <a href="https://wa.me/381654489635">WhatsApp: +381 65 448 9635</a> |
+    </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function openNav() { document.getElementById("myNav").style.width = "100%"; }
+    function closeNav() { document.getElementById("myNav").style.width = "0%"; }
+
+    /* Tech pozadina */
+    const canvas = document.getElementById("tech-bg");
+    const ctx = canvas.getContext("2d");
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+
+    window.onresize = () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    };
+
+    const particles = Array.from({ length: 70 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.7,
+      vy: (Math.random() - 0.5) * 0.7
+    }));
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(0,150,255,0.7)";
+      ctx.strokeStyle = "rgba(0,150,255,0.15)";
+
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let dx = p.x - particles[j].x;
+          let dy = p.y - particles[j].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>

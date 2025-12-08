@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt - BalkanFlix IPTV</title>
+  <style>
+    body { margin:0; font-family:Arial,sans-serif; background:#0d1b2a; color:#e6e6e6; }
+
+    header { background:#1b263b; color:#fff; padding:25px; text-align:center; }
+    header p { color:#dce3f0; }
+
+    nav { background:#415a77; display:flex; justify-content:center; flex-wrap:wrap; }
+    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
+    nav a:hover { background:#e6f0ff; color:#1b263b; }
+
+    .menu-toggle { 
+      display:none; 
+      font-size:28px; 
+      background:#415a77; 
+      border:none; 
+      color:white; 
+      cursor:pointer; 
+      padding:12px 18px; 
+      width:100%;
+      text-align:right;
+    }
+
+    @media (max-width:768px) {
+      nav { display:none; flex-direction:column; text-align:center; }
+      nav.show { display:flex; }
+      .menu-toggle { display:block; }
+    }
+
+    .container { max-width:1000px; margin:40px auto; padding:0 20px; }
+    h2 { text-align:center; color:#87b3ff; margin-bottom:20px; }
+    p { font-size:1.1em; line-height:1.8; text-align:center; }
+
+    .contact-info a { color:#87b3ff; text-decoration:none; }
+
+    .form-box { 
+      background:#1b263b; 
+      padding:25px; 
+      border-radius:10px; 
+      box-shadow:0 2px 12px rgba(0,0,0,0.4); 
+      max-width:650px; 
+      margin:40px auto; 
+    }
+    input, textarea { 
+      margin:10px 0; 
+      padding:12px; 
+      border:1px solid #415a77; 
+      border-radius:6px; 
+      font-size:1em; 
+      background:#0d1b2a;
+      color:#e6e6e6;
+    }
+    button { 
+      background:#25d366; 
+      color:#fff; 
+      border:none; 
+      padding:12px; 
+      border-radius:6px; 
+      font-size:1.1em; 
+      cursor:pointer; 
+    }
+    button:hover { background:#1ebc57; }
+
+    footer { background:#1b263b; color:#fff; text-align:center; padding:20px; margin-top:40px; }
+    footer a { color:#ffdd00; text-decoration:none; }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Kontaktirajte BalkanFlix IPTV</h1>
+    <p>Tu smo da odgovorimo na sva vaša pitanja</p>
+  </header>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav id="mainMenu">
+    <a href="index.html">Početna</a>
+    <a href="cjenovnik.html">Cijene i akcije</a>
+    <a href="top15.html">Top 30</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="onama.html">O nama</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="kako-da-gledas.html">Kako da gledaš</a>
+    <a href="aplikacije.html">Aplikacije</a>
+  </nav>
+
+  <div class="container">
+
+    <h2>Kontakt podaci</h2>
+    <div class="contact-info">
+      <p>📧 Email: <a href="mailto:support@balkanflix.com">support@balkanflix.com</a></p>
+      <p>💬 WhatsApp (RS): <a href="https://wa.me/381654489635">+381 65 4489635</a></p>
+    </div>
+
+    <!-- WhatsApp forma -->
+    <div class="form-box">
+      <h2>Pošaljite WhatsApp poruku</h2>
+      <form id="whatsappForm">
+        <input type="text" id="ime" placeholder="Vaše ime" required>
+        <input type="email" id="email" placeholder="Vaš email" required>
+        <textarea id="poruka" rows="6" placeholder="Vaša poruka" required></textarea>
+        <button type="submit">Pošalji na WhatsApp</button>
+      </form>
+    </div>
+
+    <!-- Email forma -->
+    <div class="form-box">
+      <h2>Pošaljite email</h2>
+      <form action="https://formsubmit.co/support@balkanflix.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="Ime" placeholder="Vaše ime" required>
+        <input type="email" name="Email" placeholder="Vaš email" required>
+        <textarea name="Poruka" rows="6" placeholder="Vaša poruka" required></textarea>
+        <button type="submit">Pošalji email</button>
+      </form>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 BalkanFlix IPTV</p>
+    <p>Email: <a href="mailto:support@balkanflix.com">support@balkanflix.com</a> |
+      WhatsApp RS: <a href="https://wa.me/381654489635">+381 65 4489635</a></p>
+  </footer>
+
+  <script>
+
+    function toggleMenu() {
+      document.getElementById("mainMenu").classList.toggle("show");
+    }
+
+    document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let ime = document.getElementById("ime").value;
+      let email = document.getElementById("email").value;
+      let poruka = document.getElementById("poruka").value;
+
+      let broj = "4915755749502"; 
+      let tekst = `👤 Ime: ${ime}%0A📧 Email: ${email}%0A💬 Poruka: ${poruka}`;
+      let link = `https://wa.me/${broj}?text=${tekst}`;
+      window.open(link, "_blank");
+    });
+
+  </script>
+
+</body>
+</html>
