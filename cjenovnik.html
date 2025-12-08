@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cijene i akcije - BalkanFlix IPTV</title>
+  <style>
+    body { margin:0; font-family:Arial,sans-serif; background:#f8fbff; color:#333; }
+    header { background:#0056a6; color:#fff; padding:25px; text-align:center; position:relative; }
+
+    /* Navigacija */
+    nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
+    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
+    nav a:hover { background:#e6f0ff; color:#0056a6; }
+
+    /* Hamburger meni */
+    .menu-toggle {
+      display:none;
+      flex-direction:column;
+      cursor:pointer;
+      padding:10px;
+      position:absolute;
+      top:20px;
+      right:20px;
+    }
+    .menu-toggle div {
+      width:30px;
+      height:4px;
+      background:#fff;
+      margin:5px 0;
+      transition:0.3s;
+    }
+
+    /* Mobile prikaz */
+    @media (max-width:768px) {
+      nav {
+        display:none;
+        flex-direction:column;
+        text-align:center;
+      }
+      nav.active { display:flex; }
+      .menu-toggle { display:flex; }
+    }
+
+    .container { max-width:1100px; margin:40px auto; padding:0 20px; }
+    h2 { text-align:center; color:#0056a6; margin-bottom:20px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
+    .card {
+      background:#fff;
+      border:2px solid #007bff;
+      border-radius:10px;
+      padding:20px;
+      text-align:center;
+      transition:.3s;
+    }
+    .card:hover { transform:translateY(-5px); }
+    .card h3 { margin-top:0; color:#0056a6; }
+    .card p { margin:10px 0; font-size:1.1em; }
+    .old-price { text-decoration:line-through; color:gray; font-size:0.9em; }
+    .btn {
+      display:inline-block;
+      margin-top:12px;
+      padding:10px 18px;
+      background:#007bff;
+      color:#fff;
+      text-decoration:none;
+      border-radius:6px;
+    }
+    .btn:hover { background:#0056a6; }
+    footer {
+      background:#0056a6;
+      color:#fff;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
+    }
+    footer a { color:#ffdd00; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cijene i akcije</h1>
+    <p>Najbolja IPTV ponuda za cijelu porodicu</p>
+
+    <!-- Hamburger dugme -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <nav id="navbar">
+    <a href="index.html">Početna</a>
+    <a href="cjenovnik.html">Cijene i akcije</a>
+    <a href="top15.html">Top 30</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="onama.html">O nama</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="kako-da-gledas.html">Kako da gledaš</a>
+    <a href="aplikacije.html">Aplikacije za korištenje</a>
+  </nav>
+
+  <div class="container">
+    <h2>Naši paketi</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Basic paket</h3>
+        <p>6.99€</p>
+        <p>750 kanala, 4.500 filmova, 500 serija</p>
+        <a class="btn" href="https://wa.me/381654489635">Kupi sada</a>
+      </div>
+      <div class="card">
+        <h3>Medium paket</h3>
+        <p>8.99€</p>
+        <p>1.120 kanala, 7.600 filmova, 650 serija</p>
+        <a class="btn" href="https://wa.me/381654489635">Kupi sada</a>
+      </div>
+      <div class="card">
+        <h3>Pro paket</h3>
+        <p>11.99€</p>
+        <p>2.100+ kanala, 45.000+ filmova, 1.350+ serija</p>
+        <a class="btn" href="https://wa.me/381654489635">Kupi sada</a>
+      </div>
+    </div>
+
+    <h2 style="margin-top:40px;">Akcije</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Probni test</h3>
+        <p>24h potpuno besplatno</p>
+        <a class="btn" href="https://wa.me/381654489635">Aktiviraj</a>
+      </div>
+
+      <div class="card">
+        <h3>12 + 12 mjeseci</h3>
+        <p><span class="old-price">180€</span> <strong>140€</strong></p>
+        <p>Ušteda 40€</p>
+        <a class="btn" href="https://wa.me/381654489635">Kupi sada</a>
+      </div>
+
+      <div class="card">
+        <h3>Porodični paket</h3>
+        <p>Gledanje na 2 uređaja istovremeno</p>
+        <a class="btn" href="https://wa.me/381654489635">Kupi sada</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 BalkanFlix IPTV</p>
+    <p>
+      Email: <a href="mailto:support@balkanflix.com">support@balkanflix.com</a> | 
+      WhatsApp RS: <a href="https://wa.me/381654489635">+381 65 4489635</a>
+    </p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navbar").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
