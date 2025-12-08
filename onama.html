@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O nama - BalkanFlix IPTV</title>
+
+  <style>
+    body {
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#0d1117;
+      color:#e6e6e6;
+    }
+
+    /* HEADER */
+    header {
+      background:#0d1117;
+      color:#fff;
+      text-align:center;
+      padding:60px 20px;
+      background-image:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+      url('https://images.unsplash.com/photo-1525182008055-f88b95ff7980?auto=format&fit=crop&w=1600&q=80');
+      background-size:cover;
+      background-position:center;
+    }
+    header h1 { font-size:3em; margin-bottom:10px; }
+    header p { font-size:1.2em; }
+
+    /* NAV */
+    nav {
+      background:#161b22;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      border-bottom:1px solid #30363d;
+    }
+    nav a {
+      color:#fff;
+      padding:14px 22px;
+      text-decoration:none;
+    }
+    nav a:hover { background:#2388ff; }
+
+    .menu-toggle {
+      display:none;
+      font-size:30px;
+      background:#161b22;
+      width:100%;
+      color:#fff;
+      border:none;
+      text-align:right;
+      padding:14px 22px;
+      cursor:pointer;
+    }
+
+    @media(max-width:768px){
+      nav { display:none; flex-direction:column; }
+      nav.show { display:flex; }
+      .menu-toggle { display:block; }
+    }
+
+    .container {
+      max-width:1000px;
+      margin:40px auto;
+      padding:0 20px;
+    }
+    h2 {
+      text-align:center;
+      color:#58a6ff;
+      margin-bottom:20px;
+    }
+    p {
+      font-size:1.1em;
+      line-height:1.8;
+    }
+
+    .cards {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      gap:20px;
+      margin-top:40px;
+    }
+    .card {
+      background:#161b22;
+      padding:20px;
+      border-radius:10px;
+      border:1px solid #30363d;
+      text-align:center;
+      transition:0.3s;
+    }
+    .card:hover {
+      transform:translateY(-5px);
+      border-color:#58a6ff;
+    }
+
+    .timeline {
+      border-left:3px solid #2388ff;
+      margin:40px 0;
+      padding-left:20px;
+    }
+    .t-item { margin-bottom:25px; }
+    .t-item h3 { margin:0; color:#58a6ff; }
+
+    .stats {
+      display:flex;
+      justify-content:space-around;
+      flex-wrap:wrap;
+      margin:40px 0;
+      text-align:center;
+    }
+    .stat {
+      width:200px;
+      padding:20px;
+      background:#161b22;
+      border:1px solid #30363d;
+      border-radius:10px;
+      margin:10px;
+    }
+    .stat h3 { font-size:2em; color:#58a6ff; margin:0; }
+
+    .cta {
+      background:#2388ff;
+      padding:30px;
+      border-radius:10px;
+      text-align:center;
+      margin:40px 0;
+      color:#fff;
+    }
+    .cta a {
+      background:#fff;
+      color:#2388ff;
+      padding:12px 25px;
+      display:inline-block;
+      text-decoration:none;
+      font-weight:bold;
+      border-radius:6px;
+      margin-top:10px;
+    }
+
+    footer {
+      background:#161b22;
+      color:#fff;
+      text-align:center;
+      padding:20px;
+      border-top:1px solid #30363d;
+    }
+    footer a { color:#58a6ff; text-decoration:none; }
+
+    .fade {
+      opacity:0;
+      transform:translateY(20px);
+      animation:fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* WhatsApp floating button */
+    .wa-float {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#25d366;
+      color:white;
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:32px;
+      text-decoration:none;
+      z-index:1000;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="fade">
+    <h1>O nama</h1>
+    <p>9 godina vrhunskog IPTV iskustva i povjerenja</p>
+  </header>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav id="mainMenu">
+    <a href="index.html">Početna</a>
+    <a href="cijene.html">Cijene i akcije</a>
+    <a href="komentari.html">Komentari</a>
+    <a href="onama.html">O nama</a>
+    <a href="tim.html">Postani dio tima</a>
+    <a href="top15.html">Top 15</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+
+  <div class="container">
+
+    <h2 class="fade">Ko smo mi?</h2>
+    <p class="fade">
+      Već <strong>9 godina</strong> pružamo IPTV usluge najvišeg kvaliteta.  
+      Naša misija je jednostavna — <strong>savršeno iskustvo gledanja bez prekida</strong>.  
+      Koristimo samo premium servere i najstabilnije izvore streamova.
+    </p>
+
+    <div class="cards fade">
+      <div class="card">
+        <h3>✔ Premium serveri</h3>
+        <p>Brzi, stabilni i bez prekida.</p>
+      </div>
+      <div class="card">
+        <h3>✔ Brza podrška</h3>
+        <p>Tu smo za vas 24/7.</p>
+      </div>
+      <div class="card">
+        <h3>✔ 3000+ kanala</h3>
+        <p>Ogroman izbor za cijelu porodicu.</p>
+      </div>
+      <div class="card">
+        <h3>✔ 9 godina iskustva</h3>
+        <p>Hiljade zadovoljnih korisnika.</p>
+      </div>
+    </div>
+
+    <h2 class="fade">Naš put kroz godine</h2>
+    <div class="timeline fade">
+      <div class="t-item"><h3>2016</h3><p>Početak projekta.</p></div>
+      <div class="t-item"><h3>2018</h3><p>Uvođenje premium servera.</p></div>
+      <div class="t-item"><h3>2020</h3><p>Proširenje na 2000+ kanala.</p></div>
+      <div class="t-item"><h3>2022</h3><p>Automatska aktivacija globalno.</p></div>
+      <div class="t-item"><h3>2025</h3><p>Danas — 112000+ dostupnih kanala za ubacivanje u slucaju potrebe.</p></div>
+    </div>
+
+    <h2 class="fade">Brojke koje govore</h2>
+    <div class="stats fade">
+      <div class="stat"><h3>112000+</h3><p>TV kanala</p></div>
+      <div class="stat"><h3>9</h3><p>Godina iskustva</p></div>
+      <div class="stat"><h3>24/7</h3><p>Podrška</p></div>
+      <div class="stat"><h3>10.000+</h3><p>Zadovoljnih korisnika</p></div>
+    </div>
+
+    <div class="cta fade">
+      <h2>Želite probu ili pretplatu?</h2>
+      <p>Javite nam se — odgovor stiže odmah!</p>
+      <a href="https://wa.me/381654489635">Kontaktiraj nas</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2025 BalkanFlix IPTV</p>
+    <p>WhatsApp: <a href="https://wa.me/381654489635">+381 65 4489635</a></p>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/381654489635">💬</a>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("mainMenu").classList.toggle("show");
+    }
+  </script>
+
+</body>
+</html>
