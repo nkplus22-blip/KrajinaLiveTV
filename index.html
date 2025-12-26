@@ -1,295 +1,345 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KrajinaLive IPTV</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-      background-color: #000;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KrajinaLive IPTV</title>
 
-    header {
-      text-align: center;
-      padding: 50px 20px 20px;
-      background: rgba(0,0,0,0.7);
-      position: relative;
-      z-index: 2;
-    }
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  color:#fff;
+  background:#000;
+  overflow-x:hidden;
+}
 
-    header h1 {
-      font-size: 2.2rem;
-      color: #00bfff;
-    }
+canvas#tech-bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  opacity:0.4;
+}
 
-    header p {
-      color: #ccc;
-      margin-top: 10px;
-    }
+/* HEADER */
+header{
+  text-align:center;
+  padding:60px 20px 30px;
+  position:relative;
+  z-index:2;
+}
+header h1{color:#00bfff;font-size:2.4rem}
+header p{color:#ccc}
 
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: #00bfff;
-      cursor: pointer;
-    }
+.menu-toggle{
+  position:absolute;
+  top:20px;
+  right:25px;
+  font-size:28px;
+  background:none;
+  border:none;
+  color:#00bfff;
+  cursor:pointer;
+}
 
-    .overlay {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 10;
-      top: 0;
-      left: 0;
-      background-color: rgba(0,0,0,0.95);
-      overflow-x: hidden;
-      transition: 0.5s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+/* OVERLAY MENU */
+.overlay{
+  position:fixed;
+  inset:0;
+  width:0;
+  background:rgba(0,0,0,0.95);
+  z-index:10;
+  transition:.5s;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.overlay a{
+  color:#fff;
+  text-decoration:none;
+  font-size:22px;
+  margin:8px;
+}
+.overlay a:hover{color:#00bfff}
+.closebtn{
+  position:absolute;
+  top:20px;
+  right:40px;
+  font-size:40px;
+  cursor:pointer;
+}
 
-    .overlay a {
-      padding: 10px;
-      font-size: 22px;
-      color: #fff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+/* HERO */
+.hero{
+  text-align:center;
+  padding:40px 20px;
+  z-index:2;
+  position:relative;
+}
+.hero h2{color:#00bfff}
+#typedText{margin-top:10px;color:#ccc}
 
-    .overlay a:hover {
-      color: #00bfff;
-    }
+/* LIVE STATUS */
+.live-status{
+  margin-top:20px;
+  font-size:14px;
+  color:#ccc;
+}
+.dot{
+  width:10px;
+  height:10px;
+  background:#00ff7f;
+  border-radius:50%;
+  display:inline-block;
+  box-shadow:0 0 10px #00ff7f;
+  margin-right:6px;
+}
 
-    .overlay .closebtn {
-      position: absolute;
-      top: 20px;
-      right: 45px;
-      font-size: 40px;
-    }
+/* COUNTERS */
+.counters{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  padding:40px 20px;
+  z-index:2;
+  position:relative;
+}
+.counter-box{
+  width:160px;
+  padding:20px;
+  text-align:center;
+  background:rgba(255,255,255,0.08);
+  border-radius:15px;
+  box-shadow:0 0 15px rgba(0,191,255,.3);
+}
+.counter{font-size:2rem;color:#00bfff}
 
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-      background: rgba(0,0,0,0.6);
-      z-index: 2;
-      position: relative;
-    }
+/* CONTENT */
+.content{
+  max-width:800px;
+  margin:40px auto;
+  padding:30px;
+  text-align:center;
+  background:rgba(255,255,255,0.05);
+  border-radius:15px;
+  z-index:2;
+  position:relative;
+}
 
-    .hero h1 {
-      color: #00bfff;
-    }
+/* DEMO BUTTON */
+.demo-btn{
+  margin-top:30px;
+  padding:15px 30px;
+  border:none;
+  border-radius:30px;
+  background:#00bfff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(0,191,255,.6);
+}
 
-    .counters {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 40px 20px;
-      text-align: center;
-    }
+/* IPTV DEMO */
+.iptv-demo{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:999;
+  display:none;
+  flex-direction:column;
+}
+.tv-screen{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:2.2rem;
+  background:radial-gradient(circle,#111,#000);
+}
+.channel-list{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  padding:20px;
+}
+.channel-list div{
+  padding:10px 15px;
+  background:#111;
+  border-radius:10px;
+  cursor:pointer;
+}
+.channel-list div:hover{
+  background:#00bfff;
+  color:#000;
+}
+.close-demo{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:30px;
+  cursor:pointer;
+}
 
-    .counter-box {
-      background: rgba(255,255,255,0.08);
-      padding: 20px;
-      border-radius: 12px;
-      width: 150px;
-      box-shadow: 0 0 12px rgba(0,191,255,0.3);
-    }
+/* CURSOR GLOW */
+.cursor-glow{
+  position:fixed;
+  width:20px;
+  height:20px;
+  background:rgba(0,191,255,.4);
+  border-radius:50%;
+  pointer-events:none;
+  box-shadow:0 0 30px rgba(0,191,255,.7);
+  transform:translate(-50%,-50%);
+  z-index:9999;
+}
 
-    .counter {
-      font-size: 2rem;
-      color: #00bfff;
-    }
-
-    .content {
-      padding: 40px 20px;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,191,255,0.1);
-    }
-
-    ul {
-      text-align: left;
-      display: inline-block;
-      margin-top: 10px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: rgba(0,0,0,0.8);
-      color: #aaa;
-      font-size: 14px;
-    }
-
-    footer a {
-      color: #00bfff;
-      text-decoration: none;
-    }
-
-    canvas#tech-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      opacity: 0.4;
-    }
-  </style>
+/* FOOTER */
+footer{
+  padding:30px;
+  text-align:center;
+  color:#aaa;
+  background:rgba(0,0,0,.8);
+  z-index:2;
+  position:relative;
+}
+footer a{color:#00bfff;text-decoration:none}
+</style>
 </head>
+
 <body>
 
 <canvas id="tech-bg"></canvas>
+<div class="cursor-glow"></div>
 
 <header>
   <h1>KrajinaLive IPTV</h1>
-  <p>Najbolji izbor IPTV sadržaja – stabilno, brzo i pouzdano</p>
+  <p>Premium IPTV nove generacije</p>
   <button class="menu-toggle" onclick="openNav()">☰</button>
 </header>
 
 <div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="index.html">Početna</a>
-  <a href="cjenovnik.html">Cijene i akcije</a>
-  <a href="top15.html">Top 30</a>
-  <a href="komentari.html">Komentari</a>
-  <a href="tim.html">Postani dio tima</a>
-  <a href="onama.html">O nama</a>
-  <a href="kontakt.html">Kontakt</a>
-  <a href="placanje.html">Plaćanje</a>
-  <a href="kako-da-gledas.html">Kako da gledaš</a>
-  <a href="aplikacije.html">Aplikacije za korištenje</a>
+  <span class="closebtn" onclick="closeNav()">×</span>
+  <a href="#">Početna</a>
+  <a href="#">Cijene</a>
+  <a href="#">Komentari</a>
+  <a href="#">Kontakt</a>
 </div>
 
 <section class="hero">
-  <h1>Dobrodošli u KrajinaLive IPTV</h1>
-  <p>IPTV servis nove generacije – stabilan, brz i jednostavan za korištenje.</p>
+  <h2 id="greeting"></h2>
+  <p id="typedText"></p>
+
+  <div class="live-status">
+    <span class="dot"></span> Server ONLINE • Ping: <b>12ms</b> • Aktivnih korisnika: <b id="liveUsers">16,042</b>
+  </div>
+
+  <button class="demo-btn" onclick="openDemo()">🎬 Pokreni IPTV DEMO</button>
 </section>
 
 <section class="counters">
-  <div class="counter-box"><h2 class="counter" data-target="16000">0</h2><p>Zadovoljnih korisnika</p></div>
-  <div class="counter-box"><h2 class="counter" data-target="9">0</h2><p>Godina iskustva</p></div>
-  <div class="counter-box"><h2 class="counter" data-target="2100">0</h2><p>TV kanala</p></div>
-  <div class="counter-box"><h2 class="counter" data-target="75000">0</h2><p>Filmova i serija</p></div>
+  <div class="counter-box"><div class="counter" data-target="16000">0</div><p>Korisnika</p></div>
+  <div class="counter-box"><div class="counter" data-target="9">0</div><p>Godina</p></div>
+  <div class="counter-box"><div class="counter" data-target="2100">0</div><p>Kanala</p></div>
+  <div class="counter-box"><div class="counter" data-target="75000">0</div><p>Filmova</p></div>
 </section>
 
 <section class="content">
-  <h2>Zašto odabrati KrajinaLive IPTV?</h2>
-  <p>Naš IPTV servis nudi savršen spoj kvaliteta, stabilnosti i povoljne cijene. Bez ikakvih prekida, uz servere visokih performansi koji osiguravaju najbolje moguće iskustvo.</p>
-  <p>📌 Pogledajte <a href="cjenovnik.html">pakete i akcije</a> ili <a href="komentari.html">komentare korisnika</a>.</p>
-</section>
-
-<section class="content">
-  <h2>Šta je IPTV?</h2>
-  <ul>
-    <li>Hiljade TV kanala iz cijelog svijeta</li>
-    <li>Velika videoteka sa filmovima i serijama</li>
-    <li>Gledanje na Smart TV, mobilnim uređajima, laptopima i box uređajima</li>
-    <li>Bez antena, kablova i komplikacija</li>
-    <li>Povoljnije od klasičnih operatera</li>
-  </ul>
+  <h2>Zašto KrajinaLive IPTV?</h2>
+  <p>Stabilnost, brzina, vrhunski kvalitet i podrška 24/7.</p>
 </section>
 
 <footer>
-  <p>&copy; 2025 KrajinaLive IPTV | Kontakt: 
-    <a href="https://wa.me/387644064762">WhatsApp</a> |
-    Email: support@krajinalive.com
-  </p>
+  &copy; 2025 KrajinaLive IPTV |
+  <a href="https://wa.me/387644064762">WhatsApp</a>
 </footer>
 
-<script>
-function openNav(){ document.getElementById("myNav").style.width="100%"; }
-function closeNav(){ document.getElementById("myNav").style.width="0%"; }
+<!-- IPTV DEMO -->
+<div id="iptvDemo" class="iptv-demo">
+  <span class="close-demo" onclick="closeDemo()">✕</span>
+  <div class="tv-screen" id="channelName">KrajinaLive TV</div>
+  <div class="channel-list">
+    <div onclick="changeChannel('Arena Sport')">Arena</div>
+    <div onclick="changeChannel('HBO')">HBO</div>
+    <div onclick="changeChannel('Movies+')">Movies+</div>
+    <div onclick="changeChannel('Netflix Style')">Series+</div>
+  </div>
+</div>
 
-const counters = document.querySelectorAll('.counter');
-counters.forEach(counter=>{
-  counter.innerText='0';
-  const updateCounter=()=>{
-    const target=+counter.getAttribute('data-target');
-    const current=+counter.innerText.replace(/\D/g,'');
-    const increment=target/200;
-    if(current<target){
-      counter.innerText=Math.ceil(current+increment).toLocaleString();
-      setTimeout(updateCounter,20);
-    } else {
-      counter.innerText=target>=1000?target.toLocaleString()+"+":target+"+";
-    }
-  };
-  updateCounter();
+<script>
+/* MENU */
+function openNav(){myNav.style.width="100%"}
+function closeNav(){myNav.style.width="0"}
+
+/* GREETING */
+const h=new Date().getHours();
+greeting.innerText=h<12?"Dobro jutro 👋":h<18?"Dobar dan 👋":"Dobro veče 🌙";
+
+/* TYPING */
+const texts=["Stabilan IPTV bez prekida.","Gledaj sve – bez ograničenja.","Premium IPTV po fer cijeni."];
+let i=0,j=0;
+function type(){
+ if(j<texts[i].length){
+  typedText.innerHTML+=texts[i][j++];
+  setTimeout(type,60);
+ }else{
+  setTimeout(()=>{typedText.innerHTML="";j=0;i=(i+1)%texts.length;type();},2000);
+ }
+}
+type();
+
+/* LIVE USERS */
+setInterval(()=>{
+ let v=parseInt(liveUsers.innerText.replace(/\D/g,''))+(Math.random()>0.5?1:-1);
+ liveUsers.innerText=v.toLocaleString();
+},3000);
+
+/* COUNTERS */
+document.querySelectorAll('.counter').forEach(c=>{
+ let t=+c.dataset.target;
+ let i=0;
+ let inc=t/200;
+ let run=setInterval(()=>{
+  i+=inc;
+  if(i>=t){c.innerText=t+"+";clearInterval(run)}
+  else c.innerText=Math.ceil(i).toLocaleString();
+ },20);
 });
 
-// Canvas animacija
-const canvas=document.getElementById('tech-bg');
-const ctx=canvas.getContext('2d');
-let width=canvas.width=window.innerWidth;
-let height=canvas.height=window.innerHeight;
-
-window.addEventListener('resize',()=>{ width=canvas.width=window.innerWidth; height=canvas.height=window.innerHeight; });
-
-const particleCount=80;
-const particles=[];
-
-class Particle{
-  constructor(){
-    this.x=Math.random()*width;
-    this.y=Math.random()*height;
-    this.size=Math.random()*2+1;
-    this.speedX=Math.random()*1-0.5;
-    this.speedY=Math.random()*1-0.5;
-  }
-  update(){
-    this.x+=this.speedX;
-    this.y+=this.speedY;
-    if(this.x>width)this.x=0;
-    if(this.x<0)this.x=width;
-    if(this.y>height)this.y=0;
-    if(this.y<0)this.y=height;
-  }
-  draw(){
-    ctx.fillStyle='rgba(0,150,255,0.7)';
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-    ctx.fill();
-  }
+/* DEMO */
+function openDemo(){iptvDemo.style.display="flex"}
+function closeDemo(){iptvDemo.style.display="none"}
+function changeChannel(n){
+ channelName.innerText="Loading...";
+ setTimeout(()=>channelName.innerText=n,500);
 }
 
-for(let i=0;i<particleCount;i++)particles.push(new Particle());
+/* CURSOR */
+document.addEventListener('mousemove',e=>{
+ document.querySelector('.cursor-glow').style.left=e.clientX+"px";
+ document.querySelector('.cursor-glow').style.top=e.clientY+"px";
+});
 
-function animate(){
-  ctx.clearRect(0,0,width,height);
-  particles.forEach(p=>{p.update();p.draw();});
-
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      const dx=particles[i].x-particles[j].x;
-      const dy=particles[i].y-particles[j].y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<100){
-        ctx.strokeStyle='rgba(0,150,255,0.15)';
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x,particles[i].y);
-        ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.stroke();
-      }
-    }
-  }
-
-  requestAnimationFrame(animate);
+/* CANVAS BG */
+const canvas=document.getElementById("tech-bg");
+const ctx=canvas.getContext("2d");
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+resize();addEventListener("resize",resize);
+let p=[];
+for(let i=0;i<80;i++)p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:Math.random()-0.5,vy:Math.random()-0.5});
+function anim(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ p.forEach(a=>{
+  a.x+=a.vx;a.y+=a.vy;
+  if(a.x<0||a.x>canvas.width)a.vx*=-1;
+  if(a.y<0||a.y>canvas.height)a.vy*=-1;
+  ctx.fillStyle="rgba(0,150,255,.7)";
+  ctx.beginPath();ctx.arc(a.x,a.y,2,0,Math.PI*2);ctx.fill();
+ });
+ requestAnimationFrame(anim);
 }
-
-animate();
+anim();
 </script>
 
 </body>
