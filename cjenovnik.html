@@ -1,165 +1,1026 @@
 <!DOCTYPE html>
-<html lang="bs">
+<html lang="bs" class="dark scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cijene i akcije - KrajinaLive IPTV</title>
-  <style>
-    body { margin:0; font-family:Arial,sans-serif; background:#f8fbff; color:#333; }
-    header { background:#0056a6; color:#fff; padding:25px; text-align:center; position:relative; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cijene i Akcije | KrajinaLive IPTV - Najbolji Paket Za Vaš Dom</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Pregledajte sve IPTV pakete i specijačne akcije KrajinaLive IPTV servisa. Basic, Medium, Pro i Porodični paketi po najpovoljnijim cijenama uz besplatni 24h test!">
+    <meta name="keywords" content="IPTV cijene, KrajinaLive cjenovnik, jeftin IPTV, IPTV paketi, IPTV akcija, ExYu kanali cijena, Arena Sport IPTV, Smart IPTV pretplata">
+    <meta name="author" content="KrajinaLive IPTV">
 
-    /* Navigacija */
-    nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
-    nav a:hover { background:#e6f0ff; color:#0056a6; }
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    /* Hamburger meni */
-    .menu-toggle {
-      display:none;
-      flex-direction:column;
-      cursor:pointer;
-      padding:10px;
-      position:absolute;
-      top:20px;
-      right:20px;
-    }
-    .menu-toggle div {
-      width:30px;
-      height:4px;
-      background:#fff;
-      margin:5px 0;
-      transition:0.3s;
-    }
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#00f0ff',
+                            blue: '#0072ff',
+                            purple: '#7000ff',
+                            dark: '#080c14',
+                            card: 'rgba(15, 23, 42, 0.65)',
+                            border: 'rgba(255, 255, 255, 0.12)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif']
+                    },
+                    boxShadow: {
+                        glow: '0 0 25px rgba(0, 240, 255, 0.35)',
+                        'glow-purple': '0 0 25px rgba(112, 0, 255, 0.35)',
+                        'glow-gold': '0 0 25px rgba(255, 215, 0, 0.4)',
+                        'glow-lg': '0 0 50px rgba(0, 240, 255, 0.45)'
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s infinite linear'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-    /* Mobile prikaz */
-    @media (max-width:768px) {
-      nav {
-        display:none;
-        flex-direction:column;
-        text-align:center;
-      }
-      nav.active { display:flex; }
-      .menu-toggle { display:flex; }
-    }
+    <style>
+        /* Custom Scrollbar & Glassmorphism Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080c14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f0ff;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0072ff;
+        }
 
-    .container { max-width:1100px; margin:40px auto; padding:0 20px; }
-    h2 { text-align:center; color:#0056a6; margin-bottom:20px; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
-    .card {
-      background:#fff;
-      border:2px solid #007bff;
-      border-radius:10px;
-      padding:20px;
-      text-align:center;
-      transition:.3s;
-    }
-    .card:hover { transform:translateY(-5px); }
-    .card h3 { margin-top:0; color:#0056a6; }
-    .card p { margin:10px 0; font-size:1.1em; }
-    .old-price { text-decoration:line-through; color:gray; font-size:0.9em; }
-    .btn {
-      display:inline-block;
-      margin-top:12px;
-      padding:10px 18px;
-      background:#007bff;
-      color:#fff;
-      text-decoration:none;
-      border-radius:6px;
-    }
-    .btn:hover { background:#0056a6; }
-    footer {
-      background:#0056a6;
-      color:#fff;
-      text-align:center;
-      padding:20px;
-      margin-top:40px;
-    }
-    footer a { color:#ffdd00; text-decoration:none; }
-  </style>
+        .glass-panel {
+            background: rgba(13, 20, 36, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-panel-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(0, 240, 255, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.3);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #00f0ff 0%, #0072ff 50%, #7000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gold Gradient Border */
+        .gold-border {
+            border: 2px solid transparent;
+            background-image: linear-gradient(#0a0f1d, #0a0f1d), linear-gradient(135deg, #ffd700, #ff8c00);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Cijene i akcije</h1>
-    <p>Najbolja IPTV ponuda za cijelu porodicu</p>
 
-    <!-- Hamburger dugme -->
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </header>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-brand-cyan selection:text-brand-dark">
 
-  <nav id="navbar">
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="top15.html">Top 30</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="onama.html">O nama</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="kako-da-gledas.html">Kako da gledaš</a>
-    <a href="aplikacije.html">Aplikacije za korištenje</a>
-  </nav>
+    <!-- Interactive Particle Canvas Background -->
+    <canvas id="tech-bg" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
-  <div class="container">
-    <h2>Naši paketi</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Basic paket</h3>
-        <p>6.99€</p>
-        <p>750 kanala, 4.500 filmova, 500 serija</p>
-        <a class="btn" href="https://wa.me/387644064762">Kupi sada</a>
-      </div>
-      <div class="card">
-        <h3>Medium paket</h3>
-        <p>8.99€</p>
-        <p>1.120 kanala, 7.600 filmova, 650 serija</p>
-        <a class="btn" href="https://wa.me/387644064762">Kupi sada</a>
-      </div>
-      <div class="card">
-        <h3>Pro paket</h3>
-        <p>11.99€</p>
-        <p>2.100+ kanala, 45.000+ filmova, 1.350+ serija</p>
-        <a class="btn" href="https://wa.me/387644064762">Kupi sada</a>
-      </div>
+    <!-- Top Announcement Bar -->
+    <div class="relative z-50 bg-gradient-to-r from-brand-purple via-brand-blue to-brand-cyan text-white text-xs md:text-sm py-2 px-4 font-semibold text-center shadow-lg flex items-center justify-between overflow-hidden">
+        <div class="container mx-auto flex items-center justify-center gap-3">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-extrabold bg-black/40 text-yellow-300 animate-pulse">
+                🔥 SEZONSKA AKCIJA
+            </span>
+            <span class="truncate">
+                Paket <strong>12 + 12 Mjeseci</strong> je snižen sa <span class="line-through text-slate-300">180€</span> na <strong>samo 140€</strong> (Ušteda 40€)!
+            </span>
+            <a href="#akcije" class="hidden sm:inline-block underline hover:text-yellow-300 transition-colors ml-2 font-bold">
+                Iskoristi Akciju →
+            </a>
+        </div>
     </div>
 
-    <h2 style="margin-top:40px;">Akcije</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Probni test</h3>
-        <p>24h potpuno besplatno</p>
-        <a class="btn" href="https://wa.me/387644064762">Aktiviraj</a>
-      </div>
+    <!-- Main Header / Navigation -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-white/10 transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan flex items-center justify-center text-brand-dark text-2xl font-black shadow-glow group-hover:scale-105 transition-transform duration-300">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-black tracking-wider text-white">KRAJINA<span class="text-brand-cyan">LIVE</span></span>
+                        <span class="text-[10px] tracking-widest text-slate-400 uppercase font-semibold">ULTRA HD IPTV SERVIS</span>
+                    </div>
+                </a>
 
-      <div class="card">
-        <h3>12 + 12 mjeseci</h3>
-        <p><span class="old-price">180€</span> <strong>140€</strong></p>
-        <p>Ušteda 40€</p>
-        <a class="btn" href="https://wa.me/387644064762">Kupi sada</a>
-      </div>
+                <!-- Navigation Links -->
+                <nav class="hidden xl:flex items-center gap-6 text-sm font-medium">
+                    <a href="index.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-house text-xs"></i> Početna
+                    </a>
+                    <a href="cjenovnik.html" class="text-brand-cyan font-bold flex items-center gap-1.5 hover:text-white transition-colors">
+                        <i class="fa-solid fa-tags text-xs"></i> Cijene i Akcije
+                    </a>
+                    <a href="top15.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-fire text-xs text-amber-400"></i> Top 30
+                    </a>
+                    <a href="komentari.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-comments text-xs"></i> Komentari
+                    </a>
+                    <a href="tim.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-users-gear text-xs"></i> Postani Dio Tima
+                    </a>
+                    <a href="onama.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-info text-xs"></i> O Nama
+                    </a>
+                    <a href="kontakt.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-envelope text-xs"></i> Kontakt
+                    </a>
+                    <a href="placanje.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-credit-card text-xs"></i> Plaćanje
+                    </a>
+                    <a href="kako-da-gledas.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-tv text-xs"></i> Kako Gledati
+                    </a>
+                    <a href="aplikacije.html" class="text-slate-300 hover:text-brand-cyan transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-download text-xs"></i> Aplikacije
+                    </a>
+                </nav>
 
-      <div class="card">
-        <h3>Porodični paket</h3>
-        <p>Gledanje na 2 uređaja istovremeno</p>
-        <a class="btn" href="https://wa.me/387644064762">Kupi sada</a>
-      </div>
+                <!-- Actions -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <button onclick="openTestModal()" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs font-bold rounded-xl group bg-gradient-to-br from-brand-cyan to-brand-purple group-hover:from-brand-cyan group-hover:to-brand-blue hover:text-white text-white shadow-glow transition-all duration-300">
+                        <span class="relative px-4 py-2.5 transition-all ease-in duration-75 bg-brand-dark rounded-[10px] group-hover:bg-opacity-0 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-yellow-400 animate-pulse"></i> TEST (24H)
+                        </span>
+                    </button>
+                    
+                    <a href="https://wa.me/387644064762?text=Zdravo%2C%20zanima%20me%20KrajinaLive%20IPTV%20ponuda%20i%20cijene" target="_blank" class="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl transition-all shadow-lg flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp
+                    </a>
+                </div>
+
+                <!-- Hamburger Button -->
+                <button class="xl:hidden text-2xl text-brand-cyan focus:outline-none p-2 rounded-lg bg-white/5 border border-white/10" onclick="toggleNav()" aria-label="Otvori Meni">
+                    <i class="fa-solid fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 bg-brand-dark/95 backdrop-blur-2xl hidden flex-col transition-all duration-300 overflow-y-auto">
+        <div class="p-6 flex items-center justify-between border-b border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan flex items-center justify-center text-brand-dark font-black">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <span class="text-xl font-black text-white">KRAJINA<span class="text-brand-cyan">LIVE</span></span>
+            </div>
+            <button onclick="toggleNav()" class="text-3xl text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="p-6 flex flex-col gap-3 text-base font-semibold">
+            <a href="index.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-house w-6 text-brand-cyan"></i> Početna</a>
+            <a href="cjenovnik.html" class="p-3 rounded-xl bg-brand-cyan/10 text-brand-cyan flex items-center gap-3"><i class="fa-solid fa-tags w-6"></i> Cijene i Akcije</a>
+            <a href="top15.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-fire w-6 text-amber-400"></i> Top 30 Kanala & VOD</a>
+            <a href="komentari.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-comments w-6 text-brand-cyan"></i> Utisci i Komentari</a>
+            <a href="tim.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-users-gear w-6 text-brand-cyan"></i> Postani Dio Tima</a>
+            <a href="onama.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-circle-info w-6 text-brand-cyan"></i> O Nama</a>
+            <a href="kontakt.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-envelope w-6 text-brand-cyan"></i> Kontakt</a>
+            <a href="placanje.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-credit-card w-6 text-brand-cyan"></i> Načini Plaćanja</a>
+            <a href="kako-da-gledas.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-tv w-6 text-brand-cyan"></i> Kako da Gledaš</a>
+            <a href="aplikacije.html" class="p-3 rounded-xl hover:bg-white/5 flex items-center gap-3"><i class="fa-solid fa-download w-6 text-brand-cyan"></i> Preuzmi Aplikacije</a>
+        </div>
+
+        <div class="p-6 mt-auto border-t border-white/10 flex flex-col gap-3">
+            <button onclick="openTestModal(); toggleNav();" class="w-full py-3.5 bg-gradient-to-r from-brand-cyan to-brand-blue text-brand-dark font-black rounded-xl shadow-glow">
+                ⚡ ZATRAŽI BESPLATAN TEST (24H)
+            </button>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="https://wa.me/387644064762" target="_blank" class="py-3 bg-emerald-600 hover:bg-emerald-500 text-center font-bold text-xs rounded-xl text-white flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
+                </a>
+                <a href="viber://chat?number=387644064762" class="py-3 bg-purple-600 hover:bg-purple-500 text-center font-bold text-xs rounded-xl text-white flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-viber text-base"></i> Viber
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>&copy; 2025 KrajinaLive IPTV</p>
-    <p>
-      Email: <a href="mailto:support@krajinalive.com">iptv202596.com</a> | 
-      WhatsApp: <a href="https://wa.me/387644064762">+387 64 4064762</a>
-    </p>
-  </footer>
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10">
 
-  <script>
-    function toggleMenu() {
-      document.getElementById("navbar").classList.toggle("active");
-    }
-  </script>
+        <!-- Page Hero Banner -->
+        <section class="relative pt-12 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-xs font-bold text-brand-cyan border border-brand-cyan/30 mb-6 shadow-glow">
+                    <i class="fa-solid fa-tags"></i> SLAŽEMO PAKET PO VAŠOJ MJERI
+                </span>
+
+                <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6">
+                    Cijene i <span class="text-gradient">Specijalne Akcije</span>
+                </h1>
+
+                <p class="text-base md:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed mb-8">
+                    Najbolja IPTV ponuda za cijelu porodicu! Izaberite paket po vašoj mjeri uz garanciju stabilnosti, 0% ugovorne obaveze i 24/7 tehničku podršku.
+                </p>
+
+                <!-- Currency Switcher Control -->
+                <div class="glass-panel inline-flex items-center p-2 rounded-2xl border border-white/10 gap-1.5 shadow-xl">
+                    <span class="text-xs font-bold text-slate-400 px-3 hidden sm:inline"><i class="fa-solid fa-coins text-brand-cyan mr-1"></i> Valuta:</span>
+                    <button onclick="setCurrency('EUR')" id="btn-curr-EUR" class="curr-btn active px-4 py-2 rounded-xl text-xs font-extrabold bg-brand-cyan text-brand-dark transition-all shadow-glow">
+                        EUR (€)
+                    </button>
+                    <button onclick="setCurrency('BAM')" id="btn-curr-BAM" class="curr-btn px-4 py-2 rounded-xl text-xs font-extrabold text-slate-300 hover:text-white transition-all">
+                        KM (BAM)
+                    </button>
+                    <button onclick="setCurrency('CHF')" id="btn-curr-CHF" class="curr-btn px-4 py-2 rounded-xl text-xs font-extrabold text-slate-300 hover:text-white transition-all">
+                        CHF
+                    </button>
+                    <button onclick="setCurrency('USD')" id="btn-curr-USD" class="curr-btn px-4 py-2 rounded-xl text-xs font-extrabold text-slate-300 hover:text-white transition-all">
+                        USD ($)
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 1: OSNOVNI MJESEČNI PAKETI (Basic, Medium, Pro) -->
+        <section class="py-12 relative" id="paketi">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-2">STANDARDNI PRETPLATNIČKI PAKETI</h2>
+                    <p class="text-3xl md:text-4xl font-black text-white">Naši Mjesečni Paketi</p>
+                    <p class="text-slate-400 text-sm mt-2">Prilagođeni vašim potrebama – od osnovnih kanala do kompletne Premium Ultra HD ponude.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                    <!-- Basic Paket -->
+                    <div class="glass-panel p-8 rounded-3xl relative border border-white/10 flex flex-col justify-between glass-panel-hover">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-slate-800 text-slate-300 border border-slate-700 uppercase">
+                                    Osnovni Izbor
+                                </span>
+                                <i class="fa-solid fa-tv text-2xl text-slate-400"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-black text-white">Basic Paket</h3>
+                            <p class="text-xs text-slate-400 mt-1">Savršeno za osnovne Ex-Yu i regionalne potrebe.</p>
+
+                            <div class="my-6">
+                                <span class="text-4xl md:text-5xl font-black text-white price-display" 
+                                      data-eur="6.99 €" 
+                                      data-bam="13.90 KM" 
+                                      data-chf="7.50 CHF" 
+                                      data-usd="7.50 $">
+                                    6.99 €
+                                </span>
+                                <span class="text-slate-400 text-xs"> / mjesečno</span>
+                            </div>
+
+                            <div class="space-y-3 border-t border-white/10 pt-6 text-xs text-slate-300 mb-8">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span><strong class="text-white">750+</strong> TV Kanala uživo</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span><strong class="text-white">4.500+</strong> Filmova (VOD)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span><strong class="text-white">500+</strong> Serija sa prevodom</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span>HD & Full HD kvalitet</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span>1 Istovremeni uređaj</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-slate-500">
+                                    <i class="fa-solid fa-xmark text-slate-600 text-sm"></i>
+                                    <span>Bez 4K Ultra HD sporta</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/387644064762?text=Zdravo%2C%20zelim%20kupiti%20Basic%20Paket%20(6.99EUR)" target="_blank" class="w-full py-3.5 bg-white/10 hover:bg-brand-cyan hover:text-brand-dark text-white font-extrabold text-xs rounded-xl text-center transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-shopping"></i> Kupi Sada
+                        </a>
+                    </div>
+
+                    <!-- Medium Paket -->
+                    <div class="glass-panel p-8 rounded-3xl relative border border-brand-blue/50 flex flex-col justify-between glass-panel-hover shadow-glow">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-brand-blue/20 text-brand-cyan border border-brand-blue uppercase">
+                                    Najtraženije
+                                </span>
+                                <i class="fa-solid fa-star text-2xl text-brand-cyan"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-black text-white">Medium Paket</h3>
+                            <p class="text-xs text-slate-400 mt-1">Idealan balans svih kanala, filmova i serija.</p>
+
+                            <div class="my-6">
+                                <span class="text-4xl md:text-5xl font-black text-brand-cyan price-display" 
+                                      data-eur="8.99 €" 
+                                      data-bam="17.90 KM" 
+                                      data-chf="9.50 CHF" 
+                                      data-usd="9.50 $">
+                                    8.99 €
+                                </span>
+                                <span class="text-slate-400 text-xs"> / mjesečno</span>
+                            </div>
+
+                            <div class="space-y-3 border-t border-white/10 pt-6 text-xs text-slate-300 mb-8">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span><strong class="text-white">1.120+</strong> TV Kanala uživo</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span><strong class="text-white">7.600+</strong> Filmova sa prevodom</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span><strong class="text-white">650+</strong> Najpopularnijih serija</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span>FHD & HD Kvalitet straminga</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span>EPG TV Vodič omogućen</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span>Svi Arena Sport & Sport Klub kanali</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/387644064762?text=Zdravo%2C%20zelim%20kupiti%20Medium%20Paket%20(8.99EUR)" target="_blank" class="w-full py-3.5 bg-gradient-to-r from-brand-blue to-brand-cyan hover:brightness-110 text-brand-dark font-black text-xs rounded-xl text-center transition-all shadow-glow flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-shopping"></i> Kupi Sada
+                        </a>
+                    </div>
+
+                    <!-- Pro Paket -->
+                    <div class="glass-panel p-8 rounded-3xl relative border-2 border-brand-purple flex flex-col justify-between glass-panel-hover shadow-glow-purple bg-gradient-to-b from-brand-purple/10 to-transparent">
+                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-purple to-pink-500 text-white px-4 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-lg">
+                            Maksimalan Sadržaj
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full text-[10px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500 uppercase">
+                                    VIP Pro
+                                </span>
+                                <i class="fa-solid fa-crown text-2xl text-amber-400"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-black text-white">Pro Paket</h3>
+                            <p class="text-xs text-slate-400 mt-1">Sve otključano, 4K sport i najveća VOD biblioteka.</p>
+
+                            <div class="my-6">
+                                <span class="text-4xl md:text-5xl font-black text-white price-display" 
+                                      data-eur="11.99 €" 
+                                      data-bam="23.90 KM" 
+                                      data-chf="12.90 CHF" 
+                                      data-usd="12.90 $">
+                                    11.99 €
+                                </span>
+                                <span class="text-slate-400 text-xs"> / mjesečno</span>
+                            </div>
+
+                            <div class="space-y-3 border-t border-white/10 pt-6 text-xs text-slate-300 mb-8">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-yellow-400 text-sm"></i>
+                                    <span><strong class="text-white">2.100+</strong> TV Kanala (Sve Države)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-yellow-400 text-sm"></i>
+                                    <span><strong class="text-white">45.000+</strong> Filmova (4K & FHD)</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-yellow-400 text-sm"></i>
+                                    <span><strong class="text-white">1.350+</strong> Kompletnih Serija</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span>TV Vraćanje 7 dana unazad</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span>Anti-Freeze v4.2 stabilnost</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-emerald-400 text-sm"></i>
+                                    <span>VIP Prioritetna Podrška 24/7</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/387644064762?text=Zdravo%2C%20zelim%20kupiti%20Pro%20Paket%20(11.99EUR)" target="_blank" class="w-full py-3.5 bg-gradient-to-r from-brand-purple to-pink-600 hover:brightness-110 text-white font-extrabold text-xs rounded-xl text-center transition-all shadow-glow-purple flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bolt"></i> Aktivira Pro Paket
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SPECIJALNE AKCIJE (Probni Test, 12+12 Mjeseci, Porodični Paket) -->
+        <section class="py-16 relative bg-brand-dark/70 border-y border-white/10" id="akcije">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-black bg-amber-500/10 text-amber-400 border border-amber-500/30 uppercase tracking-wider mb-2">
+                        🔥 VELIKE UŠTEDE
+                    </span>
+                    <p class="text-3xl md:text-5xl font-black text-white">Promotivne Akcije & Popusti</p>
+                    <p class="text-slate-400 text-sm mt-2">Iskoristite najpovoljnije sezonske ponude i uštedite do 40€ pri kupovini!</p>
+
+                    <!-- Countdown Timer -->
+                    <div class="glass-panel p-4 rounded-2xl max-w-md mx-auto mt-6 border border-amber-500/30 flex items-center justify-around">
+                        <span class="text-xs font-bold text-slate-300">Akcija traje još:</span>
+                        <div class="flex gap-3 font-mono font-bold text-amber-400 text-sm">
+                            <div><span id="cd-hours" class="text-lg text-white font-black">18</span>h</div> :
+                            <div><span id="cd-mins" class="text-lg text-white font-black">42</span>m</div> :
+                            <div><span id="cd-secs" class="text-lg text-white font-black">15</span>s</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                    <!-- Akcija 1: Probni Test -->
+                    <div class="glass-panel p-8 rounded-3xl relative border border-white/10 flex flex-col justify-between glass-panel-hover">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center text-xl font-bold mb-4">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <span class="text-xs font-bold text-brand-cyan uppercase tracking-wider">Testirajte Bez Rizika</span>
+                            <h3 class="text-2xl font-black text-white mt-1">Probni Test</h3>
+                            
+                            <div class="my-6">
+                                <span class="text-3xl md:text-4xl font-black text-emerald-400">POTPUNO BESPLATNO</span>
+                                <p class="text-xs text-slate-400 mt-1">Trajanje: 24 Sata (Pun pristup svim kanalima)</p>
+                            </div>
+
+                            <p class="text-xs text-slate-300 leading-relaxed mb-8 border-t border-white/10 pt-4">
+                                Isprobajte kompletnu listu kanala, stabilnost i kvalitet slike na vašem uređaju u potpunosti besplatno prije bilo kakve uplate.
+                            </p>
+                        </div>
+
+                        <button onclick="openTestModal()" class="w-full py-3.5 bg-gradient-to-r from-brand-cyan to-brand-blue text-brand-dark font-black text-xs rounded-xl text-center transition-all shadow-glow hover:brightness-110 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Zatraži Besplatan Test
+                        </button>
+                    </div>
+
+                    <!-- Akcija 2: 12 + 12 Mjeseci (SUPER AKCIJA) -->
+                    <div class="glass-panel p-8 rounded-3xl relative gold-border flex flex-col justify-between shadow-glow-gold scale-105 z-10">
+                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 to-orange-500 text-brand-dark px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-lg">
+                            🏆 BESTSELLER • AKCIJA GODINE
+                        </div>
+
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold mb-4">
+                                <i class="fa-solid fa-fire"></i>
+                            </div>
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Maksimalna Ušteda</span>
+                            <h3 class="text-2xl font-black text-white mt-1">12 + 12 Mjeseci Paket</h3>
+
+                            <div class="my-6">
+                                <div class="flex items-baseline gap-3">
+                                    <span class="line-through text-slate-400 text-xl font-bold">180 €</span>
+                                    <span class="text-4xl md:text-5xl font-black text-gradient-gold price-display"
+                                          data-eur="140 €" 
+                                          data-bam="280 KM" 
+                                          data-chf="150 CHF" 
+                                          data-usd="150 $">
+                                        140 €
+                                    </span>
+                                </div>
+                                <p class="text-xs font-bold text-emerald-400 mt-1">Ušteda čak 40 € / 80 KM!</p>
+                            </div>
+
+                            <ul class="space-y-2.5 border-t border-white/10 pt-4 text-xs text-slate-200 mb-8">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Dugoročna garancija cijene</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Neograničena VOD biblioteka</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Besplatne zamjene uređaja</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> VIP Anti-Buffer serveri</li>
+                            </ul>
+                        </div>
+
+                        <a href="https://wa.me/387644064762?text=Zdravo%2C%20zelim%20AKCIJU%2012%2B12%20Mjeseci%20za%20140EUR" target="_blank" class="w-full py-4 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-brand-dark font-black text-xs rounded-xl text-center transition-all shadow-glow-gold hover:brightness-110 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-crown"></i> Iskoristi Akciju Odmah
+                        </a>
+                    </div>
+
+                    <!-- Akcija 3: Porodični Paket (2 Uređaja Istovremeno) -->
+                    <div class="glass-panel p-8 rounded-3xl relative border border-white/10 flex flex-col justify-between glass-panel-hover">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-brand-purple/20 text-brand-purple flex items-center justify-center text-xl font-bold mb-4">
+                                <i class="fa-solid fa-house-chimney-user"></i>
+                            </div>
+                            <span class="text-xs font-bold text-brand-purple uppercase tracking-wider">Više Ekrana U Kući</span>
+                            <h3 class="text-2xl font-black text-white mt-1">Porodični Paket</h3>
+
+                            <div class="my-6">
+                                <span class="text-2xl md:text-3xl font-black text-white">2 Uređaja Istovremeno</span>
+                                <p class="text-xs text-slate-400 mt-1">Gledajte različite kanale u dvije sobe istovremeno!</p>
+                            </div>
+
+                            <p class="text-xs text-slate-300 leading-relaxed mb-8 border-t border-white/10 pt-4">
+                                Idealan za domaćinstva! Jedna pretplata pokriva npr. Smart TV u dnevnom boravku i TV Box ili tablet u spavaćoj sobi.
+                            </p>
+                        </div>
+
+                        <a href="https://wa.me/387644064762?text=Zdravo%2C%20zanima%20me%20Porodicni%20paket%20za%202%20uredjaja" target="_blank" class="w-full py-3.5 bg-gradient-to-r from-brand-purple to-brand-blue text-white font-extrabold text-xs rounded-xl text-center transition-all shadow-glow-purple hover:brightness-110 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-users"></i> Upit za Porodični Paket
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: UPOREDNI PREGLED PAKETA (Comparison Matrix) -->
+        <section class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-2">DETALJNO POREĐENJE</h2>
+                    <p class="text-3xl md:text-4xl font-black text-white">Uporedna Tabela Opcija</p>
+                    <p class="text-slate-400 text-sm mt-2">Pogledajte tačne razlike između naših pretplatničkih paketa.</p>
+                </div>
+
+                <div class="overflow-x-auto glass-panel rounded-3xl border border-white/10 p-2 md:p-6 shadow-2xl">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="border-b border-white/10 text-xs uppercase tracking-wider text-slate-400">
+                                <th class="py-4 px-4 font-bold text-white">Mogućnost / Funkcija</th>
+                                <th class="py-4 px-4 font-bold text-center">Basic</th>
+                                <th class="py-4 px-4 font-bold text-center text-brand-cyan">Medium</th>
+                                <th class="py-4 px-4 font-bold text-center text-purple-400">Pro VIP</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-xs divide-y divide-white/5 text-slate-300">
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-white">Broj Uživo TV Kanala</td>
+                                <td class="text-center font-bold">750+</td>
+                                <td class="text-center font-bold text-brand-cyan">1.120+</td>
+                                <td class="text-center font-bold text-purple-300">2.100+</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-white">VOD Filmovi & Serije</td>
+                                <td class="text-center">5.000+</td>
+                                <td class="text-center text-brand-cyan">8.250+</td>
+                                <td class="text-center text-purple-300 font-bold">46.350+</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-white">Kvalitet Slike (4K / FHD / HD)</td>
+                                <td class="text-center">HD / FHD</td>
+                                <td class="text-center">FHD / 60FPS</td>
+                                <td class="text-center text-emerald-400 font-bold">4K Ultra HD & 60FPS</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-white">Arena Sport & Sport Klub</td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i> (Svi Ultra)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-white">TV Vraćanje 7 Dana Unazad</td>
+                                <td class="text-center text-slate-500"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-white">EPG Elektronski TV Vodič</td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-white">XXX Kanali Za Odrasle (sa PIN-om)</td>
+                                <td class="text-center">Opciono</td>
+                                <td class="text-center">Opciono</td>
+                                <td class="text-center text-emerald-400"><i class="fa-solid fa-check"></i> Besplatno</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-white">Korisnička Podrška</td>
+                                <td class="text-center">Standardna</td>
+                                <td class="text-center">Brza (WhatsApp)</td>
+                                <td class="text-center text-amber-400 font-bold">VIP 24/7 Prioritet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: NAČINI PLAĆANJA (Accepted Payment Methods) -->
+        <section class="py-16 relative bg-brand-dark/80 border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                
+                <h2 class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-2">BRZA I SIGURNA TRANSKACIJA</h2>
+                <p class="text-2xl md:text-4xl font-black text-white mb-8">Prihvaćeni Načini Plaćanja</p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                    <div class="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center gap-2 glass-panel-hover">
+                        <i class="fa-brands fa-paypal text-3xl text-blue-400"></i>
+                        <span class="text-xs font-bold text-slate-200">PayPal</span>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center gap-2 glass-panel-hover">
+                        <i class="fa-solid fa-building-columns text-3xl text-emerald-400"></i>
+                        <span class="text-xs font-bold text-slate-200">Banka / SEPA</span>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center gap-2 glass-panel-hover">
+                        <i class="fa-brands fa-cc-visa text-3xl text-cyan-400"></i>
+                        <span class="text-xs font-bold text-slate-200">Visa / Mastercard</span>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center gap-2 glass-panel-hover">
+                        <i class="fa-solid fa-money-bill-transfer text-3xl text-purple-400"></i>
+                        <span class="text-xs font-bold text-slate-200">Revolut</span>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center gap-2 glass-panel-hover">
+                        <i class="fa-solid fa-globe text-3xl text-amber-400"></i>
+                        <span class="text-xs font-bold text-slate-200">Western / RIA</span>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center gap-2 glass-panel-hover">
+                        <i class="fa-brands fa-bitcoin text-3xl text-orange-400"></i>
+                        <span class="text-xs font-bold text-slate-200">Kripto (USDT/BTC)</span>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-400 mt-6">
+                    Nakon izvršene uplate, vaša linija se aktivira automatski u roku od 3 do 10 minuta.
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black/90 border-t border-white/10 relative z-20 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1 -->
+                <div>
+                    <a href="index.html" class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan flex items-center justify-center text-brand-dark font-black">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <span class="text-xl font-black text-white">KRAJINA<span class="text-brand-cyan">LIVE</span></span>
+                    </a>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                        Vodeći stabilni IPTV servis sa tradicijom dužom od 9 godina. Nudimo najviši kvalitet slike bez zamrzavanja.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <a href="https://wa.me/387644064762" target="_blank" class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-colors">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                        <a href="viber://chat?number=387644064762" class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center hover:bg-purple-500 hover:text-white transition-colors">
+                            <i class="fa-brands fa-viber text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">Brzi Linkovi</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="index.html" class="hover:text-brand-cyan transition-colors">Početna Stranica</a></li>
+                        <li><a href="cjenovnik.html" class="hover:text-brand-cyan transition-colors">Cijene i Akcije</a></li>
+                        <li><a href="top15.html" class="hover:text-brand-cyan transition-colors">Top 30 TV Kanala</a></li>
+                        <li><a href="komentari.html" class="hover:text-brand-cyan transition-colors">Utisci i Komentari</a></li>
+                        <li><a href="tim.html" class="hover:text-brand-cyan transition-colors">Postani dio tima (Reseller)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Support -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">Korisnička Zona</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="kako-da-gledas.html" class="hover:text-brand-cyan transition-colors">Kako da Gledaš</a></li>
+                        <li><a href="aplikacije.html" class="hover:text-brand-cyan transition-colors">Preuzmi Aplikacije</a></li>
+                        <li><a href="placanje.html" class="hover:text-brand-cyan transition-colors">Načini Plaćanja</a></li>
+                        <li><a href="onama.html" class="hover:text-brand-cyan transition-colors">O Nama</a></li>
+                        <li><a href="kontakt.html" class="hover:text-brand-cyan transition-colors">Kontakt Podrška</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">Direktan Kontakt</h4>
+                    <ul class="space-y-3 text-xs text-slate-400">
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                            <span>+387 64 406 4762</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-brands fa-viber text-purple-400 text-base"></i>
+                            <span>+387 64 406 4762</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-envelope text-brand-cyan text-base"></i>
+                            <span>support@krajinalive.com</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-clock text-yellow-400 text-base"></i>
+                            <span>Podrška Dostupna 24/7/365</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 KrajinaLive IPTV. Sva prava zadržana.</p>
+                <div class="flex items-center gap-4">
+                    <a href="https://wa.me/387644064762" target="_blank" class="hover:text-brand-cyan">WhatsApp Podrška</a>
+                    <span>•</span>
+                    <a href="mailto:support@krajinalive.com" class="hover:text-brand-cyan">Email Podrška</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp & Viber Buttons -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <a href="viber://chat?number=387644064762" class="w-13 h-13 p-3.5 rounded-full bg-purple-600 hover:bg-purple-500 text-white shadow-lg hover:scale-110 transition-transform flex items-center justify-center text-xl group relative" title="Viber Kontakt">
+            <i class="fa-brands fa-viber"></i>
+            <span class="absolute right-14 bg-black/80 text-white text-[11px] px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Viber Chat
+            </span>
+        </a>
+
+        <a href="https://wa.me/387644064762?text=Zdravo%2C%20trebam%20informacije%20o%20paketima%20za%20IPTV" target="_blank" class="w-13 h-13 p-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-glow hover:scale-110 transition-transform flex items-center justify-center text-xl group relative" title="WhatsApp Podrška">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="absolute right-14 bg-black/80 text-white text-[11px] px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                WhatsApp 24/7
+            </span>
+        </a>
+    </div>
+
+    <!-- Free Test Modal Window -->
+    <div id="testModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-lg w-full relative border border-white/20 animate-float shadow-glow-lg">
+            
+            <button onclick="closeTestModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center rounded-full bg-white/5">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-cyan to-brand-blue mx-auto flex items-center justify-center text-brand-dark text-xl font-black mb-3 shadow-glow">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">Besplatan Test (24 Sata)</h3>
+                <p class="text-slate-400 text-xs mt-1">Popunite podatke i odmah preusmjerite zahtjev na WhatsApp za najbržu aktivaciju!</p>
+            </div>
+
+            <form id="testForm" onsubmit="submitTestForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Vaše Ime ili Nadimak</label>
+                    <input type="text" id="modalName" required placeholder="npr. Marko" class="w-full px-4 py-3 rounded-xl glass-panel text-white text-sm border border-white/10 focus:border-brand-cyan focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Na kojem uređaju ćete gledati?</label>
+                    <select id="modalDevice" class="w-full px-4 py-3 rounded-xl glass-panel text-white text-sm border border-white/10 focus:border-brand-cyan focus:outline-none bg-slate-900">
+                        <option value="Smart TV (Samsung/LG)">Smart TV (Samsung / LG)</option>
+                        <option value="Android TV / TV Box">Android TV / TV Box</option>
+                        <option value="Amazon Firestick">Amazon Firestick</option>
+                        <option value="MAG Box / Formuler">MAG Box / Formuler</option>
+                        <option value="iPhone / iPad / Apple TV">iPhone / iPad / Apple TV</option>
+                        <option value="PC / Računar">PC / Računar</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Aplikacija koju koristite (opciono)</label>
+                    <input type="text" id="modalApp" placeholder="npr. Tivimate, IPTV Smarters, Smart IPTV..." class="w-full px-4 py-3 rounded-xl glass-panel text-white text-sm border border-white/10 focus:border-brand-cyan focus:outline-none">
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-brand-cyan to-brand-blue text-brand-dark font-black text-sm rounded-xl shadow-glow hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> POŠALJI ZAHTJEV NA WHATSAPP
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Live Toast Notification -->
+    <div id="toastNotification" class="fixed bottom-6 left-6 z-40 glass-panel p-4 rounded-2xl border border-brand-cyan/30 shadow-glow hidden items-center gap-3 max-w-sm transition-all duration-500 transform translate-y-10">
+        <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg shrink-0">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+            <p class="text-xs text-slate-200 font-medium" id="toastText"><strong>Emin iz Tuzle</strong> je upravo kupio Pro Paket na 12 mjeseci!</p>
+            <span class="text-[10px] text-slate-400">Prije 2 minuta • Verified Purchase</span>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Mobile Drawer Navigation Toggle
+        function toggleNav() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        // 2. Multi-Currency Switcher Logic
+        function setCurrency(curr) {
+            document.querySelectorAll('.curr-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-cyan', 'text-brand-dark', 'shadow-glow');
+                btn.classList.add('text-slate-300');
+            });
+            const activeBtn = document.getElementById('btn-curr-' + curr);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-brand-cyan', 'text-brand-dark', 'shadow-glow');
+                activeBtn.classList.remove('text-slate-300');
+            }
+
+            document.querySelectorAll('.price-display').forEach(el => {
+                const val = el.getAttribute('data-' + curr.toLowerCase());
+                if (val) el.innerText = val;
+            });
+        }
+
+        // 3. Discount Countdown Simulation
+        let hours = 18, mins = 42, secs = 15;
+        setInterval(() => {
+            secs--;
+            if (secs < 0) { secs = 59; mins--; }
+            if (mins < 0) { mins = 59; hours--; }
+            if (hours < 0) { hours = 23; }
+            document.getElementById('cd-hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('cd-mins').innerText = mins < 10 ? '0' + mins : mins;
+            document.getElementById('cd-secs').innerText = secs < 10 ? '0' + secs : secs;
+        }, 1000);
+
+        // 4. Test Modal Logic
+        function openTestModal() {
+            document.getElementById('testModal').classList.remove('hidden');
+            document.getElementById('testModal').classList.add('flex');
+        }
+
+        function closeTestModal() {
+            document.getElementById('testModal').classList.add('hidden');
+            document.getElementById('testModal').classList.remove('flex');
+        }
+
+        function submitTestForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('modalName').value;
+            const device = document.getElementById('modalDevice').value;
+            const app = document.getElementById('modalApp').value || 'Nije navedeno';
+
+            const message = `Zdravo KrajinaLive IPTV! Želim 24h besplatan test.%0AName: ${encodeURIComponent(name)}%0ADevice: ${encodeURIComponent(device)}%0AApp: ${encodeURIComponent(app)}`;
+            window.open(`https://wa.me/387644064762?text=${message}`, '_blank');
+            closeTestModal();
+        }
+
+        // 5. Social Proof Toast simulation
+        const toastMsgs = [
+            "<strong>Miloš iz Minhena</strong> je uplatio 12+12 Mjeseci Akciju!",
+            "<strong>Damir iz Bihaća</strong> je kupio Pro Paket za 2 uređaja!",
+            "<strong>Stefan iz Beograda</strong> je aktivirao besplatni 24h test.",
+            "<strong>Aida iz Beča</strong> je obnovila godišnju pretplatu."
+        ];
+
+        function showRandomToast() {
+            const toast = document.getElementById('toastNotification');
+            const toastText = document.getElementById('toastText');
+            const randomMsg = toastMsgs[Math.floor(Math.random() * toastMsgs.length)];
+            
+            toastText.innerHTML = randomMsg;
+            toast.classList.remove('hidden', 'translate-y-10');
+            toast.classList.add('flex', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-10');
+                setTimeout(() => toast.classList.add('hidden'), 500);
+            }, 5000);
+        }
+
+        setInterval(showRandomToast, 24000);
+        setTimeout(showRandomToast, 3500);
+
+        // 6. Particles Canvas Tech Background Effect
+        const canvas = document.getElementById('tech-bg');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        for (let i = 0; i < 70; i++) {
+            particles.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                vx: (Math.random() - 0.5) * 0.6,
+                vy: (Math.random() - 0.5) * 0.6,
+                radius: Math.random() * 2 + 1
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach((p, idx) => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.fillStyle = "rgba(0, 240, 255, 0.6)";
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                for (let j = idx + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 110) {
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 - dist / 1100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
 </body>
 </html>
