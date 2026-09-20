@@ -62,7 +62,7 @@
     </script>
 
     <style>
-        /* Custom Custom Scrollbar & Cyber Glass Styling */
+        /* Custom Scrollbar & Cyber Glass Styling */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -116,7 +116,6 @@
             border-radius: calc(1rem - 1px);
         }
 
-        /* Pulsing dot for online status */
         .live-dot {
             box-shadow: 0 0 10px #22c55e;
         }
@@ -257,8 +256,10 @@
                     
                     <!-- Live Server Badge -->
                     <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-panel text-xs md:text-sm font-semibold mb-8 border border-emerald-500/30 text-emerald-300 shadow-lg">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute"></span>
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
                         <span>SERVER STATUS: <strong class="text-white">ONLINE 99.9% UPTIME</strong> (Anti-Buffer v4.2)</span>
                     </div>
 
@@ -309,7 +310,7 @@
             </div>
         </section>
 
-        <section class="py-12 relative z-20 border-y border-white/10 bg-brand-dark/80 backdrop-blur-lg">
+        <section class="py-12 relative z-20 border-y border-white/10 bg-brand-dark/80 backdrop-blur-lg" id="counter-section">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     
@@ -365,19 +366,19 @@
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
                     <!-- Tab Buttons -->
                     <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none" id="channel-tabs">
-                        <button onclick="filterChannels('all')" class="channel-tab-btn active px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold bg-brand-cyan text-brand-dark transition-all whitespace-nowrap shadow-glow">
+                        <button onclick="filterChannels('all', this)" class="channel-tab-btn active px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold bg-brand-cyan text-brand-dark transition-all whitespace-nowrap shadow-glow">
                             Svi Kanali (2100+)
                         </button>
-                        <button onclick="filterChannels('sport')" class="channel-tab-btn px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all whitespace-nowrap">
+                        <button onclick="filterChannels('sport', this)" class="channel-tab-btn px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all whitespace-nowrap">
                             <i class="fa-solid fa-football text-amber-400 mr-1.5"></i> Sport (Arena/SK)
                         </button>
-                        <button onclick="filterChannels('exyu')" class="channel-tab-btn px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all whitespace-nowrap">
+                        <button onclick="filterChannels('exyu', this)" class="channel-tab-btn px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all whitespace-nowrap">
                             <i class="fa-solid fa-flag text-brand-cyan mr-1.5"></i> Ex-Yu Nacionalni
                         </button>
-                        <button onclick="filterChannels('movies')" class="channel-tab-btn px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all whitespace-nowrap">
+                        <button onclick="filterChannels('movies', this)" class="channel-tab-btn px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all whitespace-nowrap">
                             <i class="fa-solid fa-clapperboard text-purple-400 mr-1.5"></i> Filmovi & HBO
                         </button>
-                        <button onclick="filterChannels('vod')" class="channel-tab-btn px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all whitespace-nowrap">
+                        <button onclick="filterChannels('vod', this)" class="channel-tab-btn px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold glass-panel text-slate-300 hover:text-white transition-all whitespace-nowrap">
                             <i class="fa-solid fa-circle-play text-emerald-400 mr-1.5"></i> VOD Serije & Filmovi
                         </button>
                     </div>
@@ -385,7 +386,7 @@
                     <!-- Search Input -->
                     <div class="relative w-full md:w-72">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="channel-search" onkeyup="searchChannels()" placeholder="Pretraži kanal ili film..." class="w-full pl-10 pr-4 py-2.5 rounded-xl glass-panel text-white placeholder-slate-500 text-sm border border-white/10 focus:border-brand-cyan focus:outline-none transition-colors">
+                        <input type="text" id="channel-search" oninput="searchChannels()" placeholder="Pretraži kanal ili film..." class="w-full pl-10 pr-4 py-2.5 rounded-xl glass-panel text-white placeholder-slate-500 text-sm border border-white/10 focus:border-brand-cyan focus:outline-none transition-colors">
                     </div>
                 </div>
 
@@ -483,7 +484,7 @@
                             <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Osnovni Paket</span>
                             <h3 class="text-2xl font-black text-white mt-1">1 Mjesec</h3>
                             <div class="my-6">
-                                <span class="text-4xl font-black text-white price-display" data-eur="10 €" data-bam="20 KM" data-chf="12 CHF" data-usd="11 $">10 €</span>
+                                <span class="text-4xl font-black text-white price-display transition-all duration-300" data-eur="10 €" data-bam="20 KM" data-chf="12 CHF" data-usd="11 $">10 €</span>
                                 <span class="text-slate-400 text-xs font-normal"> / jednokratno</span>
                             </div>
                             <ul class="space-y-3 text-xs text-slate-300 mb-8 border-t border-white/10 pt-6">
@@ -505,7 +506,7 @@
                             <span class="text-xs font-bold text-brand-cyan uppercase tracking-widest">Popularno</span>
                             <h3 class="text-2xl font-black text-white mt-1">3 Mjeseca</h3>
                             <div class="my-6">
-                                <span class="text-4xl font-black text-white price-display" data-eur="25 €" data-bam="50 KM" data-chf="28 CHF" data-usd="27 $">25 €</span>
+                                <span class="text-4xl font-black text-white price-display transition-all duration-300" data-eur="25 €" data-bam="50 KM" data-chf="28 CHF" data-usd="27 $">25 €</span>
                                 <span class="text-slate-400 text-xs font-normal"> / (Ušteda 17%)</span>
                             </div>
                             <ul class="space-y-3 text-xs text-slate-300 mb-8 border-t border-white/10 pt-6">
@@ -526,7 +527,7 @@
                             <span class="text-xs font-bold text-brand-purple uppercase tracking-widest">Preporučeno</span>
                             <h3 class="text-2xl font-black text-white mt-1">6 Mjeseci</h3>
                             <div class="my-6">
-                                <span class="text-4xl font-black text-white price-display" data-eur="45 €" data-bam="90 KM" data-chf="50 CHF" data-usd="48 $">45 €</span>
+                                <span class="text-4xl font-black text-white price-display transition-all duration-300" data-eur="45 €" data-bam="90 KM" data-chf="50 CHF" data-usd="48 $">45 €</span>
                                 <span class="text-slate-400 text-xs font-normal"> / (Ušteda 25%)</span>
                             </div>
                             <ul class="space-y-3 text-xs text-slate-300 mb-8 border-t border-white/10 pt-6">
@@ -550,7 +551,7 @@
                             <span class="text-xs font-bold text-yellow-400 uppercase tracking-widest flex items-center gap-1"><i class="fa-solid fa-crown"></i> Najprodavanije</span>
                             <h3 class="text-2xl font-black text-white mt-1">12 Mjeseci</h3>
                             <div class="my-6">
-                                <span class="text-4xl font-black text-brand-cyan price-display" data-eur="70 €" data-bam="140 KM" data-chf="75 CHF" data-usd="75 $">70 €</span>
+                                <span class="text-4xl font-black text-brand-cyan price-display transition-all duration-300" data-eur="70 €" data-bam="140 KM" data-chf="75 CHF" data-usd="75 $">70 €</span>
                                 <span class="text-slate-400 text-xs font-normal"> / +1 Mjesec Gratis!</span>
                             </div>
                             <ul class="space-y-3 text-xs text-slate-300 mb-8 border-t border-white/10 pt-6">
@@ -589,6 +590,10 @@
                             <div class="text-4xl font-black text-brand-cyan font-mono mb-1"><span id="speedValue">30</span> <span class="text-lg text-slate-400">Mbps</span></div>
                             <p class="text-xs font-semibold text-emerald-400" id="speedResult">✅ Savršeno za 4K Ultra HD & 60 FPS Sport Streams!</p>
                         </div>
+
+                        <button onclick="startSpeedTestSim()" id="speedTestBtn" class="px-6 py-3 bg-gradient-to-r from-brand-cyan to-brand-blue text-brand-dark font-black text-xs rounded-xl shadow-glow hover:brightness-110 transition-all flex items-center justify-center gap-2 mx-auto">
+                            <i class="fa-solid fa-play"></i> POKRENI BRZI TEST BRZINE
+                        </button>
                     </div>
                 </div>
             </div>
@@ -645,7 +650,7 @@
         <section class="py-20 relative bg-brand-dark/60 border-t border-white/10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-2">IKSUSATVA KORISNIKA</h2>
+                    <h2 class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-2">ISKUSTVA KORISNIKA</h2>
                     <p class="text-3xl md:text-5xl font-black text-white mb-4">Šta Kažu Naši Korisnici?</p>
                     <p class="text-slate-400">Preko 16.000+ zadovoljnih korisnika u BiH, Srbiji, Hrvatskoj i dijaspori.</p>
                 </div>
@@ -745,7 +750,7 @@
                             <i class="fa-solid fa-chevron-down text-brand-cyan transition-transform duration-300"></i>
                         </button>
                         <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed hidden">
-                            Prihvatamo sve popularne načine plaćanja: PayPal, Bankovni račun (BiH, EU SEPA), PayPal, Revolut, Western Union, RIA, MoneyGram, kao i Kriptovalute (USDT, Bitcoin).
+                            Prihvatamo sve popularne načine plaćanja: PayPal, Bankovni račun (BiH, EU SEPA), Revolut, Western Union, RIA, MoneyGram, kao i Kriptovalute (USDT, Bitcoin).
                         </div>
                     </div>
 
@@ -852,7 +857,7 @@
 
     <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
         <!-- Floating Viber Button -->
-        <a href="viber://chat?number=387644064762" class="w-13 h-13 p-3.5 rounded-full bg-purple-600 hover:bg-purple-500 text-white shadow-lg hover:scale-110 transition-transform flex items-center justify-center text-xl group relative" title="Viber Kontakt">
+        <a href="viber://chat?number=387644064762" class="w-12 h-12 rounded-full bg-purple-600 hover:bg-purple-500 text-white shadow-lg hover:scale-110 transition-transform flex items-center justify-center text-xl group relative" title="Viber Kontakt">
             <i class="fa-brands fa-viber"></i>
             <span class="absolute right-14 bg-black/80 text-white text-[11px] px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                 Viber Chat
@@ -860,7 +865,7 @@
         </a>
 
         <!-- Floating WhatsApp Button -->
-        <a href="https://wa.me/387644064762?text=Zdravo%2C%20treba%20mi%20podrska%20ili%20test%20za%20KrajinaLive%20IPTV" target="_blank" class="w-13 h-13 p-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-glow hover:scale-110 transition-transform flex items-center justify-center text-xl group relative" title="WhatsApp Podrška">
+        <a href="https://wa.me/387644064762?text=Zdravo%2C%20treba%20mi%20podrska%20ili%20test%20za%20KrajinaLive%20IPTV" target="_blank" class="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-glow hover:scale-110 transition-transform flex items-center justify-center text-xl group relative" title="WhatsApp Podrška">
             <i class="fa-brands fa-whatsapp"></i>
             <span class="absolute right-14 bg-black/80 text-white text-[11px] px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                 WhatsApp 24/7
@@ -868,6 +873,7 @@
         </a>
     </div>
 
+    <!-- Modal Form -->
     <div id="testModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
         <div class="glass-panel p-6 sm:p-8 rounded-3xl max-w-lg w-full relative border border-white/20 animate-float shadow-glow-lg">
             
@@ -913,6 +919,7 @@
         </div>
     </div>
 
+    <!-- Notification Toast -->
     <div id="toastNotification" class="fixed bottom-6 left-6 z-40 glass-panel p-4 rounded-2xl border border-brand-cyan/30 shadow-glow hidden items-center gap-3 max-w-sm transition-all duration-500 transform translate-y-10">
         <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg shrink-0">
             <i class="fa-solid fa-circle-check"></i>
@@ -924,47 +931,55 @@
     </div>
 
     <script>
-        // 1. Mobile Drawer Navigation Toggle
+        // 1. Mobile Navigation Toggle
         function toggleNav() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('hidden');
             menu.classList.toggle('flex');
         }
 
-        // 2. Animated Counter Script
-        const counters = document.querySelectorAll('.counter');
+        // 2. Animirani Brojači sa IntersectionObserver-om
         let counterTriggered = false;
+        const counters = document.querySelectorAll('.counter');
 
-        function runCounters() {
+        function animateCounters() {
             counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                let count = 0;
-                const speed = target / 80;
+                const target = parseInt(counter.getAttribute('data-target'), 10);
+                const duration = 2000; 
+                const frameDuration = 1000 / 60;
+                const totalFrames = Math.round(duration / frameDuration);
+                let frame = 0;
 
-                const updateCount = () => {
-                    count += speed;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count).toLocaleString() + "+";
-                        setTimeout(updateCount, 20);
-                    } else {
+                const timer = setInterval(() => {
+                    frame++;
+                    const progress = frame / totalFrames;
+                    const currentCount = Math.round(target * progress);
+
+                    if (frame === totalFrames) {
                         counter.innerText = target.toLocaleString() + "+";
+                        clearInterval(timer);
+                    } else {
+                        counter.innerText = currentCount.toLocaleString() + "+";
                     }
-                };
-                updateCount();
+                }, frameDuration);
             });
         }
 
-        // Trigger counter when scrolled into view
-        window.addEventListener('scroll', () => {
-            if (!counterTriggered && window.scrollY > 200) {
-                runCounters();
-                counterTriggered = true;
-            }
-        });
-        // Initial check
-        if (window.scrollY > 200) { runCounters(); counterTriggered = true; }
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counterTriggered) {
+                    animateCounters();
+                    counterTriggered = true;
+                }
+            });
+        }, { threshold: 0.3 });
 
-        // 3. Interactive Channel Filter Data & Logic
+        const counterSection = document.getElementById('counter-section');
+        if (counterSection) {
+            counterObserver.observe(counterSection);
+        }
+
+        // 3. Kanali i VOD podaci sa pretragom i filterima
         const channelData = [
             { name: "Arena Sport 1 Premium 4K", cat: "sport", tag: "4K UHD", icon: "fa-football" },
             { name: "Arena Sport 2 Premium", cat: "sport", tag: "FHD 60FPS", icon: "fa-football" },
@@ -981,13 +996,19 @@
             { name: "Fox Movies HD", cat: "movies", tag: "FHD", icon: "fa-film" },
             { name: "National Geographic 4K", cat: "exyu", tag: "4K UHD", icon: "fa-earth-americas" },
             { name: "Gladiator II (2024)", cat: "vod", tag: "VOD 4K", icon: "fa-circle-play" },
-            { name: "Južni Vetar: Na Granici", cat: "vod", tag: "VOD Series", icon: "fa-circle-play" font: "bold" },
+            { name: "Južni Vetar: Na Granici", cat: "vod", tag: "VOD Series", icon: "fa-circle-play" },
             { name: "Dune: Part Two (4K)", cat: "vod", tag: "VOD 4K", icon: "fa-circle-play" },
             { name: "Pikachu & Dječiji Mix", cat: "exyu", tag: "FHD", icon: "fa-child" }
         ];
 
+        let currentCategory = 'all';
+
         function renderChannels(items) {
             const grid = document.getElementById('channels-grid');
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400">Nema pronađenih kanala za uneseni pojam.</div>`;
+                return;
+            }
             grid.innerHTML = items.map(ch => `
                 <div class="glass-panel p-4 rounded-2xl glass-panel-hover flex flex-col items-center text-center justify-between relative group">
                     <span class="absolute top-2 right-2 text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30">
@@ -1001,48 +1022,58 @@
             `).join('');
         }
 
-        function filterChannels(category) {
-            // Update active button state
+        function filterChannels(category, btnElement) {
+            currentCategory = category;
             document.querySelectorAll('.channel-tab-btn').forEach(btn => {
                 btn.classList.remove('bg-brand-cyan', 'text-brand-dark', 'shadow-glow');
                 btn.classList.add('glass-panel', 'text-slate-300');
             });
-            event.currentTarget.classList.add('bg-brand-cyan', 'text-brand-dark', 'shadow-glow');
-            event.currentTarget.classList.remove('glass-panel', 'text-slate-300');
-
-            if (category === 'all') {
-                renderChannels(channelData);
-            } else {
-                const filtered = channelData.filter(ch => ch.cat === category);
-                renderChannels(filtered);
+            if(btnElement) {
+                btnElement.classList.add('bg-brand-cyan', 'text-brand-dark', 'shadow-glow');
+                btnElement.classList.remove('glass-panel', 'text-slate-300');
             }
+
+            searchChannels();
         }
 
         function searchChannels() {
-            const query = document.getElementById('channel-search').value.toLowerCase();
-            const filtered = channelData.filter(ch => ch.name.toLowerCase().includes(query));
+            const query = document.getElementById('channel-search').value.toLowerCase().trim();
+            const filtered = channelData.filter(ch => {
+                const matchesCategory = (currentCategory === 'all' || ch.cat === currentCategory);
+                const matchesQuery = ch.name.toLowerCase().includes(query);
+                return matchesCategory && matchesQuery;
+            });
             renderChannels(filtered);
         }
 
-        // Initialize channels on load
+        // Inicijalno renderovanje
         renderChannels(channelData);
 
-        // 4. Currency Switcher Logic
+        // 4. Prebacivanje Valuta u Cjenovniku
         function setCurrency(curr) {
             document.querySelectorAll('.currency-btn').forEach(btn => {
                 btn.classList.remove('bg-brand-cyan', 'text-brand-dark');
                 btn.classList.add('text-slate-300');
             });
-            document.getElementById('curr-' + curr).classList.add('bg-brand-cyan', 'text-brand-dark');
-            document.getElementById('curr-' + curr).classList.remove('text-slate-300');
+            const activeBtn = document.getElementById('curr-' + curr);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-brand-cyan', 'text-brand-dark');
+                activeBtn.classList.remove('text-slate-300');
+            }
 
             document.querySelectorAll('.price-display').forEach(el => {
                 const val = el.getAttribute('data-' + curr.toLowerCase());
-                if (val) el.innerText = val;
+                if (val) {
+                    el.style.opacity = 0;
+                    setTimeout(() => {
+                        el.innerText = val;
+                        el.style.opacity = 1;
+                    }, 150);
+                }
             });
         }
 
-        // 5. Interactive Speed Tester Simulation
+        // 5. Test Brzine Interneta (Interaktivni Simulator)
         function updateSpeedTest(val) {
             document.getElementById('speedValue').innerText = val;
             const res = document.getElementById('speedResult');
@@ -1058,7 +1089,28 @@
             }
         }
 
-        // 6. FAQ Accordion Logic
+        function startSpeedTestSim() {
+            const btn = document.getElementById('speedTestBtn');
+            const slider = document.getElementById('speedInput');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> TESTIRAM BRZINU...`;
+
+            let current = 0;
+            const target = Math.floor(Math.random() * 60) + 40; // Nasumični rezultat od 40 do 100 Mbps
+            const interval = setInterval(() => {
+                current += Math.floor(Math.random() * 8) + 2;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(interval);
+                    btn.disabled = false;
+                    btn.innerHTML = `<i class="fa-solid fa-rotate-right"></i> PONOBI TEST BRZINE`;
+                }
+                slider.value = current;
+                updateSpeedTest(current);
+            }, 60);
+        }
+
+        // 6. FAQ Accordion
         function toggleFaq(btn) {
             const content = btn.nextElementSibling;
             const icon = btn.querySelector('.fa-chevron-down');
@@ -1066,15 +1118,17 @@
             icon.classList.toggle('rotate-180');
         }
 
-        // 7. Modal Form Logic
+        // 7. Modal Form Handler
         function openTestModal() {
-            document.getElementById('testModal').classList.remove('hidden');
-            document.getElementById('testModal').classList.add('flex');
+            const modal = document.getElementById('testModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
 
         function closeTestModal() {
-            document.getElementById('testModal').classList.add('hidden');
-            document.getElementById('testModal').classList.remove('flex');
+            const modal = document.getElementById('testModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
         }
 
         function submitTestForm(e) {
@@ -1083,12 +1137,12 @@
             const device = document.getElementById('modalDevice').value;
             const app = document.getElementById('modalApp').value || 'Nije navedeno';
 
-            const message = `Zdravo KrajinaLive IPTV! Želim 24h besplatan test.%0AName: ${encodeURIComponent(name)}%0ADevice: ${encodeURIComponent(device)}%0AApp: ${encodeURIComponent(app)}`;
+            const message = `Zdravo KrajinaLive IPTV! Želim 24h besplatan test.%0AIme: ${encodeURIComponent(name)}%0AUređaj: ${encodeURIComponent(device)}%0AAplikacija: ${encodeURIComponent(app)}`;
             window.open(`https://wa.me/387644064762?text=${message}`, '_blank');
             closeTestModal();
         }
 
-        // 8. Social Proof Toasts Simulation
+        // 8. Social Proof Toast Notifikacije
         const toastNotifications = [
             "<strong>Marko iz Sarajeva</strong> je upravo aktivirao 24h besplatni test!",
             "<strong>Damir iz Tuzle</strong> je kupio 12 Mjeseci Akcijski Paket!",
@@ -1102,8 +1156,10 @@
             const randomMsg = toastNotifications[Math.floor(Math.random() * toastNotifications.length)];
             
             toastText.innerHTML = randomMsg;
-            toast.classList.remove('hidden', 'translate-y-10');
-            toast.classList.add('flex', 'translate-y-0');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10');
+            }, 50);
 
             setTimeout(() => {
                 toast.classList.add('translate-y-10');
@@ -1111,11 +1167,10 @@
             }, 5000);
         }
 
-        // Trigger toast every 20 seconds
         setInterval(showRandomToast, 22000);
-        setTimeout(showRandomToast, 4000);
+        setTimeout(showRandomToast, 3000);
 
-        // 9. Particles Canvas Tech Background Effect
+        // 9. Particle Background Canvas
         const canvas = document.getElementById('tech-bg');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -1127,12 +1182,12 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        for (let i = 0; i < 75; i++) {
+        for (let i = 0; i < 60; i++) {
             particles.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                vx: (Math.random() - 0.5) * 0.6,
-                vy: (Math.random() - 0.5) * 0.6,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
                 radius: Math.random() * 2 + 1
             });
         }
@@ -1152,7 +1207,6 @@
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Draw subtle connecting lines
                 for (let j = idx + 1; j < particles.length; j++) {
                     const p2 = particles[j];
                     const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
