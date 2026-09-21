@@ -3,169 +3,1530 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komentari - KrajinaLive IPTV</title>
+  <title>Komentari Korisnika — KrajinaLive IPTV | Iskustva i Utisci</title>
+  
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f6ff;
-      color: #333;
+    :root {
+      --bg-dark: #080c14;
+      --bg-surface: #0f172a;
+      --bg-card: rgba(22, 31, 48, 0.7);
+      --bg-card-hover: rgba(30, 41, 59, 0.85);
+      --accent-blue: #2563eb;
+      --accent-cyan: #06b6d4;
+      --accent-light: #38bdf8;
+      --accent-gold: #fbbf24;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-glow: rgba(56, 189, 248, 0.2);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --glow-shadow: 0 0 30px rgba(37, 99, 235, 0.25);
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* HEADER */
-    header {
-      background: #004080;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(99, 102, 241, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, .brand-title {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 50%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-card);
+      padding: 15px 0;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #fff;
-      padding: 20px;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--accent-cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 9px 15px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glow);
+    }
+
+    .nav-links a.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.2));
+      color: var(--accent-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: #fff;
+      font-size: 22px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .menu-toggle:hover {
+      background: var(--accent-blue);
+    }
+
+    /* HERO HEADER */
+    .hero {
+      position: relative;
+      padding: 90px 24px 70px;
       text-align: center;
+      background: linear-gradient(180deg, rgba(8, 12, 20, 0.5) 0%, rgba(15, 23, 42, 0.85) 100%),
+                  url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      border-bottom: 1px solid var(--border-card);
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(8, 12, 20, 0.75) 0%, var(--bg-dark) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 50px;
+      color: var(--accent-gold);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--text-muted);
+      max-width: 660px;
+      margin: 0 auto 30px;
+    }
+
+    .rating-summary-chips {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .rating-chip {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-card);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rating-chip .stars {
+      color: var(--accent-gold);
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 70px 24px;
+    }
+
+    /* SEARCH & FILTER BAR */
+    .filter-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      padding: 18px 24px;
+      border-radius: var(--radius-lg);
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: rgba(8, 12, 20, 0.6);
+      border: 1px solid var(--border-card);
+      padding: 12px 16px 12px 46px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.25);
+    }
+
+    .filter-info {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-info strong {
+      color: var(--accent-light);
+    }
+
+    /* COMMENTS GRID */
+    .comments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .comment-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       position: relative;
     }
-    header h1 {
-      margin: 0;
-      font-size: 1.6em;
+
+    .comment-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      box-shadow: var(--glow-shadow);
     }
 
-    /* HAMBURGER */
-    .menu-toggle {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      font-size: 30px;
-      cursor: pointer;
-      color: white;
-      background: none;
-      border: none;
-    }
-
-    /* MENU */
-    nav {
-      display: none;
-      flex-direction: column;
-      background: #003366;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 20px;
-      border-bottom: 1px solid #002244;
-      font-size: 1.1em;
-    }
-
-    nav a:hover {
-      background: #0055cc;
-    }
-
-    .show-menu {
+    .comment-header {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
     }
 
-    /* MAIN CONTENT */
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    .comment {
-      background: #fff;
-      padding: 18px 20px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      font-size: 1.05em;
-      line-height: 1.5;
+    .user-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-    .comment strong {
-      color: #004080;
-      font-size: 1.1em;
+    .user-details h3 {
+      font-size: 17px;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .verified-badge {
+      color: var(--accent-cyan);
+      font-size: 13px;
+    }
+
+    .user-details span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .stars {
+      color: var(--accent-gold);
+      font-size: 13px;
+      display: flex;
+      gap: 2px;
+    }
+
+    .comment-text {
+      font-size: 15px;
+      color: #e2e8f0;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .comment-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .service-tag {
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--accent-light);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    /* CTA BANNER */
+    .cta {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
+      padding: 60px 40px;
+      border-radius: var(--radius-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(2, 132, 199, 0.3);
+    }
+
+    .cta::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .cta h2 {
+      font-size: 36px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      color: #0284c7;
+      padding: 16px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 17px;
+      transition: var(--transition);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      background: #f8fafc;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      color: #0369a1;
     }
 
     /* FOOTER */
     footer {
-      background: #004080;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
+      background: #05080e;
+      border-top: 1px solid var(--border-card);
+      padding: 60px 24px 30px;
+      color: var(--text-muted);
     }
 
-    footer a {
-      color: #ffcc00;
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      margin-top: 15px;
+      font-size: 15px;
+      max-width: 360px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
       text-decoration: none;
+      transition: var(--transition);
+      font-size: 15px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 14px;
+    }
+
+    .footer-bottom a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    /* WHATSAPP FLOATING BUTTON */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #25d366;
+      color: white;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      text-decoration: none;
+      z-index: 999;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    /* FADE ANIMATION */
+    .fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      .comments-grid {
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      }
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 73px;
+        left: 0;
+        right: 0;
+        background: rgba(8, 12, 20, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 24px;
+        gap: 12px;
+        border-bottom: 1px solid var(--border-card);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+      }
+
+      .nav-links.show {
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .comments-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta h2 {
+        font-size: 28px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <h1>Komentari naših korisnika</h1>
-  </header>
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-tv"></i></div>
+        <div class="logo-text">KrajinaLive <span>IPTV</span></div>
+      </a>
 
-  <nav id="mainMenu">
-    <a href="index.html">🏠 Početna</a>
-    <a href="cjenovnik.html">💰 Cijene i akcije</a>
-    <a href="top15.html">🎬 Top 15</a>
-    <a href="komentari.html">💬 Komentari</a>
-    <a href="tim.html">👥 Postani dio tima</a>
-    <a href="onama.html">ℹ️ O nama</a>
-    <a href="kontakt.html">📞 Kontakt</a>
-    <a href="placanje.html">💳 Plaćanje</a>
-    <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Meni">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="mainMenu">
+        <li><a href="index.html">Početna</a></li>
+        <li><a href="cijene.html">Cijene i akcije</a></li>
+        <li><a href="top15.html">Top 15</a></li>
+        <li><a href="komentari.html" class="active">Komentari</a></li>
+        <li><a href="tim.html">Postani dio tima</a></li>
+        <li><a href="onama.html">O nama</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="placanje.html">Plaćanje</a></li>
+        <li><a href="kako-da-gledas.html">Kako da gledaš</a></li>
+      </ul>
+    </div>
   </nav>
+
+  <!-- HERO HEADER -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade">
+      <div class="badge-pill">
+        <i class="fa-solid fa-star"></i> 5.0 Ocjena Naših Korisnika
+      </div>
+      <h1>Komentari naših korisnika</h1>
+      <p>Iskustva, recenzije i utisci naših pretplatnika širom svijeta koji svakodnevno uživaju u besprijekornom IPTV servisu.</p>
+      
+      <div class="rating-summary-chips">
+        <div class="rating-chip">
+          <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <span>4.98 / 5.0 (6,000+ Utisaka)</span>
+        </div>
+        <div class="rating-chip">
+          <i class="fa-solid fa-circle-check" style="color: var(--accent-cyan);"></i>
+          <span>100% Verifikovane Recenzije</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <div class="container">
 
-    <div class="comment"><strong>Amir:</strong> Odlična usluga, preporučujem svima!</div>
-    <div class="comment"><strong>Jelena:</strong> Brza instalacija i super kvalitet slike.</div>
-    <div class="comment"><strong>Marko:</strong> Sve radi bez ikakvih problema.</div>
-    <div class="comment"><strong>Ivana:</strong> Ljubazna podrška, pomogli su mi odmah.</div>
-    <div class="comment"><strong>Nemanja:</strong> Najbolja IPTV usluga koju sam koristio.</div>
-    <div class="comment"><strong>Lejla:</strong> Cijene su veoma povoljne, a kvalitet odličan.</div>
-    <div class="comment"><strong>Petar:</strong> Preporučujem, mnogo kanala i bez štekanja.</div>
-    <div class="comment"><strong>Maja:</strong> Djeca uživaju u crtićima, hvala vam!</div>
-    <div class="comment"><strong>Armin:</strong> Radi perfektno i na mobitelu i na TV-u.</div>
-    <div class="comment"><strong>Sanja:</strong> Sve pohvale za podršku i kvalitet.</div>
-    <div class="comment"><strong>Dino:</strong> Bolje od svih drugih IPTV provajdera.</div>
-    <div class="comment"><strong>Selma:</strong> Plaćanje jednostavno, sve je sigurno.</div>
-    <div class="comment"><strong>Vlado:</strong> Gledam i sportske kanale bez ikakvih prekida.</div>
-    <div class="comment"><strong>Elma:</strong> Savršeno za cijelu porodicu.</div>
-    <div class="comment"><strong>Dejan:</strong> Stabilna konekcija, nema zastajkivanja.</div>
-    <div class="comment"><strong>Ana:</strong> Brzo sam dobila pristup nakon plaćanja.</div>
-    <div class="comment"><strong>Adnan:</strong> Odlično iskustvo, nastavljam pretplatu.</div>
-    <div class="comment"><strong>Milica:</strong> Sve pohvale, imate moju preporuku.</div>
-    <div class="comment"><strong>Haris:</strong> Radi i na starijem smart TV-u bez problema.</div>
-    <div class="comment"><strong>Nina:</strong> Najbolja odluka, odlična zabava za cijelu kuću.</div>
-    <div class="comment"><strong>Filip:</strong> Super ponuda i mnogo kanala.</div>
-    <div class="comment"><strong>Kristina:</strong> Veoma sam zadovoljna, sve radi glatko.</div>
-    <div class="comment"><strong>Darko:</strong> Dobar kvalitet slike čak i na sporijem internetu.</div>
-    <div class="comment"><strong>Marina:</strong> Moja preporuka, odličan tim.</div>
-    <div class="comment"><strong>Edin:</strong> Instalacija brza i jednostavna.</div>
-    <div class="comment"><strong>Ivona:</strong> Hvala na ljubaznosti i pomoći.</div>
-    <div class="comment"><strong>Goran:</strong> Veoma povoljno i stabilno.</div>
-    <div class="comment"><strong>Sofija:</strong> Preporučujem svima, odlična usluga.</div>
-    <div class="comment"><strong>Damir:</strong> IPTV bez greške, svaka čast!</div>
-    <div class="comment"><strong>Lidija:</strong> Svi kanali rade savršeno, hvala vam.</div>
+    <!-- SEARCH & FILTER BAR -->
+    <div class="filter-section fade">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" onkeyup="filterComments()" placeholder="Pretraži komentare po imenu ili ključnoj riječi...">
+      </div>
+      <div class="filter-info">
+        <i class="fa-solid fa-comments"></i> Prikazano: <strong id="commentCount">30</strong> komentara
+      </div>
+    </div>
+
+    <!-- COMMENTS GRID -->
+    <div class="comments-grid fade" id="commentsGrid">
+
+      <!-- 1 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #2563eb, #06b6d4);">A</div>
+              <div class="user-details">
+                <h3>Amir <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Odlična usluga, preporučujem svima!</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">IPTV Pretplata</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">J</div>
+              <div class="user-details">
+                <h3>Jelena <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Brza instalacija i super kvalitet slike.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Brza Instalacija</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">M</div>
+              <div class="user-details">
+                <h3>Marko <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Sve radi bez ikakvih problema.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Stabilnost</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">I</div>
+              <div class="user-details">
+                <h3>Ivana <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Ljubazna podrška, pomogli su mi odmah.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">24/7 Podrška</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #6366f1, #3b82f6);">N</div>
+              <div class="user-details">
+                <h3>Nemanja <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Najbolja IPTV usluga koju sam koristio.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Premium Kvalitet</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #14b8a6, #84cc16);">L</div>
+              <div class="user-details">
+                <h3>Lejla <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Cijene su veoma povoljne, a kvalitet odličan.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Povoljna Cijena</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">P</div>
+              <div class="user-details">
+                <h3>Petar <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Preporučujem, mnogo kanala i bez štekanja.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Bez Štekanja</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #f43f5e, #fb923c);">M</div>
+              <div class="user-details">
+                <h3>Maja <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Djeca uživaju u crtićima, hvala vam!</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Porodični Paket</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #0284c7, #2dd4bf);">A</div>
+              <div class="user-details">
+                <h3>Armin <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Radi perfektno i na mobitelu i na TV-u.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Multi-Device</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #a855f7, #6366f1);">S</div>
+              <div class="user-details">
+                <h3>Sanja <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Sve pohvale za podršku i kvalitet.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Vrhunska Podrška</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #2563eb, #10b981);">D</div>
+              <div class="user-details">
+                <h3>Dino <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Bolje od svih drugih IPTV provajdera.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Broj 1 Provajder</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #eab308, #ef4444);">S</div>
+              <div class="user-details">
+                <h3>Selma <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Plaćanje jednostavno, sve je sigurno.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Sigurno Plaćanje</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #059669, #0284c7);">V</div>
+              <div class="user-details">
+                <h3>Vlado <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Gledam i sportske kanale bez ikakvih prekida.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Sportski Kanali</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #d946ef, #8b5cf6);">E</div>
+              <div class="user-details">
+                <h3>Elma <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Savršeno za cijelu porodicu.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Porodični Sadržaj</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 15 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">D</div>
+              <div class="user-details">
+                <h3>Dejan <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Stabilna konekcija, nema zastajkivanja.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Anti-Freeze</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 16 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #f43f5e, #ec4899);">A</div>
+              <div class="user-details">
+                <h3>Ana <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Brzo sam dobila pristup nakon plaćanja.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Instant Aktivacija</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 17 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #10b981, #3b82f6);">A</div>
+              <div class="user-details">
+                <h3>Adnan <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Odlično iskustvo, nastavljam pretplatu.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Stalni Korisnik</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 18 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #8b5cf6, #f43f5e);">M</div>
+              <div class="user-details">
+                <h3>Milica <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Sve pohvale, imate moju preporuku.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Visoka Ocjena</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 19 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #0284c7, #6366f1);">H</div>
+              <div class="user-details">
+                <h3>Haris <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Radi i na starijem smart TV-u bez problema.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Smart TV</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 20 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #ec4899, #f59e0b);">N</div>
+              <div class="user-details">
+                <h3>Nina <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Najbolja odluka, odlična zabava za cijelu kuću.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Zabava</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 21 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #3b82f6, #10b981);">F</div>
+              <div class="user-details">
+                <h3>Filip <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Super ponuda i mnogo kanala.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Bogata Lista</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 22 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #a855f7, #ec4899);">K</div>
+              <div class="user-details">
+                <h3>Kristina <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Veoma sam zadovoljna, sve radi glatko.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Fluidno</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 23 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">D</div>
+              <div class="user-details">
+                <h3>Darko <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Dobar kvalitet slike čak i na sporijem internetu.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Optimizacija</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 24 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #f43f5e, #8b5cf6);">M</div>
+              <div class="user-details">
+                <h3>Marina <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Moja preporuka, odličan tim.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Tim & Podrška</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 25 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">E</div>
+              <div class="user-details">
+                <h3>Edin <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Instalacija brza i jednostavna.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Jednostavno</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 26 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #8b5cf6, #3b82f6);">I</div>
+              <div class="user-details">
+                <h3>Ivona <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Hvala na ljubaznosti i pomoći.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Ljubaznost</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 27 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #f59e0b, #10b981);">G</div>
+              <div class="user-details">
+                <h3>Goran <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Veoma povoljno i stabilno.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Omjer Cijene i Kvaliteta</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 28 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #ec4899, #a855f7);">S</div>
+              <div class="user-details">
+                <h3>Sofija <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Preporučujem svima, odlična usluga.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Zadovoljna</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 29 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #2563eb, #06b6d4);">D</div>
+              <div class="user-details">
+                <h3>Damir <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">IPTV bez greške, svaka čast!</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Bez Greške</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+      <!-- 30 -->
+      <div class="comment-card">
+        <div>
+          <div class="comment-header">
+            <div class="user-info">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #a855f7, #f43f5e);">L</div>
+              <div class="user-details">
+                <h3>Lidija <i class="fa-solid fa-circle-check verified-badge"></i></h3>
+                <span>Verifikovani korisnik</span>
+              </div>
+            </div>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <p class="comment-text">Svi kanali rade savršeno, hvala vam.</p>
+        </div>
+        <div class="comment-footer">
+          <span class="service-tag">Savršeno</span>
+          <span><i class="fa-solid fa-thumbs-up"></i> Preporuka</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA BANNER -->
+    <section class="cta fade">
+      <h2>Želite i vi ostaviti komentar ili isprobati uslugu?</h2>
+      <p>Javite nam se na WhatsApp — besplatna testna lista čeka na vas!</p>
+      <a href="https://wa.me/387644064762" target="_blank" class="cta-btn">
+        <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> Kontaktirajte nas odmah
+      </a>
+    </section>
 
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 KrajinaLive IPTV | <a href="index.html">Nazad na početnu</a></p>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-tv"></i></div>
+          <div class="logo-text">KrajinaLive <span>IPTV</span></div>
+        </a>
+        <p>Vodeći provajder IPTV usluga sa više od 4 godine garancije kvaliteta, vrhunskom stabilnošću i besprijekornom podrškom.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Brzi Linkovi</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="cijene.html">Cijene i akcije</a></li>
+          <li><a href="top15.html">Top 15</a></li>
+          <li><a href="komentari.html">Komentari</a></li>
+          <li><a href="onama.html">O nama</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Korisnička Zona</h4>
+        <ul class="footer-links">
+          <li><a href="tim.html">Postani dio tima</a></li>
+          <li><a href="kontakt.html">Kontakt strana</a></li>
+          <li><a href="placanje.html">Načini plaćanja</a></li>
+          <li><a href="kako-da-gledas.html">Kako da gledaš</a></li>
+          <li><a href="https://wa.me/387644064762" target="_blank"><i class="fa-brands fa-whatsapp"></i> +387 64 4064762</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 KrajinaLive IPTV. Sva prava zadržana.</p>
+      <p>Nazad na <a href="index.html">Početnu stranicu</a></p>
+    </div>
   </footer>
 
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a class="wa-float" href="https://wa.me/387644064762" target="_blank" aria-label="Kontaktirajte nas na WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- JAVASCRIPT -->
   <script>
-    function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show-menu");
+    // MOBILE NAVIGATION TOGGLE
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
+
+    menuToggle.addEventListener('click', () => {
+      mainMenu.classList.toggle('show');
+      const icon = menuToggle.querySelector('i');
+      if (mainMenu.classList.contains('show')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // LIVE SEARCH / FILTER COMMENTS
+    function filterComments() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.comment-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(input)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('commentCount').innerText = visibleCount;
     }
+
+    // SCROLL ANIMATION (INTERSECTION OBSERVER)
+    const fadeElements = document.querySelectorAll('.fade');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    fadeElements.forEach(el => observer.observe(el));
   </script>
 
 </body>
