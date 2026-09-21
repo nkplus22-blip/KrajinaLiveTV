@@ -1,20 +1,75 @@
-/* Reset i osnovni stilovi */
+/* ==========================================================================
+   KRAJINALIVE IPTV - ULTIMATE GLOBAL STYLESHEET (WORLD CLASS DARK MODE)
+   Potpuno usklađen sa svim podstranicama i starom strukturom
+   ========================================================================== */
+
+/* 1. GLOBALNE VARIJABLE & TEMATIZACIJA */
+:root {
+  --bg-dark: #080c14;
+  --bg-surface: #0f172a;
+  --bg-card: rgba(22, 31, 48, 0.75);
+  --bg-card-hover: rgba(30, 41, 59, 0.95);
+  
+  --accent-blue: #2563eb;
+  --accent-cyan: #06b6d4;
+  --accent-light: #38bdf8;
+  --accent-gold: #fbbf24;
+  --accent-green: #22c55e;
+  --accent-wa: #25d366;
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  --border-glow: rgba(56, 189, 248, 0.3);
+  --border-card: rgba(255, 255, 255, 0.08);
+  --glow-shadow: 0 10px 35px rgba(37, 99, 235, 0.25);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. REZETI I TIPOGRAFIJA */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  color: #fff;
-  background: #001f3f;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(34, 197, 94, 0.06) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
-/* Canvas tech pozadina */
+h1, h2, h3, h4, h5, h6, .brand-title {
+  font-family: 'Outfit', -apple-system, sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 50%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Interaktivna platno/dinamička pozadina */
 #tech-bg {
   position: fixed;
   top: 0;
@@ -22,30 +77,47 @@ body {
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: #001f3f;
+  background: var(--bg-dark);
+  pointer-events: none;
 }
 
-/* Header */
+/* 3. HEADER & OVERLAY NAVIGACIJA */
 header {
-  background: rgba(0,64,128,0.8);
+  background: rgba(8, 12, 20, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-card);
   color: #fff;
-  padding: 20px;
+  padding: 20px 24px;
   text-align: center;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  transition: var(--transition);
 }
 
 .menu-toggle {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 28px;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  font-size: 26px;
   cursor: pointer;
-  background: none;
-  border: none;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-card);
+  color: var(--accent-light);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
 }
 
-/* Overlay meni */
+.menu-toggle:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-light);
+}
+
+/* Overlay Meni na preklop */
 .overlay {
   height: 100%;
   width: 0;
@@ -53,135 +125,331 @@ header {
   z-index: 1000;
   top: 0;
   left: 0;
-  background-color: rgba(0, 64, 128, 0.95);
+  background-color: rgba(8, 12, 20, 0.98);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   overflow-x: hidden;
-  transition: 0.4s;
-  padding-top: 60px;
+  transition: var(--transition);
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .overlay a {
   display: block;
   text-decoration: none;
-  font-size: 1.5em;
-  color: #fff;
-  padding: 15px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 14px 28px;
+  margin: 6px 0;
   text-align: center;
-  transition: 0.3s;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  width: 80%;
+  max-width: 360px;
 }
 
-.overlay a:hover { background: #0066cc; }
+.overlay a:hover,
+.overlay a.active {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.2));
+  color: #fff;
+  border: 1px solid var(--border-glow);
+}
 
 .overlay .closebtn {
   position: absolute;
-  top: 15px;
+  top: 20px;
   right: 30px;
-  font-size: 40px;
-  color: #fff;
+  font-size: 36px;
+  color: var(--text-muted);
   cursor: pointer;
+  transition: var(--transition);
 }
 
-/* Hero sekcija */
+.overlay .closebtn:hover {
+  color: var(--accent-light);
+  transform: rotate(90deg);
+}
+
+/* 4. HERO SEKCIJA */
 .hero {
   position: relative;
   color: #fff;
   text-align: center;
-  padding: 80px 20px;
+  padding: 100px 24px 80px;
   z-index: 1;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
 }
 
-.hero h1 { font-size: 2.5em; margin: 0; }
-.hero p { font-size: 1.2em; margin-top: 15px; }
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-/* Brojači */
+.hero p {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* 5. INTERAKTIVNI BROJAČI (COUNTERS) */
 .counters {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 40px;
-  margin: 40px 0;
+  gap: 24px;
+  margin: 50px auto;
+  max-width: 1100px;
   position: relative;
   z-index: 1;
+  padding: 0 20px;
 }
 
 .counter-box {
   text-align: center;
-  background: #fff;
-  color: #004080;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  width: 180px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text-main);
+  padding: 28px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-card);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  width: 210px;
+  transition: var(--transition);
+}
+
+.counter-box:hover {
+  transform: translateY(-6px);
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-shadow);
 }
 
 .counter-box h2 {
-  color: #004080;
-  font-size: 2em;
-  margin: 0;
+  color: var(--accent-cyan);
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 6px;
 }
 
-/* Content sekcije */
+.counter-box p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 6. CONTENT SEKCIJE */
 .content {
-  max-width: 900px;
+  max-width: 960px;
   margin: auto;
-  padding: 20px;
+  padding: 40px 24px;
   text-align: center;
   position: relative;
   z-index: 1;
 }
 
 .content h2 {
-  font-size: 1.8em;
+  font-size: 2.2rem;
+  font-weight: 800;
   color: #fff;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .content p, .content li {
-  font-size: 1.1em;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-muted);
 }
 
 .content ul {
   text-align: left;
-  max-width: 700px;
-  margin: 20px auto;
+  max-width: 720px;
+  margin: 28px auto;
   list-style: none;
 }
 
-.content ul li::before {
-  content: "✔ ";
-  color: #ffcc00;
+.content ul li {
+  margin-bottom: 14px;
+  padding-left: 32px;
+  position: relative;
 }
 
-/* Footer */
-footer {
-  background: rgba(0,64,128,0.8);
-  color: #fff;
+.content ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-cyan);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* 7. APLIKACIJE STRANICA (GRID & KARTICE) */
+.container-apps {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text-main);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
   text-align: center;
-  padding: 15px;
-  margin-top: 40px;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow);
+  box-shadow: var(--glow-shadow);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* 8. ISTAKNUTO POLJE (HIGHLIGHT BANNER) */
+.highlight {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+  border: 1px solid var(--border-glow);
+  backdrop-filter: blur(20px);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  padding: 40px 28px;
+  text-align: center;
+  margin: 50px 0;
+  box-shadow: var(--glow-shadow);
+}
+
+.highlight h2 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.highlight p {
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto 20px;
+}
+
+.highlight a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--accent-gold), #f59e0b);
+  color: #0f172a;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.3);
+}
+
+.highlight a.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(251, 191, 36, 0.5);
+  background: linear-gradient(135deg, #fcd34d, var(--accent-gold));
+}
+
+/* Standardna dugmad */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+}
+
+/* 9. FOOTER (PODNOŽJE) */
+footer {
+  background: #05080e;
+  border-top: 1px solid var(--border-card);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 30px 24px;
+  margin-top: 60px;
   position: relative;
   z-index: 1;
+  font-size: 0.95rem;
 }
 
 footer a {
-  color: #ffcc00;
+  color: var(--accent-light);
   text-decoration: none;
+  transition: var(--transition);
 }
 
-/* Aplikacije stranica */
-.container-apps { max-width:1100px; margin:40px auto; padding:0 20px; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:20px; }
-.card { background:#fff; color:#004080; border:2px solid #007bff; border-radius:10px; padding:20px; text-align:center; transition:.3s; }
-.card:hover { transform:translateY(-5px); }
-.card h3 { margin-top:0; }
+footer a:hover {
+  color: var(--accent-cyan);
+  text-decoration: underline;
+}
 
-/* Istaknuto polje */
-.highlight { background:#007bff; color:#fff; border-radius:10px; padding:30px 20px; text-align:center; margin:40px 0; }
-.highlight a.btn { display:inline-block; margin-top:15px; padding:12px 20px; background:#ffcc00; color:#0056a6; text-decoration:none; border-radius:6px; font-weight:bold; }
-.highlight a.btn:hover { background:#e6b800; }
-
-/* Responsive */
+/* 10. RESPONZIVNOST (MOBILE & TABLET) */
 @media screen and (max-width: 768px) {
-  .counters { flex-direction: column; align-items: center; }
-  .counter-box { width: 60%; }
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  
+  .counters {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .counter-box {
+    width: 85%;
+    max-width: 320px;
+  }
+
+  .content h2 {
+    font-size: 1.8rem;
+  }
+
+  .highlight {
+    padding: 30px 20px;
+  }
 }
