@@ -3,103 +3,887 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Postani dio tima - KrajinaLive IPTV</title>
+  <title>Postani dio tima - KrajinaLive IPTV | Zaradite sa nama</title>
+  
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
-    body { margin:0; font-family:Arial,sans-serif; background:#f8fbff; color:#333; }
-    header { background:#0056a6; color:#fff; padding:25px; text-align:center; }
-
-    /* Navigacija */
-    nav { background:#007bff; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
-    nav a:hover { background:#e6f0ff; color:#0056a6; }
-
-    /* Hamburger dugme */
-    .menu-toggle { 
-      display:none; 
-      font-size:28px; 
-      background:none; 
-      border:none; 
-      color:white; 
-      cursor:pointer; 
-      padding:12px 18px; 
-    }
-    @media (max-width:768px) {
-      nav { display:none; flex-direction:column; text-align:center; }
-      nav.show { display:flex; }
-      .menu-toggle { display:block; background:#007bff; width:100%; text-align:right; }
+    :root {
+      --bg-dark: #080c14;
+      --bg-surface: #0f172a;
+      --bg-card: rgba(22, 31, 48, 0.7);
+      --bg-card-hover: rgba(30, 41, 59, 0.9);
+      --accent-blue: #2563eb;
+      --accent-cyan: #06b6d4;
+      --accent-light: #38bdf8;
+      --accent-gold: #fbbf24;
+      --accent-green: #22c55e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-glow: rgba(56, 189, 248, 0.25);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --glow-shadow: 0 0 35px rgba(37, 99, 235, 0.25);
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .container { max-width:1000px; margin:40px auto; padding:0 20px; }
-    h2 { text-align:center; color:#0056a6; margin-bottom:20px; }
-    p { line-height:1.8; font-size:1.1em; text-align:justify; }
-    ul { line-height:1.8; font-size:1.1em; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    .cta { text-align:center; margin:30px 0; }
-    .cta a { background:#007bff; color:#fff; padding:12px 24px; border-radius:6px; text-decoration:none; font-size:1.1em; }
-    .cta a:hover { background:#0056a6; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-    footer { background:#0056a6; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-    footer a { color:#ffdd00; text-decoration:none; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(34, 197, 94, 0.06) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4, .brand-title {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 50%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-card);
+      padding: 15px 0;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--accent-cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 9px 15px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glow);
+    }
+
+    .nav-links a.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.2));
+      color: var(--accent-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: #fff;
+      font-size: 22px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .menu-toggle:hover {
+      background: var(--accent-blue);
+    }
+
+    /* HERO HEADER */
+    .hero {
+      position: relative;
+      padding: 90px 24px 70px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(8, 12, 20, 0.75) 0%, rgba(15, 23, 42, 0.92) 100%),
+                  url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      border-bottom: 1px solid var(--border-card);
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(8, 12, 20, 0.7) 0%, var(--bg-dark) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 50px;
+      color: var(--accent-light);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* INTRO CARD */
+    .intro-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      margin-bottom: 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    }
+
+    .intro-card h2 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .intro-card p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* SECTION HEADINGS */
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #fff;
+      border-left: 4px solid var(--accent-cyan);
+      padding-left: 16px;
+    }
+
+    /* CARDS GRID (NUDIMO / OCEKUJEMO) */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      box-shadow: var(--glow-shadow);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .card-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .icon-offer {
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--accent-light);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .icon-expect {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .card-header h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .feature-list li i {
+      color: var(--accent-green);
+      font-size: 18px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .feature-list.expect li i {
+      color: var(--accent-cyan);
+    }
+
+    .feature-list li strong {
+      color: #fff;
+    }
+
+    /* HOW IT WORKS / STEPS */
+    .steps-section {
+      margin-bottom: 60px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .step-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-glow);
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: #fff;
+      font-weight: 800;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+    }
+
+    .step-card h4 {
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .step-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* CTA BANNER */
+    .cta {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
+      padding: 60px 40px;
+      border-radius: var(--radius-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(2, 132, 199, 0.3);
+      margin-top: 30px;
+    }
+
+    .cta::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .cta h2 {
+      font-size: 36px;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .cta p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #25d366;
+      color: #ffffff;
+      padding: 16px 38px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 18px;
+      transition: var(--transition);
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      background: #22c55e;
+      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+      color: #fff;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #05080e;
+      border-top: 1px solid var(--border-card);
+      padding: 60px 24px 30px;
+      color: var(--text-muted);
+      margin-top: 80px;
+    }
+
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      margin-top: 15px;
+      font-size: 15px;
+      max-width: 360px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 15px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 14px;
+    }
+
+    .footer-bottom a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    /* WHATSAPP FLOATING BUTTON */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #25d366;
+      color: white;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      text-decoration: none;
+      z-index: 999;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    }
+
+    /* FADE ANIMATION */
+    .fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 73px;
+        left: 0;
+        right: 0;
+        background: rgba(8, 12, 20, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 24px;
+        gap: 12px;
+        border-bottom: 1px solid var(--border-card);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+      }
+
+      .nav-links.show {
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .intro-card {
+        padding: 24px;
+      }
+
+      .cta h2 {
+        font-size: 28px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Postani dio našeg tima</h1>
-    <p>Započni saradnju sa KrajinaLive IPTV i ostvari dodatnu zaradu</p>
-  </header>
 
-  <!-- Hamburger dugme -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-tv"></i></div>
+        <div class="logo-text">KrajinaLive <span>IPTV</span></div>
+      </a>
 
-  <nav id="mainMenu">
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="onama.html">O nama</a>
-    <a href="tim.html">Postani sad dio tima</a>
-    <a href="top15.html">Top 15</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="placanje.html">Plaćanje</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Meni">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="mainMenu">
+        <li><a href="index.html">Početna</a></li>
+        <li><a href="cjenovnik.html">Cijene i akcije</a></li>
+        <li><a href="komentari.html">Komentari</a></li>
+        <li><a href="onama.html">O nama</a></li>
+        <li><a href="tim.html" class="active">Postani dio tima</a></li>
+        <li><a href="top15.html">Top 15 / Top 30</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="placanje.html">Plaćanje</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <div class="container">
-    <h2>Pridruži se našem timu</h2>
-    <p>
-      Tražimo motivisane i odgovorne ljude koji žele postati dio BalkanFlix IPTV tima.  
-      Ako voliš rad sa ljudima, komunikativan si i spreman za izazove – ovo je prava prilika za tebe!
-    </p>
-
-    <h3>Šta nudimo?</h3>
-    <ul>
-      <li>Rad u dinamičnom i prijateljskom okruženju</li>
-      <li>Mogućnost dodatne zarade</li>
-      <li<Fleksibilno radno vrijeme</li>
-      <li>Obuku i podršku u radu</li>
-    </ul>
-
-    <h3>Šta očekujemo od tebe?</h3>
-    <ul>
-      <li>Da si odgovoran i pouzdan</li>
-      <li>Da imaš osnovne komunikacijske vještine</li>
-      <li>Da si spreman učiti i pratiti naše smjernice</li>
-    </ul>
-
-    <div class="cta">
-      <p>📩 Zainteresovan? Javi nam se i postani dio KrajinaLive IPTV tima!</p>
-      <a href="https://wa.me/387644064762">Pridruži se odmah</a>
+  <!-- HERO HEADER -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade">
+      <div class="badge-pill">
+        <i class="fa-solid fa-handshake-simple"></i> Partnerstvo & Zarada
+      </div>
+      <h1>Postani Dio Našeg Tima</h1>
+      <p>Započni stabilnu i profitabilnu saradnju sa KrajinaLive IPTV timom i ostvari odličnu dodatnu zaradu uz potpunu podršku 24/7.</p>
     </div>
+  </header>
+
+  <div class="container">
+
+    <!-- INTRO CARD -->
+    <section class="intro-card fade">
+      <h2>Pridruži Se Najboljem IPTV Timu</h2>
+      <p>
+        Tražimo motivisane, pouzdane i odgovorne osobe koje žele postati dio <strong>KrajinaLive IPTV</strong> mreže. 
+        Ako voliš rad sa ljudima, komunikativan si i želiš izgraditi sopstveni posao ili ostvariti fleksibilnu dodatnu zaradu – ovo je savršena prilika za tebe!
+      </p>
+    </section>
+
+    <!-- OFFER VS EXPECTATIONS GRID -->
+    <div class="grid-2 fade">
+      <!-- WHAT WE OFFER -->
+      <div class="feature-card">
+        <div class="card-header">
+          <div class="card-icon icon-offer">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+          <h3>Šta Nudimo?</h3>
+        </div>
+        <ul class="feature-list">
+          <li>
+            <i class="fa-solid fa-circle-check"></i>
+            <span><strong>Dinamično okruženje:</strong> Rad u timu koji te podržava u svakom koraku.</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle-check"></i>
+            <span><strong>Visoka zarada:</strong> Odlični uslovi i provizije bez gornje granice primanja.</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle-check"></i>
+            <span><strong>Fleksibilno radno vrijeme:</strong> Radi kada želiš i koliko želiš, sa bilo koje lokacije.</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle-check"></i>
+            <span><strong>Obuka i podrška:</strong> Kompletna tehnička obuka i mentorska podrška u radu.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- WHAT WE EXPECT -->
+      <div class="feature-card">
+        <div class="card-header">
+          <div class="card-icon icon-expect">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <h3>Šta Očekujemo?</h3>
+        </div>
+        <ul class="feature-list expect">
+          <li>
+            <i class="fa-solid fa-shield-halved"></i>
+            <span><strong>Odgovornost i pouzdanost:</strong> Poštovanje dogovora i profesionalan odnos prema klijentima.</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-comments"></i>
+            <span><strong>Komunikacijske vještine:</strong> Osnovno poznavanje komunikacije sa ljudima i volja za radom.</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span><strong>Volja za učenjem:</strong> Spremnost na usvajanje novih smjernica i unaprjeđenje poslovanja.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HOW TO START STEPS -->
+    <section class="steps-section fade">
+      <h2 class="section-title"><i class="fa-solid fa-list-check" style="color: var(--accent-light);"></i> Kako Započeti Saradnju?</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>Javi nam se</h4>
+          <p>Pošalji nam poruku putem WhatsApp-a ili email-a sa osnovnim informacijama o sebi.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>Kratka obuka</h4>
+          <p>Upoznat ćemo te sa našim sistemom radnih panela i smjernicama za uspješan rad.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>Započni zaradu</h4>
+          <p>Kreni sa radom i ostvaruj sigurne prihode uz našu stalnu podršku!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta fade">
+      <h2>📩 Zainteresovan za Saradnju?</h2>
+      <p>Javi nam se već danas, postani dio KrajinaLive IPTV tima i osiguraj svoj uspjeh!</p>
+      <a href="https://wa.me/387644064762" target="_blank" class="cta-btn">
+        <i class="fa-brands fa-whatsapp" style="font-size: 24px;"></i> Pridruži Se Odmah
+      </a>
+    </section>
+
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 KrajinaLive IPTV</p>
-    <p>Email: <a href="mailto:support@krajinalive.com">iptv202596@gmail.com</a> | WhatsApp: <a href="https://wa.me/387644064762">+387 64 4064762</a></p>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-tv"></i></div>
+          <div class="logo-text">KrajinaLive <span>IPTV</span></div>
+        </a>
+        <p>Vodeći provajder IPTV usluga sa više od 4 godine garancije kvaliteta, vrhunskom stabilnošću i besprijekornom podrškom.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Brzi Linkovi</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="cjenovnik.html">Cijene i akcije</a></li>
+          <li><a href="komentari.html">Komentari</a></li>
+          <li><a href="top15.html">Top 15 / Top 30</a></li>
+          <li><a href="onama.html">O nama</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Kontakt & Podrška</h4>
+        <ul class="footer-links">
+          <li><a href="tim.html">Postani dio tima</a></li>
+          <li><a href="kontakt.html">Kontakt strana</a></li>
+          <li><a href="placanje.html">Načini plaćanja</a></li>
+          <li><a href="mailto:iptv202596@gmail.com"><i class="fa-solid fa-envelope"></i> iptv202596@gmail.com</a></li>
+          <li><a href="https://wa.me/387644064762" target="_blank"><i class="fa-brands fa-whatsapp"></i> +387 64 4064762</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 KrajinaLive IPTV. Sva prava zadržana.</p>
+      <p>Nazad na <a href="index.html">Početnu stranicu</a></p>
+    </div>
   </footer>
 
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a class="wa-float" href="https://wa.me/387644064762" target="_blank" aria-label="Kontaktirajte nas na WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- JAVASCRIPT -->
   <script>
-    // Hamburger meni
-    function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show");
-    }
+    // MOBILE NAVIGATION TOGGLE
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
+
+    menuToggle.addEventListener('click', () => {
+      mainMenu.classList.toggle('show');
+      const icon = menuToggle.querySelector('i');
+      if (mainMenu.classList.contains('show')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // SCROLL ANIMATION (INTERSECTION OBSERVER)
+    const fadeElements = document.querySelectorAll('.fade');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    fadeElements.forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
