@@ -3,152 +3,1177 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kontakt - KrajinaLive IPTV</title>
+  <title>Kontaktirajte Nas - KrajinaLive IPTV | Podrška 24/7</title>
+  
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
-    body { margin:0; font-family:Arial,sans-serif; background:#0d1b2a; color:#e6e6e6; }
-
-    header { background:#1b263b; color:#fff; padding:25px; text-align:center; }
-    header p { color:#dce3f0; }
-
-    nav { background:#415a77; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; text-decoration:none; padding:12px 18px; display:block; }
-    nav a:hover { background:#e6f0ff; color:#1b263b; }
-
-    .menu-toggle { 
-      display:none; 
-      font-size:28px; 
-      background:#415a77; 
-      border:none; 
-      color:white; 
-      cursor:pointer; 
-      padding:12px 18px; 
-      width:100%;
-      text-align:right;
+    :root {
+      --bg-dark: #080c14;
+      --bg-surface: #0f172a;
+      --bg-card: rgba(22, 31, 48, 0.7);
+      --bg-card-hover: rgba(30, 41, 59, 0.9);
+      --accent-blue: #2563eb;
+      --accent-cyan: #06b6d4;
+      --accent-light: #38bdf8;
+      --accent-gold: #fbbf24;
+      --accent-green: #22c55e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-glow: rgba(56, 189, 248, 0.25);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --glow-shadow: 0 0 35px rgba(37, 99, 235, 0.25);
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    @media (max-width:768px) {
-      nav { display:none; flex-direction:column; text-align:center; }
-      nav.show { display:flex; }
-      .menu-toggle { display:block; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .container { max-width:1000px; margin:40px auto; padding:0 20px; }
-    h2 { text-align:center; color:#87b3ff; margin-bottom:20px; }
-    p { font-size:1.1em; line-height:1.8; text-align:center; }
-
-    .contact-info a { color:#87b3ff; text-decoration:none; }
-
-    .form-box { 
-      background:#1b263b; 
-      padding:25px; 
-      border-radius:10px; 
-      box-shadow:0 2px 12px rgba(0,0,0,0.4); 
-      max-width:650px; 
-      margin:40px auto; 
+    html {
+      scroll-behavior: smooth;
     }
-    input, textarea { 
-      margin:10px 0; 
-      padding:12px; 
-      border:1px solid #415a77; 
-      border-radius:6px; 
-      font-size:1em; 
-      background:#0d1b2a;
-      color:#e6e6e6;
-    }
-    button { 
-      background:#25d366; 
-      color:#fff; 
-      border:none; 
-      padding:12px; 
-      border-radius:6px; 
-      font-size:1.1em; 
-      cursor:pointer; 
-    }
-    button:hover { background:#1ebc57; }
 
-    footer { background:#1b263b; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-    footer a { color:#ffdd00; text-decoration:none; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(34, 197, 94, 0.06) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    h1, h2, h3, h4, .brand-title {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 50%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* NAVIGATION BAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-card);
+      padding: 15px 0;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--accent-cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 9px 15px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glow);
+    }
+
+    .nav-links a.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.2));
+      color: var(--accent-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: #fff;
+      font-size: 22px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .menu-toggle:hover {
+      background: var(--accent-blue);
+    }
+
+    /* HERO HEADER */
+    .hero {
+      position: relative;
+      padding: 80px 24px 60px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(8, 12, 20, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%),
+                  url('https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      border-bottom: 1px solid var(--border-card);
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(8, 12, 20, 0.6) 0%, var(--bg-dark) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 50px;
+      color: var(--accent-light);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* QUICK CONTACT CARDS */
+    .contact-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      box-shadow: var(--glow-shadow);
+    }
+
+    .contact-card:hover::before {
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    }
+
+    .card-icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      transition: var(--transition);
+    }
+
+    .icon-wa {
+      background: rgba(37, 211, 102, 0.15);
+      color: #25d366;
+      border: 1px solid rgba(37, 211, 102, 0.3);
+    }
+
+    .icon-mail {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .icon-time {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--accent-gold);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .icon-loc {
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--accent-light);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .contact-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .card-link {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-light);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .card-link:hover {
+      color: #fff;
+      gap: 12px;
+    }
+
+    /* FAST TOPIC SELECTOR */
+    .topic-selector {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .topic-selector h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .topic-selector p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .topic-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .topic-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: var(--text-main);
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topic-btn:hover, .topic-btn.active {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* FORMS SECTION GRID */
+    .forms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 36px;
+      margin-bottom: 70px;
+    }
+
+    .form-box {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+    }
+
+    .form-box:hover {
+      border-color: var(--border-glow);
+    }
+
+    .form-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+    }
+
+    .form-box.wa-box::before {
+      background: linear-gradient(90deg, #25d366, #128c7e);
+    }
+
+    .form-box.mail-box::before {
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    }
+
+    .form-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .form-header-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .wa-box .form-header-icon {
+      background: rgba(37, 211, 102, 0.15);
+      color: #25d366;
+    }
+
+    .mail-box .form-header-icon {
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--accent-light);
+    }
+
+    .form-header h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(8, 12, 20, 0.7);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      font-size: 15px;
+      color: #fff;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-light);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .form-control::placeholder {
+      color: #64748b;
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 18px;
+    }
+
+    select.form-control option {
+      background-color: var(--bg-surface);
+      color: #fff;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: var(--transition);
+      color: #fff;
+    }
+
+    .btn-wa {
+      background: #25d366;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-wa:hover {
+      background: #22c55e;
+      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-email {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-email:hover {
+      opacity: 0.95;
+      box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* FAQ ACCORDION SECTION */
+    .faq-section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #fff;
+      border-left: 4px solid var(--accent-cyan);
+      padding-left: 16px;
+    }
+
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .faq-item.active {
+      border-color: var(--border-glow);
+      background: var(--bg-card-hover);
+    }
+
+    .faq-question {
+      padding: 22px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-question i {
+      color: var(--accent-cyan);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+      padding: 0 28px;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding-bottom: 22px;
+      transition: max-height 0.35s ease-in-out;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #05080e;
+      border-top: 1px solid var(--border-card);
+      padding: 60px 24px 30px;
+      color: var(--text-muted);
+      margin-top: 80px;
+    }
+
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      margin-top: 15px;
+      font-size: 15px;
+      max-width: 360px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 15px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 14px;
+    }
+
+    .footer-bottom a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    /* FLOATING WHATSAPP BUTTON */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #25d366;
+      color: white;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      text-decoration: none;
+      z-index: 999;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    }
+
+    /* FADE ANIMATION */
+    .fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 73px;
+        left: 0;
+        right: 0;
+        background: rgba(8, 12, 20, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 24px;
+        gap: 12px;
+        border-bottom: 1px solid var(--border-card);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+      }
+
+      .nav-links.show {
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .forms-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Kontaktirajte KrajinaLive IPTV</h1>
-    <p>Tu smo da odgovorimo na sva vaša pitanja</p>
-  </header>
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-tv"></i></div>
+        <div class="logo-text">KrajinaLive <span>IPTV</span></div>
+      </a>
 
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Meni">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-  <nav id="mainMenu">
-    <a href="index.html">Početna</a>
-    <a href="cjenovnik.html">Cijene i akcije</a>
-    <a href="top15.html">Top 30</a>
-    <a href="komentari.html">Komentari</a>
-    <a href="tim.html">Postani dio tima</a>
-    <a href="onama.html">O nama</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="kako-da-gledas.html">Kako da gledaš</a>
-    <a href="aplikacije.html">Aplikacije</a>
+      <ul class="nav-links" id="mainMenu">
+        <li><a href="index.html">Početna</a></li>
+        <li><a href="cjenovnik.html">Cijene i akcije</a></li>
+        <li><a href="top15.html">Top 30</a></li>
+        <li><a href="komentari.html">Komentari</a></li>
+        <li><a href="tim.html">Postani dio tima</a></li>
+        <li><a href="onama.html">O nama</a></li>
+        <li><a href="kontakt.html" class="active">Kontakt</a></li>
+        <li><a href="placanje.html">Plaćanje</a></li>
+        <li><a href="kako-da-gledas.html">Kako da gledaš</a></li>
+        <li><a href="aplikacije.html">Aplikacije</a></li>
+      </ul>
+    </div>
   </nav>
+
+  <!-- HERO HEADER -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade">
+      <div class="badge-pill">
+        <i class="fa-solid fa-headset"></i> Podrška 24/7 Dostupna
+      </div>
+      <h1>Kontaktirajte KrajinaLive IPTV</h1>
+      <p>Tu smo da odgovorimo na sva vaša pitanja, pružimo tehničku podršku ili vam aktiviramo besplatan test u roku od nekoliko minuta.</p>
+    </div>
+  </header>
 
   <div class="container">
 
-    <h2>Kontakt podaci</h2>
-    <div class="contact-info">
-      <p>📧 Email: <a href="mailto:support@krajinalive.com">iptv202596@gmail.com</a></p>
-      <p>💬 WhatsApp: <a href="https://wa.me/387644064762">+387 64 4064762</a></p>
+    <!-- QUICK CONTACT CARDS -->
+    <div class="contact-cards-grid fade">
+      <!-- WHATSAPP CARD -->
+      <div class="contact-card">
+        <div class="card-icon-box icon-wa">
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <h3>WhatsApp Podrška</h3>
+        <p>Instant odgovor u roku od par minuta. Najbrži kanal za podršku i test.</p>
+        <a href="https://wa.me/387644064762" target="_blank" class="card-link">
+          +387 64 4064762 <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- EMAIL CARD -->
+      <div class="contact-card">
+        <div class="card-icon-box icon-mail">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3>Email Podrška</h3>
+        <p>Pošaljite nam detaljan upit ili dokumente kad god vam odgovara.</p>
+        <a href="mailto:iptv202596@gmail.com" class="card-link">
+          iptv202596@gmail.com <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- WORKING HOURS CARD -->
+      <div class="contact-card">
+        <div class="card-icon-box icon-time">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <h3>Radno Vrijeme</h3>
+        <p>Aktivacije i live tehnička podrška dostupne 00-24h, 365 dana u godini.</p>
+        <span class="card-link" style="color: var(--accent-gold);">
+          <i class="fa-solid fa-circle" style="font-size: 10px; color: var(--accent-green);"></i> Online i Aktivni
+        </span>
+      </div>
+
+      <!-- LOCATION CARD -->
+      <div class="contact-card">
+        <div class="card-icon-box icon-loc">
+          <i class="fa-solid fa-earth-europe"></i>
+        </div>
+        <h3>Pokrivenost Usluge</h3>
+        <p>Globalna pokrivenost: BiH, Balkan, Dijaspora (EU, SAD, Kanada, Australija).</p>
+        <span class="card-link" style="color: var(--accent-light);">
+          <i class="fa-solid fa-location-dot"></i> Unsko-Sanski Kanton & Dijaspora
+        </span>
+      </div>
     </div>
 
-    <!-- WhatsApp forma -->
-    <div class="form-box">
-      <h2>Pošaljite WhatsApp poruku</h2>
-      <form id="whatsappForm">
-        <input type="text" id="ime" placeholder="Vaše ime" required>
-        <input type="email" id="email" placeholder="Vaš email" required>
-        <textarea id="poruka" rows="6" placeholder="Vaša poruka" required></textarea>
-        <button type="submit">Pošalji na WhatsApp</button>
-      </form>
+    <!-- FAST TOPIC SELECTOR -->
+    <section class="topic-selector fade">
+      <h3>Šta želite učiniti? Kliknite za brzu pripremu poruke:</h3>
+      <p>Klikom na opciju ispod, forma će se automatski prilagoditi vašim potrebama!</p>
+      <div class="topic-buttons">
+        <button class="topic-btn" onclick="selectTopic('Besplatan Test (24h)', 'Pozdrav! Želio bih zatražiti besplatan test u trajanju od 24 sata.')">
+          🚀 Zatraži Besplatan Test (24h)
+        </button>
+        <button class="topic-btn" onclick="selectTopic('Tehnička Podrška', 'Pozdrav! Potrebna mi je tehnička podrška u vezi podešavanja IPTV kanala/aplikacije.')">
+          🛠️ Tehnička Podrška
+        </button>
+        <button class="topic-btn" onclick="selectTopic('Upit o Plaćanju', 'Pozdrav! Želim provjeriti načine plaćanja i aktivaciju paketa.')">
+          💳 Pitanje o Plaćanju
+        </button>
+        <button class="topic-btn" onclick="selectTopic('Postani Reseller / Partne', 'Pozdrav! Zainteresovan sam za reseller saradnju i prodaju IPTV usluga.')">
+          💼 Postani Dio Tima / Partner
+        </button>
+      </div>
+    </section>
+
+    <!-- FORMS SECTION -->
+    <div class="forms-grid fade">
+
+      <!-- WHATSAPP FORM -->
+      <div class="form-box wa-box">
+        <div class="form-header">
+          <div class="form-header-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <div>
+            <h2>Pošalji WhatsApp Poruku</h2>
+            <p style="font-size: 13px; color: var(--text-muted);">Instant komunikacija sa operaterom</p>
+          </div>
+        </div>
+
+        <form id="whatsappForm">
+          <div class="form-group">
+            <label for="wa_ime">Vaše Ime i Prezime *</label>
+            <input type="text" id="wa_ime" class="form-control" placeholder="npr. Marko Marković" required>
+          </div>
+
+          <div class="form-group">
+            <label for="wa_kontakt">Vaš Email ili Telefon</label>
+            <input type="text" id="wa_kontakt" class="form-control" placeholder="npr. email@gmail.com ili +387..." required>
+          </div>
+
+          <div class="form-group">
+            <label for="wa_tema">Tema Upita</label>
+            <select id="wa_tema" class="form-control">
+              <option value="Generalni Upit">Generalni Upit</option>
+              <option value="Besplatan Test (24h)">Besplatan Test (24h)</option>
+              <option value="Tehnička Podrška">Tehnička Podrška</option>
+              <option value="Upit o Plaćanju">Upit o Plaćanju</option>
+              <option value="Postani Dio Tima">Postani Dio Tima</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="wa_poruka">Vaša Poruka *</label>
+            <textarea id="wa_poruka" class="form-control" rows="5" placeholder="Napišite vaše pitanje ili uređaj na kojem želite gledati..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit btn-wa">
+            <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> Pošalji na WhatsApp
+          </button>
+        </form>
+      </div>
+
+      <!-- DIRECT EMAIL FORM -->
+      <div class="form-box mail-box">
+        <div class="form-header">
+          <div class="form-header-icon">
+            <i class="fa-solid fa-paper-plane"></i>
+          </div>
+          <div>
+            <h2>Pošalji Email Poruku</h2>
+            <p style="font-size: 13px; color: var(--text-muted);">Izravni kontakt putem e-pošte</p>
+          </div>
+        </div>
+
+        <form action="https://formsubmit.co/iptv202596@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="Novi Upit - KrajinaLive IPTV Kontakt Stranica">
+
+          <div class="form-group">
+            <label for="email_ime">Vaše Ime *</label>
+            <input type="text" id="email_ime" name="Ime" class="form-control" placeholder="Unesite vaše ime" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email_email">Vaš Email *</label>
+            <input type="email" id="email_email" name="Email" class="form-control" placeholder="vaš.email@domena.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email_tema">Naslov / Tema Poruke</label>
+            <input type="text" id="email_tema" name="Naslov" class="form-control" placeholder="Npr. Pitanje u vezi Smart TV-a">
+          </div>
+
+          <div class="form-group">
+            <label for="email_poruka">Sadržaj Poruke *</label>
+            <textarea id="email_poruka" name="Poruka" class="form-control" rows="5" placeholder="Opišite detaljno šta vas zanima..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit btn-email">
+            <i class="fa-solid fa-envelope"></i> Pošalji Email
+          </button>
+        </form>
+      </div>
+
     </div>
 
-    <!-- Email forma -->
-    <div class="form-box">
-      <h2>Pošaljite email</h2>
-      <form action="https://formsubmit.co/iptv202596@gmail.com" method="POST">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="Ime" placeholder="Vaše ime" required>
-        <input type="email" name="Email" placeholder="Vaš email" required>
-        <textarea name="Poruka" rows="6" placeholder="Vaša poruka" required></textarea>
-        <button type="submit">Pošalji email</button>
-      </form>
-    </div>
+    <!-- FAQ SECTION -->
+    <section class="faq-section fade">
+      <h2 class="section-title"><i class="fa-solid fa-circle-question" style="color: var(--accent-cyan);"></i> Često Postavljana Pitanja</h2>
+      
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Koliko brzo se aktivira besplatan test ili naručena pretplata?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Aktivacija je gotovo trenutna! Kada nam se javite putem WhatsApp-a, naš tim će vam u roku od 5 do 15 minuta poslati pristupne podatke i upute za podešavanje na vašem uređaju.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Na kojim sve uređajima mogu gledati KrajinaLive IPTV?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Naša usluga radi na svim pametnim uređajima: Smart TV (Samsung, LG, Android TV), Firestick, Android Box, MAG uređaji, iPhone/iPad, Android telefoni, Windows i Mac računari.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Šta ako mi je potrebna pomoć oko instalacije aplikacije?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Naša korisnička podrška stoji vam na raspolaganju korak po korak. Možemo vam poslati tačne upute za vaš model televizora ili uređaja i voditi vas kroz cijeli proces besplatno!
+          </div>
+        </div>
+      </div>
+    </section>
 
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 KrajinaLive IPTV</p>
-    <p>Email: <a href="mailto:support@krajinalive.com">iptv202596@gmail.com</a> |
-      WhatsApp: <a href="https://wa.me/387644064762">+387 64 4064762</a></p>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-tv"></i></div>
+          <div class="logo-text">KrajinaLive <span>IPTV</span></div>
+        </a>
+        <p>Vodeći provajder IPTV usluga sa više od 4 godine garancije kvaliteta, vrhunskom stabilnošću bez trzanja i podrškom 24/7.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Brzi Linkovi</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="cjenovnik.html">Cijene i akcije</a></li>
+          <li><a href="top15.html">Top 30 Kanala</a></li>
+          <li><a href="komentari.html">Utisci Korisnika</a></li>
+          <li><a href="onama.html">O Nama</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Kontakt & Podrška</h4>
+        <ul class="footer-links">
+          <li><a href="tim.html">Postani dio tima</a></li>
+          <li><a href="kontakt.html">Kontakt strana</a></li>
+          <li><a href="placanje.html">Načini plaćanja</a></li>
+          <li><a href="mailto:iptv202596@gmail.com"><i class="fa-solid fa-envelope"></i> iptv202596@gmail.com</a></li>
+          <li><a href="https://wa.me/387644064762" target="_blank"><i class="fa-brands fa-whatsapp"></i> +387 64 4064762</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 KrajinaLive IPTV. Sva prava zadržana.</p>
+      <p>Email: <a href="mailto:iptv202596@gmail.com">iptv202596@gmail.com</a> | WhatsApp: <a href="https://wa.me/387644064762">+387 64 4064762</a></p>
+    </div>
   </footer>
 
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a class="wa-float" href="https://wa.me/387644064762" target="_blank" aria-label="Kontaktirajte nas na WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- JAVASCRIPT -->
   <script>
+    // MOBILE NAVIGATION TOGGLE
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
 
-    function toggleMenu() {
-      document.getElementById("mainMenu").classList.toggle("show");
-    }
+    menuToggle.addEventListener('click', () => {
+      mainMenu.classList.toggle('show');
+      const icon = menuToggle.querySelector('i');
+      if (mainMenu.classList.contains('show')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      }
+    });
 
+    // WHATSAPP FORM SUBMIT HANDLER
     document.getElementById("whatsappForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      let ime = document.getElementById("ime").value;
-      let email = document.getElementById("email").value;
-      let poruka = document.getElementById("poruka").value;
+      
+      let ime = document.getElementById("wa_ime").value.trim();
+      let kontakt = document.getElementById("wa_kontakt").value.trim();
+      let tema = document.getElementById("wa_tema").value;
+      let poruka = document.getElementById("wa_poruka").value.trim();
 
       let broj = "387644064762"; 
-      let tekst = `👤 Ime: ${ime}%0A📧 Email: ${email}%0A💬 Poruka: ${poruka}`;
+      let tekst = `👋 *Novi upit sa KrajinaLive IPTV sajta*%0A%0A` +
+                  `👤 *Ime:* ${encodeURIComponent(ime)}%0A` +
+                  `📧 *Kontakt:* ${encodeURIComponent(kontakt)}%0A` +
+                  `📌 *Tema:* ${encodeURIComponent(tema)}%0A` +
+                  `💬 *Poruka:* ${encodeURIComponent(poruka)}`;
+
       let link = `https://wa.me/${broj}?text=${tekst}`;
       window.open(link, "_blank");
     });
 
+    // FAST TOPIC SELECTOR FUNCTION
+    function selectTopic(topicName, defaultMessage) {
+      const temaSelect = document.getElementById("wa_tema");
+      const porukaArea = document.getElementById("wa_poruka");
+
+      // Set select option
+      for (let option of temaSelect.options) {
+        if (option.value.toLowerCase().includes(topicName.toLowerCase())) {
+          temaSelect.value = option.value;
+          break;
+        }
+      }
+
+      // Set message text
+      porukaArea.value = defaultMessage;
+
+      // Highlight form
+      document.querySelector(".wa-box").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // FAQ ACCORDION HANDLER
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+
+    // SCROLL ANIMATION (INTERSECTION OBSERVER)
+    const fadeElements = document.querySelectorAll('.fade');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    fadeElements.forEach(el => observer.observe(el));
   </script>
 
 </body>
