@@ -1,200 +1,560 @@
 <!DOCTYPE html>
-<html lang="bs">
+<html lang="bs" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kako da gledaš | KrajinaLive IPTV</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kako da gledaš | KrajinaLive IPTV - Najbolji IPTV Servis na Svijetu</title>
+  <meta name="description" content="Saznajte kako gledati KrajinaLive IPTV na Smart TV-u, računaru, mobilnom telefonu, tabletu ili streaming uređajima (Fire Stick, Android Box). Brza i jednostavna instalacija." />
 
-  <!-- GLOBAL STYLE (ujednačeno sa ostalim stranicama) -->
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom CSS / Theme Setup -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#080c14',
+              card: '#0f172a',
+              accent: '#00f0ff',
+              purple: '#7000ff',
+              gold: '#ffb700',
+              blue: '#0072ff'
+            }
+          },
+          boxShadow: {
+            'glow': '0 0 25px -5px rgba(0, 240, 255, 0.4)',
+            'glow-purple': '0 0 25px -5px rgba(112, 0, 255, 0.4)',
+            'glow-lg': '0 0 50px -10px rgba(0, 240, 255, 0.3)',
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #001f3f;
-      color: #fff;
+      background-color: #080c14;
+      color: #f8fafc;
+      font-family: 'Outfit', sans-serif;
       overflow-x: hidden;
     }
 
-    /* Header */
-    header {
-      background: rgba(0, 64, 128, 0.9);
-      padding: 20px;
-      text-align: center;
-      position: relative;
-      backdrop-filter: blur(8px);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: 1px;
+    /* Glassmorphism Panel */
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .menu-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 28px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: #ffcc00;
+    .glass-panel-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-panel-hover:hover {
+      transform: translateY(-6px);
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(0, 240, 255, 0.3);
+      box-shadow: 0 12px 30px -10px rgba(0, 240, 255, 0.25);
     }
 
-    /* Overlay meni */
-    .overlay {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 1000;
-      top: 0; left: 0;
-      background: rgba(0, 64, 128, 0.98);
-      backdrop-filter: blur(8px);
-      overflow-x: hidden;
-      transition: 0.4s;
-      padding-top: 60px;
-    }
-    .overlay a {
-      display: block;
-      text-decoration: none;
-      font-size: 1.5em;
-      color: #fff;
-      padding: 15px;
-      text-align: center;
-      transition: 0.3s;
-    }
-    .overlay a:hover {
-      background: rgba(255, 204, 0, 0.2);
-      color: #ffcc00;
-    }
-    .overlay .closebtn {
-      position: absolute;
-      top: 15px;
-      right: 30px;
-      font-size: 40px;
-      color: #fff;
-      cursor: pointer;
+    /* Text Gradient */
+    .text-gradient {
+      background: linear-gradient(135deg, #00f0ff 0%, #0072ff 50%, #7000ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Sadržaj */
-    .content {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
-      position: relative;
-      z-index: 5;
-    }
-
-    .content p {
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 30px;
-      text-align: center;
-      opacity: 0.9;
-    }
-
-    .device {
-      background: rgba(0, 50, 100, 0.65);
-      margin-bottom: 20px;
-      padding: 25px;
-      border-radius: 12px;
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: 0.3s;
-    }
-    .device:hover {
-      transform: translateY(-5px);
-      background: rgba(0, 70, 150, 0.8);
-    }
-    .device h2 {
-      margin: 0 0 10px;
-      color: #ffcc00;
-      font-size: 22px;
-    }
-
-    /* Footer */
-    footer {
-      background: rgba(0, 64, 128, 0.9);
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-      font-size: 14px;
-      backdrop-filter: blur(8px);
-    }
-    footer a {
-      color: #ffcc00;
-      text-decoration: none;
+    .text-gradient-gold {
+      background: linear-gradient(135deg, #fff7ad 0%, #ffa900 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     /* Canvas pozadina */
     #tech-bg {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Pulse Animacija */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    /* Overlay Meni Animacija */
+    .overlay-menu {
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
   </style>
 </head>
-<body>
+<body class="relative min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-black">
 
-  <!-- Canvas background -->
+  <!-- Interactive Tech Canvas Background -->
   <canvas id="tech-bg"></canvas>
 
-  <header>
-    <h1>Kako da gledaš KrajinaLive IPTV</h1>
-    <button class="menu-toggle" onclick="openNav()">☰</button>
-  </header>
+  <!-- Ambient Glow Effects -->
+  <div class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" style="animation-delay: 2s;"></div>
 
-  <!-- Navigacija -->
-  <div id="myNav" class="overlay">
-    <span class="closebtn" onclick="closeNav()">×</span>
-    <a href="index.html">🏠 Početna</a>
-    <a href="cjenovnik.html">💰 Cijene i akcije</a>
-    <a href="top15.html">🎬 Top 15</a>
-    <a href="komentari.html">💬 Komentari</a>
-    <a href="tim.html">👥 Postani dio tima</a>
-    <a href="onama.html">ℹ️ O nama</a>
-    <a href="kontakt.html">📞 Kontakt</a>
-    <a href="placanje.html">💳 Plaćanje</a>
-    <a href="kako-da-gledas.html">📺 Kako da gledaš</a>
-    <a href="aplikacije.html">📱 Aplikacije</a>
+  <!-- STICKY TOP BANNER -->
+  <div class="relative z-50 bg-gradient-to-r from-purple-900 via-indigo-900 to-cyan-900 border-b border-cyan-500/20 text-xs md:text-sm py-2 px-4 text-center font-medium flex items-center justify-center gap-3">
+    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold uppercase text-[10px] tracking-wider border border-cyan-500/30">
+      <i class="fa-solid fa-bolt text-yellow-400"></i> Brza Aktivacija
+    </span>
+    <span class="text-slate-200">Isprobajte potpuno besplatno na 24 sata bez ikakvih obaveza!</span>
+    <button onclick="openTestModal()" class="ml-2 underline hover:text-cyan-300 font-bold transition">Zatraži test <i class="fa-solid fa-arrow-right text-xs"></i></button>
   </div>
 
-  <main class="content">
-    <p>KrajinaLive IPTV možeš gledati na različitim uređajima — izaberi način koji ti najviše odgovara.</p>
+  <!-- HEADER / NAVIGACIJA -->
+  <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 p-[2px] shadow-glow transition group-hover:scale-105">
+          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+            <i class="fa-solid fa-tv text-cyan-400 text-lg"></i>
+          </div>
+        </div>
+        <div>
+          <span class="text-2xl font-black tracking-tight text-white group-hover:text-cyan-400 transition">KRAJINA<span class="text-cyan-400">LIVE</span></span>
+          <span class="block text-[9px] tracking-[0.2em] uppercase font-semibold text-slate-400 -mt-1">IPTV WORLD CLASS</span>
+        </div>
+      </a>
 
-    <div class="device">
-      <h2>📺 Smart TV</h2>
-      <p>Instaliraj IPTV aplikaciju, unesi podatke i gledaj odmah — bez dodatne opreme.</p>
+      <!-- Desktop Navigacija -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+        <a href="index.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition"><i class="fa-solid fa-house mr-1.5 text-xs text-slate-400"></i> Početna</a>
+        <a href="cjenovnik.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition"><i class="fa-solid fa-tags mr-1.5 text-xs text-slate-400"></i> Cijene i akcije</a>
+        <a href="kako-da-gledas.html" class="px-3 py-2 text-sm font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 rounded-lg transition shadow-sm"><i class="fa-solid fa-desktop mr-1.5 text-xs text-cyan-400"></i> Kako da gledaš</a>
+        <a href="aplikacije.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition"><i class="fa-solid fa-mobile-screen-button mr-1.5 text-xs text-slate-400"></i> Aplikacije</a>
+        <a href="top15.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition"><i class="fa-solid fa-film mr-1.5 text-xs text-slate-400"></i> Top 15</a>
+        <a href="komentari.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition"><i class="fa-solid fa-comments mr-1.5 text-xs text-slate-400"></i> Komentari</a>
+        <a href="tim.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition"><i class="fa-solid fa-users mr-1.5 text-xs text-slate-400"></i> Tim</a>
+        <a href="onama.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition"><i class="fa-solid fa-circle-info mr-1.5 text-xs text-slate-400"></i> O nama</a>
+        <a href="kontakt.html" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition"><i class="fa-solid fa-headset mr-1.5 text-xs text-slate-400"></i> Kontakt</a>
+      </nav>
+
+      <!-- Desktop Action Buttons -->
+      <div class="hidden lg:flex items-center gap-3">
+        <button onclick="openTestModal()" class="px-4 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 hover:shadow-glow hover:scale-105 transition active:scale-95 flex items-center gap-2">
+          <i class="fa-solid fa-play"></i> Test 24h
+        </button>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button onclick="openNav()" class="lg:hidden p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 text-cyan-400 hover:text-white hover:bg-slate-700 transition">
+        <i class="fa-solid fa-bars-staggered text-xl"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- OVERLAY MOBILNI MENI -->
+  <div id="myNav" class="overlay-menu fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl opacity-0 pointer-events-none transition-all duration-300 flex flex-col justify-between p-6">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500 p-[2px]">
+            <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+              <i class="fa-solid fa-tv text-cyan-400"></i>
+            </div>
+          </div>
+          <span class="text-xl font-black text-white">KRAJINA<span class="text-cyan-400">LIVE</span></span>
+        </div>
+        <button onclick="closeNav()" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <nav class="mt-6 flex flex-col gap-2">
+        <a href="index.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-house w-6 text-cyan-400"></i> 🏠 Početna</a>
+        <a href="cjenovnik.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-tags w-6 text-cyan-400"></i> 💰 Cijene i akcije</a>
+        <a href="kako-da-gledas.html" class="p-3.5 rounded-xl font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 flex items-center gap-3"><i class="fa-solid fa-desktop w-6 text-cyan-400"></i> 📺 Kako da gledaš</a>
+        <a href="aplikacije.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-mobile-screen-button w-6 text-cyan-400"></i> 📱 Aplikacije</a>
+        <a href="top15.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-film w-6 text-cyan-400"></i> 🎬 Top 15</a>
+        <a href="komentari.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-comments w-6 text-cyan-400"></i> 💬 Komentari</a>
+        <a href="tim.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-users w-6 text-cyan-400"></i> 👥 Postani dio tima</a>
+        <a href="onama.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-circle-info w-6 text-cyan-400"></i> ℹ️ O nama</a>
+        <a href="kontakt.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-headset w-6 text-cyan-400"></i> 📞 Kontakt</a>
+        <a href="placanje.html" class="p-3.5 rounded-xl font-semibold text-slate-200 hover:bg-slate-800/80 hover:text-cyan-400 transition flex items-center gap-3"><i class="fa-solid fa-credit-card w-6 text-cyan-400"></i> 💳 Plaćanje</a>
+      </nav>
     </div>
 
-    <div class="device">
-      <h2>💻 Kompjuter ili Laptop</h2>
-      <p>Gledaj direktno kroz browser ili putem IPTV playera za PC.</p>
+    <div class="pt-6 border-t border-slate-800 flex flex-col gap-3">
+      <button onclick="closeNav(); openTestModal();" class="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 text-center shadow-glow">
+        <i class="fa-solid fa-bolt mr-2"></i> Besplatan Test (24h)
+      </button>
+      <a href="https://wa.me/387644064762" target="_blank" class="w-full py-3.5 rounded-xl font-bold bg-emerald-600 hover:bg-emerald-500 text-white text-center flex items-center justify-center gap-2">
+        <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp Podrška
+      </a>
+    </div>
+  </div>
+
+  <!-- GLAVNI SADRŽAJ -->
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    
+    <!-- HERO SEKCIJA -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-cyan-500/30 text-cyan-400 text-sm font-semibold mb-6 shadow-glow">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i> Jednostavna Instalacija u 3 Koraka
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6">
+        Kako da gledaš <span class="text-gradient">KrajinaLive IPTV</span>
+      </h1>
+      <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+        KrajinaLive IPTV možeš gledati na praktično bilo kom uređaju! Izaberi svoju platformu ispod i saznaj kako postaviti kanal u samo nekoliko minuta.
+      </p>
     </div>
 
-    <div class="device">
-      <h2>📱 Telefon ili Tablet</h2>
-      <p>Preuzmi aplikaciju sa Google Play ili App Store i gledaj bilo gdje.</p>
+    <!-- MREŽA UREĐAJA (DEVICES GRID) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+      
+      <!-- 1. SMART TV -->
+      <div class="glass-panel glass-panel-hover rounded-3xl p-8 relative overflow-hidden group border border-slate-800">
+        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition duration-500"></div>
+        
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-3xl shadow-glow">
+            <i class="fa-solid fa-tv"></i>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-slate-800 text-xs font-bold text-slate-300 border border-slate-700">Samsung / LG / Android TV</span>
+        </div>
+
+        <h2 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition">📺 Smart TV</h2>
+        <p class="text-slate-300 leading-relaxed mb-6">
+          Instaliraj neku od podržanih IPTV aplikacija direktno iz TV prodavnice (App Store/Google Play), unesi dobijeni M3U link ili Xtream podatke i uživaj u vrhunskoj slici bez dodatne opreme.
+        </p>
+
+        <div class="space-y-3 pt-4 border-t border-slate-800/80">
+          <p class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-2">Preporučene Aplikacije:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">Smart IPTV</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">Net IPTV</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">SET IPTV</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">IPTV Smarters Pro</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">SS IPTV</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. KOMPJUTER ILI LAPTOP -->
+      <div class="glass-panel glass-panel-hover rounded-3xl p-8 relative overflow-hidden group border border-slate-800">
+        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition duration-500"></div>
+
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-500/20 to-indigo-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-3xl shadow-glow-purple">
+            <i class="fa-solid fa-laptop"></i>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-slate-800 text-xs font-bold text-slate-300 border border-slate-700">Windows / macOS / Linux</span>
+        </div>
+
+        <h2 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition">💻 Kompjuter ili Laptop</h2>
+        <p class="text-slate-300 leading-relaxed mb-6">
+          Gledaj omiljene kanale i video na zahtjev direktno kroz tvoj web preglednik (Web Player) ili putem besplatnih besprekornih plejera kao što su VLC Player i IPTV Smarters za PC.
+        </p>
+
+        <div class="space-y-3 pt-4 border-t border-slate-800/80">
+          <p class="text-xs font-bold uppercase tracking-wider text-purple-400 mb-2">Preporučeni Programi:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">VLC Media Player</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">IPTV Smarters Desktop</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">Kodi</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">Web Browser Player</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. TELEFON ILI TABLET -->
+      <div class="glass-panel glass-panel-hover rounded-3xl p-8 relative overflow-hidden group border border-slate-800">
+        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition duration-500"></div>
+
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-3xl">
+            <i class="fa-solid fa-mobile-screen"></i>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-slate-800 text-xs font-bold text-slate-300 border border-slate-700">Android / iOS (iPhone/iPad)</span>
+        </div>
+
+        <h2 class="text-2xl font-bold text-white mb-3 group-hover:text-emerald-400 transition">📱 Telefon ili Tablet</h2>
+        <p class="text-slate-300 leading-relaxed mb-6">
+          Preuzmi neku od vrhunskih besplatnih aplikacija sa Google Play ili App Store prodavnice, unesi podatke za prijavu i nosi svoju televiziju svuda sa sobom u džepu.
+        </p>
+
+        <div class="space-y-3 pt-4 border-t border-slate-800/80">
+          <p class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">Preporučene Aplikacije:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">IPTV Smarters Pro</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">XCIPTV</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">GSE Smart IPTV</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">Xtream Player</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. STREAMING UREĐAJI -->
+      <div class="glass-panel glass-panel-hover rounded-3xl p-8 relative overflow-hidden group border border-slate-800">
+        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition duration-500"></div>
+
+        <div class="flex items-start justify-between mb-6">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500/20 to-yellow-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-3xl">
+            <i class="fa-solid fa-box-open"></i>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-slate-800 text-xs font-bold text-slate-300 border border-slate-700">FireStick / Android Box / MAG</span>
+        </div>
+
+        <h2 class="text-2xl font-bold text-white mb-3 group-hover:text-amber-400 transition">▶️ Streaming Uređaji</h2>
+        <p class="text-slate-300 leading-relaxed mb-6">
+          Stariji TV pretvori u naj moderniji Smart TV! Potpuno kompatibilno sa Amazon Fire TV Stick, Chromecast, Nvidia Shield, Android TV Box i MAG uređajima.
+        </p>
+
+        <div class="space-y-3 pt-4 border-t border-slate-800/80">
+          <p class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Preporučeni Aplikativni Plejeri:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">TiviMate (Najbolji za FireStick)</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">XCIPTV</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">Stalker Portal (MAG)</span>
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-xs font-medium text-slate-200">Downloader App</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="device">
-      <h2>▶️ Streaming uređaji</h2>
-      <p>Kompatibilno sa Fire Stick, Chromecast, Nvidia Shield i Android TV Box uređajima.</p>
+    <!-- KORACI PODEŠAVANJA / SETUP PROCESS -->
+    <div class="glass-panel rounded-3xl p-8 md:p-12 mb-20 border border-slate-800 relative">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl font-extrabold text-white mb-3">Kako funkcioniše aktivacija?</h2>
+        <p class="text-slate-400">Postupak je brz i jednostavan — ne trebate imati nikakvo tehničko znanje!</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center text-center relative">
+          <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 font-black text-2xl flex items-center justify-center mb-6 shadow-glow">
+            01
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Zatražite Test ili Pretplatu</h3>
+          <p class="text-sm text-slate-400">Kontaktirajte nas putem WhatsApp-a ili popunite formu na sajtu da dobijete besplatne test podatke.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center text-center relative">
+          <div class="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-500/40 text-purple-400 font-black text-2xl flex items-center justify-center mb-6 shadow-glow-purple">
+            02
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Instalirajte Aplikaciju</h3>
+          <p class="text-sm text-slate-400">Naš tim će vam preporučiti najbolju aplikaciju za vaš uređaj i poslati vam detaljna uputstva.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center text-center relative">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-black text-2xl flex items-center justify-center mb-6">
+            03
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Unesite Podatke i Gledajte</h3>
+          <p class="text-sm text-slate-400">Unesite dobijeni M3U link ili korisničko ime i lozinku. Kanali se učitavaju trenutno!</p>
+        </div>
+      </div>
     </div>
+
+    <!-- CTA BANNER / SEKCIONALNI POZIV NA AKCIJU -->
+    <div class="relative rounded-3xl p-8 md:p-12 overflow-hidden bg-gradient-to-r from-cyan-900/60 via-indigo-900/60 to-purple-900/60 border border-cyan-500/30 text-center shadow-glow-lg">
+      <div class="relative z-10 max-w-2xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Trebate pomoć pri instalaciji?</h2>
+        <p class="text-slate-300 mb-8 text-base md:text-lg">
+          Naš tehnički tim je dostupan 24/7! Nudimo besplatnu asistenciju pri podešavanju na bilo kom vašem uređaju.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onclick="openTestModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-slate-950 bg-gradient-to-r from-cyan-400 to-emerald-400 hover:shadow-glow hover:scale-105 transition active:scale-95">
+            <i class="fa-solid fa-bolt mr-2"></i> Besplatan Test (24h)
+          </button>
+          <a href="https://wa.me/387644064762" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-emerald-600/90 hover:bg-emerald-500 border border-emerald-500/30 transition flex items-center justify-center gap-2">
+            <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp: +387 64 4064762
+          </a>
+        </div>
+      </div>
+    </div>
+
   </main>
 
-  <footer>
-    © 2025 KrajinaLive IPTV | Kontakt:
-    <a href="https://wa.me/387644064762">WhatsApp: +387 64 4064762</a> |
-    </footer>
+  <!-- FOOTER -->
+  <footer class="relative z-10 glass-panel border-t border-slate-800 mt-20 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        
+        <!-- Col 1: About -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500 p-[2px]">
+              <div class="w-full h-full bg-slate-950 rounded-[6px] flex items-center justify-center">
+                <i class="fa-solid fa-tv text-cyan-400 text-sm"></i>
+              </div>
+            </div>
+            <span class="text-xl font-black text-white">KRAJINA<span class="text-cyan-400">LIVE</span></span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Vodeći IPTV provajder u regiji i svijetu. Preko 15.000 TV kanala i obimna VOD videoteka bez trzanja i kočenja.
+          </p>
+        </div>
 
-  <!-- JavaScript -->
+        <!-- Col 2: Navigation -->
+        <div>
+          <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Brza Navigacija</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="index.html" class="hover:text-cyan-400 transition">Početna</a></li>
+            <li><a href="cjenovnik.html" class="hover:text-cyan-400 transition">Cijene i akcije</a></li>
+            <li><a href="kako-da-gledas.html" class="hover:text-cyan-400 transition">Kako da gledaš</a></li>
+            <li><a href="aplikacije.html" class="hover:text-cyan-400 transition">Aplikacije za IPTV</a></li>
+            <li><a href="top15.html" class="hover:text-cyan-400 transition">Top 15 Kanala</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Support & Info -->
+        <div>
+          <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Informacije</h4>
+          <ul class="space-y-2.5 text-sm text-slate-400">
+            <li><a href="komentari.html" class="hover:text-cyan-400 transition">Komentari korisnika</a></li>
+            <li><a href="tim.html" class="hover:text-cyan-400 transition">Postani dio tima</a></li>
+            <li><a href="onama.html" class="hover:text-cyan-400 transition">O nama</a></li>
+            <li><a href="placanje.html" class="hover:text-cyan-400 transition">Načini plaćanja</a></li>
+            <li><a href="kontakt.html" class="hover:text-cyan-400 transition">Kontakt podrška</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact -->
+        <div>
+          <h4 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">Direktan Kontakt</h4>
+          <p class="text-sm text-slate-400 mb-3">Imate pitanja ili trebate podršku?</p>
+          <a href="https://wa.me/387644064762" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 transition font-bold text-sm">
+            <i class="fa-brands fa-whatsapp text-lg"></i> +387 64 4064762
+          </a>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p>© 2025 KrajinaLive IPTV. Sva prava zadržana. Svjetski broj 1 IPTV servis.</p>
+        <div class="flex gap-4">
+          <a href="https://wa.me/387644064762" class="hover:text-cyan-400 transition">WhatsApp Podrška</a>
+          <span>•</span>
+          <a href="kontakt.html" class="hover:text-cyan-400 transition">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING QUICK CONTACT BUTTONS -->
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+    <a href="https://wa.me/387644064762" target="_blank" title="Kontaktiraj na WhatsApp" class="w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl shadow-lg hover:scale-110 active:scale-95 transition">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="viber://chat?number=%2B387644064762" title="Kontaktiraj na Viber" class="w-14 h-14 rounded-full bg-purple-600 text-white flex items-center justify-center text-2xl shadow-lg hover:scale-110 active:scale-95 transition">
+      <i class="fa-brands fa-viber"></i>
+    </a>
+  </div>
+
+  <!-- MODAL: BESPLATAN TEST 24H -->
+  <div id="testModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center p-4">
+    <div class="glass-panel rounded-3xl max-w-lg w-full p-6 md:p-8 border border-cyan-500/30 relative shadow-glow-lg transform scale-95 transition-all duration-300" id="testModalCard">
+      <button onclick="closeTestModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 mx-auto flex items-center justify-center text-2xl mb-3 shadow-glow">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-white">Besplatan Test (24 Sata)</h3>
+        <p class="text-xs text-slate-400 mt-1">Popunite formu i testni podaci stižu ubrzo na vaš WhatsApp ili e-mail.</p>
+      </div>
+
+      <form onsubmit="handleTestSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Vaše Ime / Nadimak</label>
+          <input type="text" required placeholder="npr. Marko" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 transition text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">WhatsApp / Broj telefona ili E-mail</label>
+          <input type="text" required placeholder="+387 6X XXX XXX ili email@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 transition text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Koji uređaj koristite?</label>
+          <select class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 transition text-sm">
+            <option>Smart TV (Samsung / LG / Android)</option>
+            <option>Fire Stick / Android TV Box</option>
+            <option>Mobilni Telefon / Tablet</option>
+            <option>Kompjuter / Laptop</option>
+            <option>MAG / Drugi uređaj</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-4 rounded-xl font-black bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 shadow-glow hover:scale-[1.02] active:scale-95 transition mt-2">
+          <i class="fa-solid fa-paper-plane mr-2"></i> Pošalji Zahtjev za Test
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT KOD -->
   <script>
-    function openNav() { document.getElementById("myNav").style.width = "100%"; }
-    function closeNav() { document.getElementById("myNav").style.width = "0%"; }
+    /* Overlay Navigacija Funkcije */
+    function openNav() {
+      const nav = document.getElementById("myNav");
+      nav.classList.remove("opacity-0", "pointer-events-none");
+      nav.classList.add("opacity-100", "pointer-events-auto");
+    }
+    function closeNav() {
+      const nav = document.getElementById("myNav");
+      nav.classList.remove("opacity-100", "pointer-events-auto");
+      nav.classList.add("opacity-0", "pointer-events-none");
+    }
 
-    /* Tech pozadina */
+    /* Test Modal Funkcije */
+    function openTestModal() {
+      const modal = document.getElementById("testModal");
+      const card = document.getElementById("testModalCard");
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      modal.classList.add("opacity-100", "pointer-events-auto");
+      card.classList.remove("scale-95");
+      card.classList.add("scale-100");
+    }
+    function closeTestModal() {
+      const modal = document.getElementById("testModal");
+      const card = document.getElementById("testModalCard");
+      modal.classList.remove("opacity-100", "pointer-events-auto");
+      modal.classList.add("opacity-0", "pointer-events-none");
+      card.classList.remove("scale-100");
+      card.classList.add("scale-95");
+    }
+    function handleTestSubmit(e) {
+      e.preventDefault();
+      alert("Hvala vam! Vaš zahtjev za test od 24h je primljen. Tehnička podrška će vas kontaktirati uskoro.");
+      closeTestModal();
+    }
+
+    /* Interactive Tech Particles Canvas Background */
     const canvas = document.getElementById("tech-bg");
     const ctx = canvas.getContext("2d");
     let w = canvas.width = window.innerWidth;
@@ -205,18 +565,17 @@
       h = canvas.height = window.innerHeight;
     };
 
-    const particles = Array.from({ length: 70 }, () => ({
+    const particles = Array.from({ length: 60 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.7,
-      vy: (Math.random() - 0.5) * 0.7
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      radius: Math.random() * 2 + 1
     }));
 
     function animate() {
       ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = "rgba(0,150,255,0.7)";
-      ctx.strokeStyle = "rgba(0,150,255,0.15)";
-
+      
       particles.forEach((p, i) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -226,16 +585,18 @@
         if (p.y < 0) p.y = h;
         if (p.y > h) p.y = 0;
 
+        ctx.fillStyle = "rgba(0, 240, 255, 0.6)";
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
           let dx = p.x - particles[j].x;
           let dy = p.y - particles[j].y;
           let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.lineWidth = 1;
+          if (dist < 130) {
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 * (1 - dist / 130)})`;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(particles[j].x, particles[j].y);
