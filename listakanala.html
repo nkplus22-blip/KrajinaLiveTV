@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="bs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista Kanala | KrajinaLive IPTV</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome za ikonice -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Stilovi za pretragu i prikaz kanala */
+    .search-box-wrapper {
+      position: relative;
+      max-width: 650px;
+      margin: 0 auto 25px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 18px 24px 18px 55px;
+      font-size: 1.1rem;
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid var(--border-glow);
+      border-radius: var(--radius-xl);
+      color: #fff;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-cyan);
+      font-size: 1.2rem;
+    }
+
+    .stats-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    .stats-badge span {
+      color: var(--accent-light);
+      font-weight: 700;
+    }
+
+    .country-group {
+      margin-bottom: 35px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      backdrop-filter: blur(16px);
+    }
+
+    .country-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .country-title {
+      font-size: 1.35rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .country-count {
+      background: rgba(37, 99, 235, 0.2);
+      color: var(--accent-light);
+      border: 1px solid var(--border-glow);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .channel-item {
+      background: rgba(8, 12, 20, 0.6);
+      border: 1px solid var(--border-card);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      transition: var(--transition);
+    }
+
+    .channel-item:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: var(--border-glow);
+      transform: translateY(-2px);
+    }
+
+    .channel-item i {
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      display: none;
+    }
+
+    #loader {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255,255,255,0.1);
+      border-top-color: var(--accent-cyan);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tech Pozadina -->
+  <canvas id="tech-bg"></canvas>
+
+  <!-- Header -->
+  <header>
+    <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+      <a href="index.html" class="logo" style="text-decoration: none; color: #fff; font-size: 1.5rem; font-weight: 800;">
+        KrajinaLive <span style="color: var(--accent-cyan);">IPTV</span>
+      </a>
+      <button class="menu-toggle" onclick="openNav()"><i class="fa-solid fa-bars"></i> Meni</button>
+    </div>
+  </header>
+
+  <!-- Overlay Navigacija -->
+  <div id="myNav" class="overlay">
+    <span class="closebtn" onclick="closeNav()">&times;</span>
+    <a href="index.html">Početna</a>
+    <a href="listakanala.html" class="active">Lista Kanala</a>
+    <a href="placanje.html">Plaćanje / Cjenovnik</a>
+    <a href="tim.html">O Nama / Tim</a>
+    <a href="kontakt.html">Kontakt</a>
+  </div>
+
+  <!-- Hero Sekcija -->
+  <section class="hero">
+    <h1>Pregled Dostupnih Kanala</h1>
+    <p>Pretražite našu kompletnu ponudu TV kanala razvrstanih po državama i kategorijama.</p>
+  </section>
+
+  <!-- Glavni Sadržaj -->
+  <div class="content" style="max-width: 1200px; padding-top: 0;">
+    
+    <!-- Polje za Pretragu -->
+    <div class="search-box-wrapper">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" id="searchInput" class="search-input" placeholder="Ukucajte naziv kanala (npr. Arena, HBO, HRT, Pink)..." onkeyup="filterChannels()" />
+    </div>
+
+    <!-- Brojač Kanala -->
+    <div style="text-align: center;">
+      <div class="stats-badge">
+         Ukupno učitano: <span id="totalChannels">0</span> kanala u <span id="totalGroups">0</span> kategorija
+      </div>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader">
+      <div class="spinner"></div>
+      <p style="color: var(--text-muted);">Učitavanje M3U liste kanala...</p>
+    </div>
+
+    <!-- Nema rezultata -->
+    <div id="noResults" class="no-results">
+      <i class="fa-solid fa-circle-exclamation" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 15px;"></i>
+      <p>Nijedan kanal ne odgovara vašoj pretrazi.</p>
+    </div>
+
+    <!-- Kontenjer za Kanale -->
+    <div id="channelsContainer"></div>
+
+    <!-- Istaknuto Polje (CTA) -->
+    <div class="highlight">
+      <h2>Želite besplatan test na 24h?</h2>
+      <p>Uvjerite se u stabilnost i kvalitet naših kanala prije kupovine.</p>
+      <a href="https://wa.me/38700000000?text=Zdravo,%20zelim%20besplatan%20test%20IPTV-a" class="btn"><i class="fa-brands fa-whatsapp"></i> Zatraži Besplatan Test</a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 KrajinaLive IPTV. Sva prava zadržana. | <a href="kontakt.html">Podrška 24/7</a></p>
+  </footer>
+
+  <!-- JavaScript logika -->
+  <script>
+    // Putanja do vašeg lokalnog M3U fajla u folderu
+    const M3U_FILE = "playlist.m3u";
+
+    // Navigacija
+    function openNav() { document.getElementById("myNav").style.width = "100%"; }
+    function closeNav() { document.getElementById("myNav").style.width = "0%"; }
+
+    // Učitavanje M3U fajla
+    async function loadM3U() {
+      const loader = document.getElementById('loader');
+      
+      try {
+        const response = await fetch(M3U_FILE);
+        if (!response.ok) throw new Error('Fajl playlist.m3u nije pronađen u folderu.');
+        const text = await response.text();
+        
+        parseAndRenderM3U(text);
+      } catch (error) {
+        console.error("Greška:", error);
+        loader.innerHTML = `
+          <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; padding: 25px; border-radius: 12px; max-width: 650px; margin: 0 auto; text-align: center;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; color: #ef4444; margin-bottom: 12px;"></i>
+            <h3 style="color: #fff; margin-bottom: 8px;">Fajl 'playlist.m3u' nije pronađen!</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+              Spremite vašu M3U listu u isti folder gdje se nalazi ovaj fajl i nazovite je tačno <b>playlist.m3u</b>.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    // Parsiranje M3U sadržaja
+    function parseAndRenderM3U(data) {
+      const lines = data.split('\n');
+      const groups = {};
+      let totalChannelsCount = 0;
+      let currentGroup = "Ostali Kanali";
+
+      for (let i = 0; i < lines.length; i++) {
+        let line = lines[i].trim();
+
+        if (line.startsWith('#EXTINF:')) {
+          // Izdvajanje kategorije/države
+          const groupMatch = line.match(/group-title="([^"]+)"/);
+          if (groupMatch && groupMatch[1]) {
+            currentGroup = groupMatch[1].trim();
+          } else {
+            currentGroup = "Ostali Kanali";
+          }
+
+          // Izdvajanje imena kanala
+          const commaIndex = line.lastIndexOf(',');
+          if (commaIndex !== -1) {
+            const channelName = line.substring(commaIndex + 1).trim();
+
+            if (channelName) {
+              if (!groups[currentGroup]) {
+                groups[currentGroup] = [];
+              }
+              groups[currentGroup].push(channelName);
+              totalChannelsCount++;
+            }
+          }
+        }
+      }
+
+      // Ažuriranje brojača
+      document.getElementById('totalChannels').innerText = totalChannelsCount;
+      document.getElementById('totalGroups').innerText = Object.keys(groups).length;
+
+      // Prikaz kanala
+      renderGroups(groups);
+      document.getElementById('loader').style.display = 'none';
+    }
+
+    // Generisanje HTML strukture za kanale
+    function renderGroups(groups) {
+      const container = document.getElementById('channelsContainer');
+      container.innerHTML = '';
+
+      for (const [groupName, channels] of Object.entries(groups)) {
+        const groupEl = document.createElement('div');
+        groupEl.className = 'country-group';
+
+        let channelCards = channels.map(name => `
+          <div class="channel-item">
+            <i class="fa-solid fa-tv"></i>
+            <span>${escapeHtml(name)}</span>
+          </div>
+        `).join('');
+
+        groupEl.innerHTML = `
+          <div class="country-header">
+            <div class="country-title">
+              <i class="fa-solid fa-globe" style="color: var(--accent-cyan);"></i>
+              ${escapeHtml(groupName)}
+            </div>
+            <span class="country-count">${channels.length} kanala</span>
+          </div>
+          <div class="channel-grid">
+            ${channelCards}
+          </div>
+        `;
+
+        container.appendChild(groupEl);
+      }
+    }
+
+    // Pretraga u realnom vremenu
+    function filterChannels() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const groups = document.querySelectorAll('.country-group');
+      let hasResults = false;
+
+      groups.forEach(group => {
+        const channels = group.querySelectorAll('.channel-item');
+        let visibleInGroup = 0;
+
+        channels.forEach(channel => {
+          const name = channel.textContent.toLowerCase();
+          if (name.includes(query)) {
+            channel.style.display = 'flex';
+            visibleInGroup++;
+          } else {
+            channel.style.display = 'none';
+          }
+        });
+
+        if (visibleInGroup > 0) {
+          group.style.display = 'block';
+          hasResults = true;
+        } else {
+          group.style.display = 'none';
+        }
+      });
+
+      document.getElementById('noResults').style.display = hasResults ? 'none' : 'block';
+    }
+
+    // Zaštita od nevažećih karaktera
+    function escapeHtml(text) {
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // Pokretanje pri učitavanju
+    window.addEventListener('DOMContentLoaded', loadM3U);
+  </script>
+</body>
+</html>
