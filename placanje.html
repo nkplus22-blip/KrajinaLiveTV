@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Načini Plaćanja - KrajinaLive IPTV | Sigurno i Brzo Plaćanje</title>
+  
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #080c14;
+      --bg-surface: #0f172a;
+      --bg-card: rgba(22, 31, 48, 0.7);
+      --bg-card-hover: rgba(30, 41, 59, 0.9);
+      --accent-blue: #2563eb;
+      --accent-cyan: #06b6d4;
+      --accent-light: #38bdf8;
+      --accent-gold: #fbbf24;
+      --accent-green: #22c55e;
+      --accent-purple: #a855f7;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-glow: rgba(56, 189, 248, 0.25);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --glow-shadow: 0 0 35px rgba(37, 99, 235, 0.25);
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 35%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(34, 197, 94, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4, .brand-title {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 50%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 12, 20, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-card);
+      padding: 15px 0;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text span {
+      color: var(--accent-cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 9px 15px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glow);
+    }
+
+    .nav-links a.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.2));
+      color: var(--accent-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: #fff;
+      font-size: 22px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .menu-toggle:hover {
+      background: var(--accent-blue);
+    }
+
+    /* HERO HEADER */
+    .hero {
+      position: relative;
+      padding: 90px 24px 70px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(8, 12, 20, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%),
+                  url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      border-bottom: 1px solid var(--border-card);
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(8, 12, 20, 0.7) 0%, var(--bg-dark) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 50px;
+      color: var(--accent-green);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* INTRO INFO CARD */
+    .info-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 35px 40px;
+      margin-bottom: 50px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent-blue), var(--accent-cyan));
+    }
+
+    .info-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .info-text h3 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .info-text p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* SECTION TITLE */
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+      font-size: 32px;
+      color: #fff;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    /* PAYMENT GRID */
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .payment-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .payment-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-glow);
+      box-shadow: var(--glow-shadow);
+    }
+
+    .payment-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-instant {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .badge-popular {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--accent-gold);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .badge-local {
+      background: rgba(168, 85, 247, 0.15);
+      color: var(--accent-purple);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .payment-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: var(--accent-light);
+      flex-shrink: 0;
+    }
+
+    .payment-title h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .payment-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .btn-pay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .payment-card:hover .btn-pay {
+      background: #25d366;
+      border-color: #25d366;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+    }
+
+    /* ACTIVATION STEPS */
+    .steps-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      margin-bottom: 60px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .step-box {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 50%;
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+    }
+
+    .step-box h4 {
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .step-box p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* CTA BANNER */
+    .cta {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
+      padding: 60px 40px;
+      border-radius: var(--radius-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(2, 132, 199, 0.3);
+    }
+
+    .cta::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .cta h2 {
+      font-size: 34px;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .cta p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #25d366;
+      color: #ffffff;
+      padding: 16px 38px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 18px;
+      transition: var(--transition);
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      background: #22c55e;
+      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+      color: #fff;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #05080e;
+      border-top: 1px solid var(--border-card);
+      padding: 60px 24px 30px;
+      color: var(--text-muted);
+      margin-top: 80px;
+    }
+
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand p {
+      margin-top: 15px;
+      font-size: 15px;
+      max-width: 360px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 15px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 14px;
+    }
+
+    .footer-bottom a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    /* WHATSAPP FLOATING BUTTON */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #25d366;
+      color: white;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      text-decoration: none;
+      z-index: 999;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    }
+
+    /* FADE ANIMATION */
+    .fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 73px;
+        left: 0;
+        right: 0;
+        background: rgba(8, 12, 20, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 24px;
+        gap: 12px;
+        border-bottom: 1px solid var(--border-card);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+      }
+
+      .nav-links.show {
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .info-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+      }
+
+      .payment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta h2 {
+        font-size: 28px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-tv"></i></div>
+        <div class="logo-text">KrajinaLive <span>IPTV</span></div>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Meni">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="mainMenu">
+        <li><a href="index.html">Početna</a></li>
+        <li><a href="cjenovnik.html">Cijene i akcije</a></li>
+        <li><a href="komentari.html">Komentari</a></li>
+        <li><a href="onama.html">O nama</a></li>
+        <li><a href="tim.html">Postani dio tima</a></li>
+        <li><a href="top15.html">Top 15 / Top 30</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="placanje.html" class="active">Plaćanje</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO HEADER -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content fade">
+      <div class="badge-pill">
+        <i class="fa-solid fa-shield-check"></i> Sigurna Transakcija & Instant Aktivacija
+      </div>
+      <h1>Izaberite Način Plaćanja</h1>
+      <p>Podržavamo sve najpopularnije domaće i internacionalne metode plaćanja. Odaberite opciju koja vam najviše odgovara i započnite gledanje u par minuta.</p>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- INFO BANNER -->
+    <div class="info-card fade">
+      <div class="info-icon">
+        <i class="fa-solid fa-bolt-lightning"></i>
+      </div>
+      <div class="info-text">
+        <h3>Kako funkcioniše plaćanje?</h3>
+        <p>Klikom na bilo koju opciju ispod, otvara se direktan WhatsApp chat sa našom podrškom koja će vam poslati tačne podatke za uplatu. Odmah po potvrdi uplate, vaša IPTV lista se aktivira instant!</p>
+      </div>
+    </div>
+
+    <!-- PAYMENT METHODS SECTION -->
+    <div class="section-header fade">
+      <h2>Dostupne Metode Plaćanja</h2>
+      <p>Kliknite na željenu opciju za dobijanje instrukcija putem WhatsApp-a</p>
+    </div>
+
+    <div class="payment-grid fade">
+
+      <!-- 1. BANKOVNO BiH -->
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20%C5%BDelim%20platiti%20IPTV%20pretplatu%20putem%20bankovnog%20ra%C4%8Duna%20u%20BiH." target="_blank" class="payment-card">
+        <span class="payment-badge badge-popular">Najlakše u BiH</span>
+        <div>
+          <div class="card-top">
+            <div class="payment-icon" style="color: #38bdf8;">
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div class="payment-title">
+              <h3>Banka (Unutar BiH)</h3>
+            </div>
+          </div>
+          <p class="payment-desc">Uplata u bilo kojoj banci, pošti ili putem mobilnog bankarstva (žiro račun / uplatnica) na području Bosne i Hercegovine.</p>
+        </div>
+        <div class="btn-pay">
+          <i class="fa-brands fa-whatsapp"></i> Zatraži podatke u BiH
+        </div>
+      </a>
+
+      <!-- 2. BANKOVNO INOSTRANSTVO -->
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20%C5%BDelim%20platiti%20IPTV%20pretplatu%20putem%20banke%20iz%20inostranstva%20(IBAN/SEPA/SWIFT)." target="_blank" class="payment-card">
+        <span class="payment-badge badge-instant">EU & Dijaspora</span>
+        <div>
+          <div class="card-top">
+            <div class="payment-icon" style="color: #06b6d4;">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <div class="payment-title">
+              <h3>Banka (Inostranstvo)</h3>
+            </div>
+          </div>
+          <p class="payment-desc">Plaćanje putem IBAN / SEPA / SWIFT doznaka iz bilo koje države Evrope i svijeta brzo i bez provizije.</p>
+        </div>
+        <div class="btn-pay">
+          <i class="fa-brands fa-whatsapp"></i> Zatraži IBAN / SEPA
+        </div>
+      </a>
+
+      <!-- 3. WESTERN UNION -->
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20%C5%BDelim%20platiti%20IPTV%20pretplatu%20putem%20Western%20Union-a." target="_blank" class="payment-card">
+        <span class="payment-badge badge-instant">Instant</span>
+        <div>
+          <div class="card-top">
+            <div class="payment-icon" style="color: #fbbf24;">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+            </div>
+            <div class="payment-title">
+              <h3>Western Union</h3>
+            </div>
+          </div>
+          <p class="payment-desc">Brzi prijenos novca iz bilo kojeg grada širom svijeta putem poslovnica ili zvanične Western Union aplikacije.</p>
+        </div>
+        <div class="btn-pay">
+          <i class="fa-brands fa-whatsapp"></i> Zatraži WU podatke
+        </div>
+      </a>
+
+      <!-- 4. PAYPAL -->
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20%C5%BDelim%20platiti%20IPTV%20pretplatu%20putem%20PayPal-a." target="_blank" class="payment-card">
+        <span class="payment-badge badge-popular">Globalno</span>
+        <div>
+          <div class="card-top">
+            <div class="payment-icon" style="color: #60a5fa;">
+              <i class="fa-brands fa-paypal"></i>
+            </div>
+            <div class="payment-title">
+              <h3>PayPal</h3>
+            </div>
+          </div>
+          <p class="payment-desc">Jednostavno i bezbjedno online plaćanje direktno sa vašeg PayPal računa ili povezane platne kartice.</p>
+        </div>
+        <div class="btn-pay">
+          <i class="fa-brands fa-whatsapp"></i> Zatraži PayPal link
+        </div>
+      </a>
+
+      <!-- 5. CRYPTO -->
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20%C5%BDelim%20platiti%20IPTV%20pretplatu%20putem%20Kriptovaluta%20(USDT/BTC)." target="_blank" class="payment-card">
+        <span class="payment-badge badge-instant">100% Anonimno</span>
+        <div>
+          <div class="card-top">
+            <div class="payment-icon" style="color: #f59e0b;">
+              <i class="fa-brands fa-bitcoin"></i>
+            </div>
+            <div class="payment-title">
+              <h3>Kriptovalute (Crypto)</h3>
+            </div>
+          </div>
+          <p class="payment-desc">Podržavamo plaćanje putem USDT (TRC20/ERC20), Bitcoin (BTC), Ethereum (ETH), Litecoin (LTC) i drugih valuta.</p>
+        </div>
+        <div class="btn-pay">
+          <i class="fa-brands fa-whatsapp"></i> Zatraži Wallet Adresu
+        </div>
+      </a>
+
+      <!-- 6. KEŠ / GOTOVINA (USK) -->
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20Zainteresovan%20sam%20za%20gotovinsko%20pla%C4%87anje%20(Ke%C5%A1)%20na%20podru%C4%8Dju%20USK." target="_blank" class="payment-card">
+        <span class="payment-badge badge-local">USK Regija</span>
+        <div>
+          <div class="card-top">
+            <div class="payment-icon" style="color: #22c55e;">
+              <i class="fa-solid fa-hand-holding-dollar"></i>
+            </div>
+            <div class="payment-title">
+              <h3>Keš / Gotovina (USK)</h3>
+            </div>
+          </div>
+          <p class="payment-desc">Direktno lično plaćanje za korisnike na području Unsko-Sanskog kantona (Bihać, Cazin, Velika Kladuša, Sanski Most, itd.).</p>
+        </div>
+        <div class="btn-pay">
+          <i class="fa-brands fa-whatsapp"></i> Dogovori preuzimanje
+        </div>
+      </a>
+
+      <!-- 7. MONEYGRAM & RIA -->
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20%C5%BDelim%20platiti%20IPTV%20pretplatu%20putem%20MoneyGram%20ili%20Ria%20transfera." target="_blank" class="payment-card">
+        <span class="payment-badge badge-instant">Brzi Transfer</span>
+        <div>
+          <div class="card-top">
+            <div class="payment-icon" style="color: #ec4899;">
+              <i class="fa-solid fa-paper-plane"></i>
+            </div>
+            <div class="payment-title">
+              <h3>MoneyGram / Ria</h3>
+            </div>
+          </div>
+          <p class="payment-desc">Siguran novčani transfer u bilo kojoj banci, pošti ili partner lokaciji koja podržava MoneyGram ili Ria uslugu.</p>
+        </div>
+        <div class="btn-pay">
+          <i class="fa-brands fa-whatsapp"></i> Zatraži podatke
+        </div>
+      </a>
+
+      <!-- 8. REVOLUT / WISE / SKRILL -->
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20%C5%BDelim%20platiti%20IPTV%20pretplatu%20putem%20Revolut/Wise/Skrill-a." target="_blank" class="payment-card">
+        <span class="payment-badge badge-instant">E-Wallet</span>
+        <div>
+          <div class="card-top">
+            <div class="payment-icon" style="color: #a855f7;">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+            <div class="payment-title">
+              <h3>Revolut / Wise / Skrill</h3>
+            </div>
+          </div>
+          <p class="payment-desc">Moderni digitalni novčanici za trenutni prijenos novca bez provizije i čekanja sa bilo koje aplikacije.</p>
+        </div>
+        <div class="btn-pay">
+          <i class="fa-brands fa-whatsapp"></i> Zatraži E-Wallet info
+        </div>
+      </a>
+
+    </div>
+
+    <!-- STEPS SECTION -->
+    <section class="steps-section fade">
+      <div class="section-header" style="margin-bottom: 20px;">
+        <h2>Proces Aktivacije</h2>
+        <p>Samo 4 koraka vas dijele od vaših omiljenih TV kanala</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-box">
+          <div class="step-num">1</div>
+          <h4>Odaberite Opciju</h4>
+          <p>Izaberite način uplate koji vam je najprikladniji s liste iznad.</p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">2</div>
+          <h4>Javite se na WhatsApp</h4>
+          <p>Klikom se otvara chat sa našim operaterom koji vam šalje instrukcije.</p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">3</div>
+          <h4>Izvršite Uplatu</h4>
+          <p>Uplatite iznos pretplate i pošaljite nam sliku uplatnice ili potvrdni kod.</p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-num">4</div>
+          <h4>Gledajte Odmah</h4>
+          <p>Dobićete pristupne podatke i kompletnu podršku za podešavanje uređaja!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta fade">
+      <h2>Trebate Pomoć oko Plaćanja?</h2>
+      <p>Niste sigurni koja vam opcija najviše odgovara ili trebate drugačiji način uplate? Javite se našem timu!</p>
+      <a href="https://wa.me/387644064762?text=Pozdrav!%20Trebam%20pomo%C4%87%20oko%20pla%C4%87anja%20IPTV%20pretplate." target="_blank" class="cta-btn">
+        <i class="fa-brands fa-whatsapp" style="font-size: 24px;"></i> Kontaktiraj Podršku
+      </a>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-tv"></i></div>
+          <div class="logo-text">KrajinaLive <span>IPTV</span></div>
+        </a>
+        <p>Vodeći provajder IPTV usluga sa više od 4 godine garancije kvaliteta, vrhunskom stabilnošću i besprijekornom podrškom.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Brzi Linkovi</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="cjenovnik.html">Cijene i akcije</a></li>
+          <li><a href="komentari.html">Komentari</a></li>
+          <li><a href="top15.html">Top 15 / Top 30</a></li>
+          <li><a href="onama.html">O nama</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Kontakt & Podrška</h4>
+        <ul class="footer-links">
+          <li><a href="tim.html">Postani dio tima</a></li>
+          <li><a href="kontakt.html">Kontakt strana</a></li>
+          <li><a href="placanje.html">Načini plaćanja</a></li>
+          <li><a href="mailto:iptv202596@gmail.com"><i class="fa-solid fa-envelope"></i> iptv202596@gmail.com</a></li>
+          <li><a href="https://wa.me/387644064762" target="_blank"><i class="fa-brands fa-whatsapp"></i> +387 64 4064762</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 KrajinaLive IPTV. Sva prava zadržana.</p>
+      <p>Nazad na <a href="index.html">Početnu stranicu</a></p>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a class="wa-float" href="https://wa.me/387644064762" target="_blank" aria-label="Kontaktirajte nas na WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // MOBILE NAVIGATION TOGGLE
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
+
+    menuToggle.addEventListener('click', () => {
+      mainMenu.classList.toggle('show');
+      const icon = menuToggle.querySelector('i');
+      if (mainMenu.classList.contains('show')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // SCROLL ANIMATION (INTERSECTION OBSERVER)
+    const fadeElements = document.querySelectorAll('.fade');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    fadeElements.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
